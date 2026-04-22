@@ -7,7 +7,98 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>Silly</copyright>
-        <lastBuildDate>Thu, 23 Apr 2026 00:56:40 +0800</lastBuildDate><atom:link href="https://iloveu521.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 23 Apr 2026 01:06:24 +0800</lastBuildDate><atom:link href="https://iloveu521.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Ros2学习记录</title>
+        <link>https://iloveu521.github.io/p/ros2%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</link>
+        <pubDate>Thu, 23 Apr 2026 01:06:24 +0800</pubDate>
+        
+        <guid>https://iloveu521.github.io/p/ros2%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</guid>
+        <description>&lt;style&gt;
+  * {
+    font-family: &#34;JetBrains Mono&#34;, &#34;宋体&#34;, &#34;KaiTi&#34;, sans-serif !important;
+  }
+&lt;/style&gt;
+&lt;h1 style=&#34;text-align: center&#34;;&gt;Ros2学习记录&lt;/h1&gt;
+&lt;h1 id=&#34;一ros2入门&#34;&gt;&lt;strong&gt;(一)Ros2入门&lt;/strong&gt;
+&lt;/h1&gt;&lt;h2 id=&#34;1-ros2节点&#34;&gt;&lt;strong&gt;1. Ros2节点&lt;/strong&gt;
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;节点是什么？&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;ROS2中每一个节点也是只负责一个单独的模块化的功能(比如一个节点负责控制车轮转动，一个节点负责从激光雷达获取数据、一个节点负责处理激光雷达的数据、一个节点负责定位等等)
+&lt;a href=&#34;https://imgchr.com/i/peR3gVH&#34;&gt;&lt;div align=center&gt;&lt;img src=&#34;https://s41.ax1x.com/2026/04/23/peR3gVH.png&#34; alt=&#34;peR3gVH.png&#34; border=&#34;0&#34; width=&#34;50%&#34;/&gt;&lt;/div&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;节点之间如何通信？&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;一共四种：&lt;/p&gt;
+&lt;h6 id=&#34;1-topics&#34;&gt;1. topics
+&lt;/h6&gt;&lt;h6 id=&#34;2-services&#34;&gt;2. services
+&lt;/h6&gt;&lt;h6 id=&#34;3-action&#34;&gt;3. Action
+&lt;/h6&gt;&lt;h6 id=&#34;4-parameters&#34;&gt;4. parameters
+&lt;/h6&gt;&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Ros2 节点常用CLI工具&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;启动节点&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;ros2 run &amp;lt;package_name&amp;gt; &amp;lt;excutable_name&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;查看节点list&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; ros2 node list
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;查看节点info&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;ros2 node info &amp;lt;node_name&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;重映射节点名称&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;ros2 run &amp;lt;package_name&amp;gt; &amp;lt;excutable_name&amp;gt; --ros-args --remap __node:&amp;lt;new_name&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;-运行节点时设置参数&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;ros2 run &amp;lt;package_name&amp;gt; &amp;lt;excutable_name&amp;gt; --ros-args -p &amp;lt;parameter_name&amp;gt;:&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&amp;lt;parameter_value&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
         <title>MyFirstBlog</title>
         <link>https://iloveu521.github.io/p/myfirstblog/</link>
         <pubDate>Thu, 23 Apr 2026 00:56:40 +0800</pubDate>
