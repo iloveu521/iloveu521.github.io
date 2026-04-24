@@ -325,6 +325,7 @@
         </li>
         <li><a href="#1-话题常用cli工具">1. 话题常用CLI工具</a></li>
         <li><a href="#2-c话题例程">2. c++话题例程</a></li>
+        <li><a href="#3-python实现">3. python实现</a></li>
       </ol>
     </li>
   </ol>
@@ -424,7 +425,7 @@
 
 
                 <time class="article-time--reading">
-                    3 minute read
+                    4 minute read
                 </time>
             </div>
         
@@ -476,38 +477,31 @@
   <tbody>
       <tr>
           <td style="text-align: center">c++-rclcpp</td>
-          <td style="text-align: center"><a class="link" href="https://github.com/ros2/rclcpp"  target="_blank" rel="noopener"
-    >链接</a></td>
+          <td style="text-align: center">[链接][rclcpp]</td>
       </tr>
       <tr>
           <td style="text-align: center">python-rclpython</td>
-          <td style="text-align: center"><a class="link" href="https://github.com/ros2/rclpy"  target="_blank" rel="noopener"
-    >链接</a></td>
+          <td style="text-align: center">[链接][rclcpy]</td>
       </tr>
       <tr>
           <td style="text-align: center">java-rcljava</td>
-          <td style="text-align: center"><a class="link" href="https://github.com/esteve/ros2_java"  target="_blank" rel="noopener"
-    >链接</a></td>
+          <td style="text-align: center">[链接][rcljava]</td>
       </tr>
       <tr>
           <td style="text-align: center">rust-rclrust</td>
-          <td style="text-align: center"><a class="link" href="https://github.com/ros2-rust/ros2_rust"  target="_blank" rel="noopener"
-    >链接</a></td>
+          <td style="text-align: center">[链接][rclrust]</td>
       </tr>
       <tr>
           <td style="text-align: center">node.js-rclnodejs</td>
-          <td style="text-align: center"><a class="link" href="https://github.com/RobotWebTools/rclnodejs"  target="_blank" rel="noopener"
-    >链接</a></td>
+          <td style="text-align: center">[链接][rclnodejs]</td>
       </tr>
       <tr>
           <td style="text-align: center">go-rclgo</td>
-          <td style="text-align: center"><a class="link" href="https://github.com/juaruipav/rclgo"  target="_blank" rel="noopener"
-    >链接</a></td>
+          <td style="text-align: center">[链接][rclgo]</td>
       </tr>
       <tr>
           <td style="text-align: center">C#-rclcs</td>
-          <td style="text-align: center"><a class="link" href="https://github.com/RobotecAI/ros2cs"  target="_blank" rel="noopener"
-    >链接</a></td>
+          <td style="text-align: center">[链接][rclcs]</td>
       </tr>
   </tbody>
 </table></div>
@@ -583,42 +577,102 @@
 <hr>
 <h3 id="2-工作空间">2. <strong>工作空间</strong>
 </h3><h4 id="21-工作空间目录">2.1. 工作空间目录
-</h4><blockquote>
-<p>workspace_ws/</p>
-<blockquote>
-<p>&mdash;&ndash; build/
-&mdash;&ndash; install/
-&mdash;&ndash; log/
-&mdash;&ndash; src/</p>
-<blockquote>
-<p>&mdash;&ndash; CMakeLists.txt
-&mdash;&ndash; package_1/</p>
-<blockquote>
-<p>&mdash;&ndash; CMakeLists.txt
-&mdash;&ndash; package.xml
-&mdash;&ndash; include/
-&mdash;&ndash; launch/
-&mdash;&ndash; msg/
-&mdash;&ndash; scripts/
-&mdash;&ndash; src/
-&mdash;&ndash; srv/
-&mdash;&ndash; package_2/
-&mdash;&ndash; CMakeLists.txt
-&mdash;&ndash; package.xml
-&mdash;&ndash; &hellip;</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-<h4 id="22-创建工作空间">2.2. 创建工作空间
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">workspace_ws/
+</span></span><span class="line"><span class="cl">├── build/
+</span></span><span class="line"><span class="cl">├── install/
+</span></span><span class="line"><span class="cl">├── log/
+</span></span><span class="line"><span class="cl">└── src/
+</span></span><span class="line"><span class="cl">    ├── CMakeLists.txt
+</span></span><span class="line"><span class="cl">    ├── package_1/
+</span></span><span class="line"><span class="cl">    │   ├── CMakeLists.txt
+</span></span><span class="line"><span class="cl">    │   ├── package.xml
+</span></span><span class="line"><span class="cl">    │   ├── include/
+</span></span><span class="line"><span class="cl">    │   ├── launch/
+</span></span><span class="line"><span class="cl">    │   ├── msg/
+</span></span><span class="line"><span class="cl">    │   ├── scripts/
+</span></span><span class="line"><span class="cl">    │   ├── src/
+</span></span><span class="line"><span class="cl">    │   └── srv/
+</span></span><span class="line"><span class="cl">    └── package_2/
+</span></span><span class="line"><span class="cl">        ├── CMakeLists.txt
+</span></span><span class="line"><span class="cl">        ├── package.xml
+</span></span><span class="line"><span class="cl">        └── ...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="22-创建工作空间">2.2. 创建工作空间
 </h4><ul>
-<li>使用<code>ros2 pkg</code>创建工作空间
-1. 首先创建工程文件夹
-<code>bash mkdir -p name_ws/src &amp;&amp; cd name_ws/src </code>
-2. 然后创建功能包
-<code>bash ros2 pkg create &lt;package_name&gt; \   --build-type {ament_cmake ament_python} \   --dependencies {rclcpp rclpy std_msg (if use interface) rosidl_default_generators ...} \   --node-name &lt;node_name&gt; \   --description &quot;description&quot; \   --license Apache-2.0 \   --version 0.1.0 \   --maintainer-name &quot;&quot; \   --maintainer-email &quot;&quot; \   </code>
-3. 构建测试
-<code>bash cd .. &amp;&amp; colcon build </code></li>
+<li>
+<p>使用<code>ros2 pkg</code>创建工作空间</p>
+<ol>
+<li>首先创建工程文件夹</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mkdir -p name_ws/src <span class="o">&amp;&amp;</span> <span class="nb">cd</span> name_ws/src
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>然后创建功能包</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ros2 pkg create &lt;package_name&gt; <span class="se">\
+</span></span></span><span class="line"><span class="cl">--build-type <span class="o">{</span>ament_cmake ament_python<span class="o">}</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl">--dependencies <span class="o">{</span>rclcpp rclpy std_msg <span class="o">(</span><span class="k">if</span> use interface<span class="o">)</span> rosidl_default_generators ...<span class="o">}</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl">--node-name &lt;node_name&gt; <span class="se">\
+</span></span></span><span class="line"><span class="cl">--description <span class="s2">&#34;description&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl">--license Apache-2.0 <span class="se">\
+</span></span></span><span class="line"><span class="cl">--maintainer-name <span class="s2">&#34;&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl">--maintainer-email <span class="s2">&#34;&#34;</span> <span class="se">\
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="3">
+<li>构建测试</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> .. <span class="o">&amp;&amp;</span> colcon build
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
 </ul>
 <h4 id="23-colcon使用方法">2.3. colcon使用方法
 </h4><blockquote>
@@ -999,6 +1053,89 @@
 </span></span><span class="line"><span class="cl">    <span class="n">rclcpp</span><span class="o">::</span><span class="n">spin</span><span class="p">(</span><span class="n">node</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="n">rclcpp</span><span class="o">::</span><span class="n">shutdown</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="3-python实现">3. python实现
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">rclpy</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">rclpy.node</span> <span class="kn">import</span> <span class="n">Node</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">std_msg.msg</span> <span class="kn">import</span> <span class="n">String</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">ExamplePub</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">super</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="n">rclcpp</span><span class="p">]:</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">ros2</span><span class="o">/</span><span class="n">rclcpp</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="n">rclcpy</span><span class="p">]:</span>  <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">ros2</span><span class="o">/</span><span class="n">rclpy</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="n">rcljava</span><span class="p">]:</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">esteve</span><span class="o">/</span><span class="n">ros2_java</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="n">rclrust</span><span class="p">]:</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">ros2</span><span class="o">-</span><span class="n">rust</span><span class="o">/</span><span class="n">ros2_rust</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="n">rclnodejs</span><span class="p">]:</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">RobotWebTools</span><span class="o">/</span><span class="n">rclnodejs</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="n">rclgo</span><span class="p">]:</span>  <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">juaruipav</span><span class="o">/</span><span class="n">rclgo</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="n">rclcs</span><span class="p">]:</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">RobotecAI</span><span class="o">/</span><span class="n">ros2cs</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div>
