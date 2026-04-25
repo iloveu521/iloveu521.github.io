@@ -328,6 +328,49 @@
         <li><a href="#3-python实现">3. python实现</a></li>
       </ol>
     </li>
+    <li><a href="#四-服务通信-service"><strong>(四) 服务通信 (Service)</strong></a>
+      <ol>
+        <li><a href="#1-service常用cli工具">1. service常用CLI工具</a></li>
+        <li><a href="#2-service例程c工程更常用">2. service例程（C++，工程更常用）</a></li>
+        <li><a href="#3-service例程python快速验证写脚本更舒服">3. service例程（Python，快速验证/写脚本更舒服）</a></li>
+      </ol>
+    </li>
+    <li><a href="#五-动作通信-action"><strong>(五) 动作通信 (Action)</strong></a>
+      <ol>
+        <li><a href="#1-action常用cli工具">1. action常用CLI工具</a></li>
+        <li><a href="#2-action快速体验内置例子">2. action快速体验（内置例子）</a></li>
+        <li><a href="#3-action例程c工程更常用">3. action例程（C++，工程更常用）</a></li>
+        <li><a href="#4-action例程python写脚本调试更快">4. action例程（Python，写脚本/调试更快）</a></li>
+      </ol>
+    </li>
+    <li><a href="#六-参数-parameters"><strong>(六) 参数 (Parameters)</strong></a>
+      <ol>
+        <li><a href="#1-参数常用cli工具">1. 参数常用CLI工具</a></li>
+        <li><a href="#2-c节点内声明读取参数工程更常用">2. C++节点内声明/读取参数（工程更常用）</a></li>
+        <li><a href="#3-python节点内声明读取参数">3. Python节点内声明/读取参数</a></li>
+      </ol>
+    </li>
+    <li><a href="#七-launch-文件启动多个节点"><strong>(七) Launch 文件（启动多个节点）</strong></a>
+      <ol>
+        <li><a href="#1-launch常用命令">1. launch常用命令</a></li>
+        <li><a href="#2-python-launch最小可用模板">2. Python Launch：最小可用模板</a></li>
+        <li><a href="#3-launch里最常用的几个配置动作">3. launch里最常用的几个“配置动作”</a>
+          <ol>
+            <li><a href="#31-重映射-remappings">3.1. 重映射 remappings</a></li>
+            <li><a href="#32-命名空间-namespace">3.2. 命名空间 namespace</a></li>
+            <li><a href="#33-传参数-parameters字典-or-yaml">3.3. 传参数 parameters（字典 or yaml）</a></li>
+            <li><a href="#34-launch参数launch-arguments">3.4. launch参数（Launch Arguments）</a></li>
+          </ol>
+        </li>
+        <li><a href="#4-include把多个launch拼起来">4. Include：把多个launch拼起来</a></li>
+        <li><a href="#5-让-launch-文件能被-ros2-launch-找到安装">5. 让 launch 文件“能被 ros2 launch 找到”（安装）</a>
+          <ol>
+            <li><a href="#61-ament_cmakec包">6.1. ament_cmake（C++包）</a></li>
+            <li><a href="#62-ament_pythonpython包">6.2. ament_python（Python包）</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
   </ol>
 </nav>
         </div>
@@ -425,7 +468,7 @@
 
 
                 <time class="article-time--reading">
-                    4 minute read
+                    13 minute read
                 </time>
             </div>
         
@@ -477,31 +520,38 @@
   <tbody>
       <tr>
           <td style="text-align: center">c++-rclcpp</td>
-          <td style="text-align: center">[rclcpp]</td>
+          <td style="text-align: center"><a class="link" href="https://github.com/ros2/rclcpp"  target="_blank" rel="noopener"
+    >rclcpp</a></td>
       </tr>
       <tr>
           <td style="text-align: center">python-rclpython</td>
-          <td style="text-align: center">[rclcpy]</td>
+          <td style="text-align: center"><a class="link" href="https://github.com/ros2/rclpy"  target="_blank" rel="noopener"
+    >rclcpy</a></td>
       </tr>
       <tr>
           <td style="text-align: center">java-rcljava</td>
-          <td style="text-align: center">[rcljava]</td>
+          <td style="text-align: center"><a class="link" href="https://github.com/esteve/ros2_java"  target="_blank" rel="noopener"
+    >rcljava</a></td>
       </tr>
       <tr>
           <td style="text-align: center">rust-rclrust</td>
-          <td style="text-align: center">[rclrust]</td>
+          <td style="text-align: center"><a class="link" href="https://github.com/ros2-rust/ros2_rust"  target="_blank" rel="noopener"
+    >rclrust</a></td>
       </tr>
       <tr>
           <td style="text-align: center">node.js-rclnodejs</td>
-          <td style="text-align: center">[rclnodejs]</td>
+          <td style="text-align: center"><a class="link" href="https://github.com/RobotWebTools/rclnodejs"  target="_blank" rel="noopener"
+    >rclnodejs</a></td>
       </tr>
       <tr>
           <td style="text-align: center">go-rclgo</td>
-          <td style="text-align: center">[rclgo]</td>
+          <td style="text-align: center"><a class="link" href="https://github.com/juaruipav/rclgo"  target="_blank" rel="noopener"
+    >rclgo</a></td>
       </tr>
       <tr>
           <td style="text-align: center">C#-rclcs</td>
-          <td style="text-align: center">[rclcs]</td>
+          <td style="text-align: center"><a class="link" href="https://github.com/RobotecAI/ros2cs"  target="_blank" rel="noopener"
+    >rclcs</a></td>
       </tr>
   </tbody>
 </table></div>
@@ -1088,6 +1138,267 @@
 </span><span class="lnt">28
 </span><span class="lnt">29
 </span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">rclpy</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">rclpy.node</span> <span class="kn">import</span> <span class="n">Node</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">std_msgs.msg</span> <span class="kn">import</span> <span class="n">String</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">ExamplePublisher</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&#34;py_publisher&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">publisher_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_publisher</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="s2">&#34;chatter&#34;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">timer_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_timer</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">timer_callback</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">count_</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">timer_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">msg</span> <span class="o">=</span> <span class="n">String</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">msg</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;Hello ROS2 (</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">count_</span><span class="si">}</span><span class="s2">)&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">publisher_</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Publishing: </span><span class="si">{</span><span class="n">msg</span><span class="o">.</span><span class="n">data</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">count_</span> <span class="o">+=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rclpy</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="n">args</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">node</span> <span class="o">=</span> <span class="n">ExamplePublisher</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rclpy</span><span class="o">.</span><span class="n">spin</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">node</span><span class="o">.</span><span class="n">destroy_node</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rclpy</span><span class="o">.</span><span class="n">shutdown</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">main</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>python订阅者</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">rclpy</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">rclpy.node</span> <span class="kn">import</span> <span class="n">Node</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">std_msgs.msg</span> <span class="kn">import</span> <span class="n">String</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">ExampleSubscriber</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&#34;py_subscriber&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">subscription_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_subscription</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="s2">&#34;chatter&#34;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">callback</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">:</span> <span class="n">String</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;I heard: </span><span class="si">{</span><span class="n">msg</span><span class="o">.</span><span class="n">data</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rclpy</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="n">args</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">node</span> <span class="o">=</span> <span class="n">ExampleSubscriber</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rclpy</span><span class="o">.</span><span class="n">spin</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">node</span><span class="o">.</span><span class="n">destroy_node</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rclpy</span><span class="o">.</span><span class="n">shutdown</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">main</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="四-服务通信-service"><strong>(四) 服务通信 (Service)</strong>
+</h2><blockquote>
+<ul>
+<li>service 更像“打电话问问题”：请求（request）发过去，对方处理完给你一个响应（response）</li>
+<li>适合：查询一次性的状态（比如“当前电量多少？”、“是否已经到位？”）</li>
+</ul>
+</blockquote>
+<h3 id="1-service常用cli工具">1. service常用CLI工具
+</h3><ul>
+<li>查看service列表
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ros2 service list
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>查看service类型
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ros2 service <span class="nb">type</span> &lt;service_name&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>查看service接口
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ros2 interface show &lt;pkg/srv/xxx&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>调用service（手动发请求）
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ros2 service call &lt;service_name&gt; &lt;service_type&gt; <span class="s2">&#34;{field1: value1, field2: value2}&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h3 id="2-service例程c工程更常用">2. service例程（C++，工程更常用）
+</h3><blockquote>
+<p>服务端（以 <code>example_interfaces/srv/AddTwoInts</code> 为例）</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;chrono&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;memory&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;rclcpp/rclcpp.hpp&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;example_interfaces/srv/add_two_ints.hpp&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">AddTwoIntsServer</span> <span class="o">:</span> <span class="k">public</span> <span class="n">rclcpp</span><span class="o">::</span><span class="n">Node</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">   <span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="n">AddTwoIntsServer</span><span class="p">()</span> <span class="o">:</span> <span class="n">Node</span><span class="p">(</span><span class="s">&#34;add_two_ints_server_cpp&#34;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">service_</span> <span class="o">=</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">create_service</span><span class="o">&lt;</span><span class="n">example_interfaces</span><span class="o">::</span><span class="n">srv</span><span class="o">::</span><span class="n">AddTwoInts</span><span class="o">&gt;</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">      <span class="s">&#34;add_two_ints&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="p">[</span><span class="k">this</span><span class="p">](</span>
+</span></span><span class="line"><span class="cl">        <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">example_interfaces</span><span class="o">::</span><span class="n">srv</span><span class="o">::</span><span class="n">AddTwoInts</span><span class="o">::</span><span class="n">Request</span><span class="o">&gt;</span> <span class="n">request</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">example_interfaces</span><span class="o">::</span><span class="n">srv</span><span class="o">::</span><span class="n">AddTwoInts</span><span class="o">::</span><span class="n">Response</span><span class="o">&gt;</span> <span class="n">response</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">response</span><span class="o">-&gt;</span><span class="n">sum</span> <span class="o">=</span> <span class="n">request</span><span class="o">-&gt;</span><span class="n">a</span> <span class="o">+</span> <span class="n">request</span><span class="o">-&gt;</span><span class="n">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">RCLCPP_INFO</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">          <span class="k">this</span><span class="o">-&gt;</span><span class="n">get_logger</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">          <span class="s">&#34;Request: a=%lld, b=%lld -&gt; sum=%lld&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">          <span class="p">(</span><span class="kt">long</span> <span class="kt">long</span><span class="p">)</span><span class="n">request</span><span class="o">-&gt;</span><span class="n">a</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">          <span class="p">(</span><span class="kt">long</span> <span class="kt">long</span><span class="p">)</span><span class="n">request</span><span class="o">-&gt;</span><span class="n">b</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">          <span class="p">(</span><span class="kt">long</span> <span class="kt">long</span><span class="p">)</span><span class="n">response</span><span class="o">-&gt;</span><span class="n">sum</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">RCLCPP_INFO</span><span class="p">(</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">get_logger</span><span class="p">(),</span> <span class="s">&#34;AddTwoInts service ready.&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">   <span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="n">rclcpp</span><span class="o">::</span><span class="n">Service</span><span class="o">&lt;</span><span class="n">example_interfaces</span><span class="o">::</span><span class="n">srv</span><span class="o">::</span><span class="n">AddTwoInts</span><span class="o">&gt;::</span><span class="n">SharedPtr</span> <span class="n">service_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">rclcpp</span><span class="o">::</span><span class="n">init</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">auto</span> <span class="n">node</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">AddTwoIntsServer</span><span class="o">&gt;</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="n">rclcpp</span><span class="o">::</span><span class="n">spin</span><span class="p">(</span><span class="n">node</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">rclcpp</span><span class="o">::</span><span class="n">shutdown</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>客户端</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
 </span><span class="lnt">31
 </span><span class="lnt">32
 </span><span class="lnt">33
@@ -1098,47 +1409,1333 @@
 </span><span class="lnt">38
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">rclpy</span>
-</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">rclpy.node</span> <span class="kn">import</span> <span class="n">Node</span>
-</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">std_msg.msg</span> <span class="kn">import</span> <span class="n">String</span>
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;chrono&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;memory&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;rclcpp/rclcpp.hpp&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;example_interfaces/srv/add_two_ints.hpp&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="o">::</span><span class="n">chrono_literals</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">ExamplePub</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
-</span></span><span class="line"><span class="cl">    <span class="nb">super</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">rclcpp</span><span class="o">::</span><span class="n">init</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">auto</span> <span class="n">node</span> <span class="o">=</span> <span class="n">rclcpp</span><span class="o">::</span><span class="n">Node</span><span class="o">::</span><span class="n">make_shared</span><span class="p">(</span><span class="s">&#34;add_two_ints_client_cpp&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">auto</span> <span class="n">client</span> <span class="o">=</span> <span class="n">node</span><span class="o">-&gt;</span><span class="n">create_client</span><span class="o">&lt;</span><span class="n">example_interfaces</span><span class="o">::</span><span class="n">srv</span><span class="o">::</span><span class="n">AddTwoInts</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&#34;add_two_ints&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">client</span><span class="o">-&gt;</span><span class="n">wait_for_service</span><span class="p">(</span><span class="mi">1</span><span class="n">s</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">rclcpp</span><span class="o">::</span><span class="n">ok</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">RCLCPP_ERROR</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">get_logger</span><span class="p">(),</span> <span class="s">&#34;Interrupted while waiting for the service.&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="n">rclcpp</span><span class="o">::</span><span class="n">shutdown</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">RCLCPP_INFO</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">get_logger</span><span class="p">(),</span> <span class="s">&#34;Waiting for service...&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">auto</span> <span class="n">request</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">example_interfaces</span><span class="o">::</span><span class="n">srv</span><span class="o">::</span><span class="n">AddTwoInts</span><span class="o">::</span><span class="n">Request</span><span class="o">&gt;</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="n">request</span><span class="o">-&gt;</span><span class="n">a</span> <span class="o">=</span> <span class="mi">12</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">request</span><span class="o">-&gt;</span><span class="n">b</span> <span class="o">=</span> <span class="mi">30</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">auto</span> <span class="n">future</span> <span class="o">=</span> <span class="n">client</span><span class="o">-&gt;</span><span class="n">async_send_request</span><span class="p">(</span><span class="n">request</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">auto</span> <span class="n">ret</span> <span class="o">=</span> <span class="n">rclcpp</span><span class="o">::</span><span class="n">spin_until_future_complete</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">future</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="n">ret</span> <span class="o">==</span> <span class="n">rclcpp</span><span class="o">::</span><span class="n">FutureReturnCode</span><span class="o">::</span><span class="n">SUCCESS</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">auto</span> <span class="n">response</span> <span class="o">=</span> <span class="n">future</span><span class="p">.</span><span class="n">get</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">RCLCPP_INFO</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">get_logger</span><span class="p">(),</span> <span class="s">&#34;Result: %lld&#34;</span><span class="p">,</span> <span class="p">(</span><span class="kt">long</span> <span class="kt">long</span><span class="p">)</span><span class="n">response</span><span class="o">-&gt;</span><span class="n">sum</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">RCLCPP_ERROR</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">get_logger</span><span class="p">(),</span> <span class="s">&#34;Service call failed.&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="n">rclcpp</span><span class="p">]:</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">ros2</span><span class="o">/</span><span class="n">rclcpp</span>
-</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="n">rclcpy</span><span class="p">]:</span>  <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">ros2</span><span class="o">/</span><span class="n">rclpy</span>
-</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="n">rcljava</span><span class="p">]:</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">esteve</span><span class="o">/</span><span class="n">ros2_java</span>
-</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="n">rclrust</span><span class="p">]:</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">ros2</span><span class="o">-</span><span class="n">rust</span><span class="o">/</span><span class="n">ros2_rust</span>
-</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="n">rclnodejs</span><span class="p">]:</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">RobotWebTools</span><span class="o">/</span><span class="n">rclnodejs</span>
-</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="n">rclgo</span><span class="p">]:</span>  <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">juaruipav</span><span class="o">/</span><span class="n">rclgo</span>
-</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="n">rclcs</span><span class="p">]:</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">RobotecAI</span><span class="o">/</span><span class="n">ros2cs</span>
+</span></span><span class="line"><span class="cl">  <span class="n">rclcpp</span><span class="o">::</span><span class="n">shutdown</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
+</div><h3 id="3-service例程python快速验证写脚本更舒服">3. service例程（Python，快速验证/写脚本更舒服）
+</h3><blockquote>
+<p>服务端（以 <code>example_interfaces/srv/AddTwoInts</code> 为例）</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">rclpy</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">rclpy.node</span> <span class="kn">import</span> <span class="n">Node</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">example_interfaces.srv</span> <span class="kn">import</span> <span class="n">AddTwoInts</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">AddTwoIntsServer</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&#34;add_two_ints_server&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">srv_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_service</span><span class="p">(</span><span class="n">AddTwoInts</span><span class="p">,</span> <span class="s2">&#34;add_two_ints&#34;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">callback</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&#34;AddTwoInts service ready.&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="n">AddTwoInts</span><span class="o">.</span><span class="n">Request</span><span class="p">,</span> <span class="n">response</span><span class="p">:</span> <span class="n">AddTwoInts</span><span class="o">.</span><span class="n">Response</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">response</span><span class="o">.</span><span class="n">sum</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">a</span> <span class="o">+</span> <span class="n">request</span><span class="o">.</span><span class="n">b</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Request: a=</span><span class="si">{</span><span class="n">request</span><span class="o">.</span><span class="n">a</span><span class="si">}</span><span class="s2">, b=</span><span class="si">{</span><span class="n">request</span><span class="o">.</span><span class="n">b</span><span class="si">}</span><span class="s2"> -&gt; sum=</span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">sum</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">response</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rclpy</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="n">args</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">node</span> <span class="o">=</span> <span class="n">AddTwoIntsServer</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rclpy</span><span class="o">.</span><span class="n">spin</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">node</span><span class="o">.</span><span class="n">destroy_node</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rclpy</span><span class="o">.</span><span class="n">shutdown</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">main</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
 </div>
+</div><blockquote>
+<p>客户端</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">rclpy</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">rclpy.node</span> <span class="kn">import</span> <span class="n">Node</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">example_interfaces.srv</span> <span class="kn">import</span> <span class="n">AddTwoInts</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">AddTwoIntsClient</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&#34;add_two_ints_client&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">client_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_client</span><span class="p">(</span><span class="n">AddTwoInts</span><span class="p">,</span> <span class="s2">&#34;add_two_ints&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">client_</span><span class="o">.</span><span class="n">wait_for_service</span><span class="p">(</span><span class="n">timeout_sec</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="bp">self</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&#34;Waiting for service...&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">req</span> <span class="o">=</span> <span class="n">AddTwoInts</span><span class="o">.</span><span class="n">Request</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">req</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="n">a</span>
+</span></span><span class="line"><span class="cl">        <span class="n">req</span><span class="o">.</span><span class="n">b</span> <span class="o">=</span> <span class="n">b</span>
+</span></span><span class="line"><span class="cl">        <span class="n">future</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client_</span><span class="o">.</span><span class="n">call_async</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">rclpy</span><span class="o">.</span><span class="n">spin_until_future_complete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">future</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">future</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rclpy</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="n">args</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">node</span> <span class="o">=</span> <span class="n">AddTwoIntsClient</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">resp</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">node</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Result: </span><span class="si">{</span><span class="n">resp</span><span class="o">.</span><span class="n">sum</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">node</span><span class="o">.</span><span class="n">destroy_node</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rclpy</span><span class="o">.</span><span class="n">shutdown</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">main</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="五-动作通信-action"><strong>(五) 动作通信 (Action)</strong>
+</h2><blockquote>
+<ul>
+<li>action 更像“下单跑腿”：你发一个目标（Goal），它会边做边给反馈（Feedback），最后给结果（Result）</li>
+<li>适合：耗时动作（导航、机械臂运动、抓取）</li>
+</ul>
+</blockquote>
+<h3 id="1-action常用cli工具">1. action常用CLI工具
+</h3><ul>
+<li>查看action列表
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ros2 action list
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>查看action类型
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ros2 action info &lt;action_name&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>发送action目标
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ros2 action send_goal &lt;action_name&gt; &lt;action_type&gt; <span class="s2">&#34;{field: value}&#34;</span> --feedback
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h3 id="2-action快速体验内置例子">2. action快速体验（内置例子）
+</h3><blockquote>
+<p>ROS2 自带一个很经典的动作接口：<code>example_interfaces/action/Fibonacci</code></p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 终端1：启动示例 action server（注意：不同发行版对应 demo 包名可能略有差异）</span>
+</span></span><span class="line"><span class="cl">ros2 run demo_nodes_cpp action_server
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 终端2：发送目标并打印反馈</span>
+</span></span><span class="line"><span class="cl">ros2 action send_goal /fibonacci example_interfaces/action/Fibonacci <span class="s2">&#34;{order: 10}&#34;</span> --feedback
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>你会看到 feedback 不断增长，最后输出 result。</p>
+</blockquote>
+<h3 id="3-action例程c工程更常用">3. action例程（C++，工程更常用）
+</h3><blockquote>
+<p>Action Server（Fibonacci）</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span><span class="lnt">87
+</span><span class="lnt">88
+</span><span class="lnt">89
+</span><span class="lnt">90
+</span><span class="lnt">91
+</span><span class="lnt">92
+</span><span class="lnt">93
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;chrono&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;functional&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;memory&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;thread&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;rclcpp/rclcpp.hpp&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;rclcpp_action/rclcpp_action.hpp&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;example_interfaces/action/fibonacci.hpp&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">FibonacciActionServer</span> <span class="o">:</span> <span class="k">public</span> <span class="n">rclcpp</span><span class="o">::</span><span class="n">Node</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">   <span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="k">using</span> <span class="n">Fibonacci</span> <span class="o">=</span> <span class="n">example_interfaces</span><span class="o">::</span><span class="n">action</span><span class="o">::</span><span class="n">Fibonacci</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">using</span> <span class="n">GoalHandleFibonacci</span> <span class="o">=</span> <span class="n">rclcpp_action</span><span class="o">::</span><span class="n">ServerGoalHandle</span><span class="o">&lt;</span><span class="n">Fibonacci</span><span class="o">&gt;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">FibonacciActionServer</span><span class="p">()</span> <span class="o">:</span> <span class="n">Node</span><span class="p">(</span><span class="s">&#34;fibonacci_action_server_cpp&#34;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">using</span> <span class="n">std</span><span class="o">::</span><span class="n">placeholders</span><span class="o">::</span><span class="n">_1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">using</span> <span class="n">std</span><span class="o">::</span><span class="n">placeholders</span><span class="o">::</span><span class="n">_2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">server_</span> <span class="o">=</span> <span class="n">rclcpp_action</span><span class="o">::</span><span class="n">create_server</span><span class="o">&lt;</span><span class="n">Fibonacci</span><span class="o">&gt;</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s">&#34;fibonacci&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="n">std</span><span class="o">::</span><span class="n">bind</span><span class="p">(</span><span class="o">&amp;</span><span class="n">FibonacciActionServer</span><span class="o">::</span><span class="n">handle_goal</span><span class="p">,</span> <span class="k">this</span><span class="p">,</span> <span class="n">_1</span><span class="p">,</span> <span class="n">_2</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">      <span class="n">std</span><span class="o">::</span><span class="n">bind</span><span class="p">(</span><span class="o">&amp;</span><span class="n">FibonacciActionServer</span><span class="o">::</span><span class="n">handle_cancel</span><span class="p">,</span> <span class="k">this</span><span class="p">,</span> <span class="n">_1</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">      <span class="n">std</span><span class="o">::</span><span class="n">bind</span><span class="p">(</span><span class="o">&amp;</span><span class="n">FibonacciActionServer</span><span class="o">::</span><span class="n">handle_accepted</span><span class="p">,</span> <span class="k">this</span><span class="p">,</span> <span class="n">_1</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">RCLCPP_INFO</span><span class="p">(</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">get_logger</span><span class="p">(),</span> <span class="s">&#34;Fibonacci action server ready.&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">   <span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="n">rclcpp_action</span><span class="o">::</span><span class="n">Server</span><span class="o">&lt;</span><span class="n">Fibonacci</span><span class="o">&gt;::</span><span class="n">SharedPtr</span> <span class="n">server_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">rclcpp_action</span><span class="o">::</span><span class="n">GoalResponse</span> <span class="n">handle_goal</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="n">rclcpp_action</span><span class="o">::</span><span class="n">GoalUUID</span><span class="o">&amp;</span> <span class="cm">/*uuid*/</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">Fibonacci</span><span class="o">::</span><span class="n">Goal</span><span class="o">&gt;</span> <span class="n">goal</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">RCLCPP_INFO</span><span class="p">(</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">get_logger</span><span class="p">(),</span> <span class="s">&#34;Received goal, order=%d&#34;</span><span class="p">,</span> <span class="n">goal</span><span class="o">-&gt;</span><span class="n">order</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">goal</span><span class="o">-&gt;</span><span class="n">order</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="n">rclcpp_action</span><span class="o">::</span><span class="n">GoalResponse</span><span class="o">::</span><span class="n">REJECT</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">rclcpp_action</span><span class="o">::</span><span class="n">GoalResponse</span><span class="o">::</span><span class="n">ACCEPT_AND_EXECUTE</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">rclcpp_action</span><span class="o">::</span><span class="n">CancelResponse</span> <span class="n">handle_cancel</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">GoalHandleFibonacci</span><span class="o">&gt;</span> <span class="cm">/*goal_handle*/</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">RCLCPP_INFO</span><span class="p">(</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">get_logger</span><span class="p">(),</span> <span class="s">&#34;Received cancel request&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">rclcpp_action</span><span class="o">::</span><span class="n">CancelResponse</span><span class="o">::</span><span class="n">ACCEPT</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">handle_accepted</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">GoalHandleFibonacci</span><span class="o">&gt;</span> <span class="n">goal_handle</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="kr">thread</span><span class="p">{[</span><span class="k">this</span><span class="p">,</span> <span class="n">goal_handle</span><span class="p">]()</span> <span class="p">{</span> <span class="n">execute</span><span class="p">(</span><span class="n">goal_handle</span><span class="p">);</span> <span class="p">}}.</span><span class="n">detach</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">execute</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">GoalHandleFibonacci</span><span class="o">&gt;</span> <span class="n">goal_handle</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="o">::</span><span class="n">chrono_literals</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="k">auto</span> <span class="n">goal</span> <span class="o">=</span> <span class="n">goal_handle</span><span class="o">-&gt;</span><span class="n">get_goal</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">auto</span> <span class="n">feedback</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">Fibonacci</span><span class="o">::</span><span class="n">Feedback</span><span class="o">&gt;</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">auto</span> <span class="n">result</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">Fibonacci</span><span class="o">::</span><span class="n">Result</span><span class="o">&gt;</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int32_t</span><span class="o">&gt;</span> <span class="n">seq</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">seq</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">goal</span><span class="o">-&gt;</span><span class="n">order</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">seq</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">rclcpp</span><span class="o">::</span><span class="n">Rate</span> <span class="n">rate</span><span class="p">(</span><span class="mf">2.0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">goal</span><span class="o">-&gt;</span><span class="n">order</span> <span class="o">&amp;&amp;</span> <span class="n">rclcpp</span><span class="o">::</span><span class="n">ok</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="n">goal_handle</span><span class="o">-&gt;</span><span class="n">is_canceling</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">result</span><span class="o">-&gt;</span><span class="n">sequence</span> <span class="o">=</span> <span class="n">seq</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">goal_handle</span><span class="o">-&gt;</span><span class="n">canceled</span><span class="p">(</span><span class="n">result</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">RCLCPP_INFO</span><span class="p">(</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">get_logger</span><span class="p">(),</span> <span class="s">&#34;Goal canceled&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="n">seq</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">seq</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">seq</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">2</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">      <span class="n">feedback</span><span class="o">-&gt;</span><span class="n">sequence</span> <span class="o">=</span> <span class="n">seq</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">goal_handle</span><span class="o">-&gt;</span><span class="n">publish_feedback</span><span class="p">(</span><span class="n">feedback</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="n">RCLCPP_INFO</span><span class="p">(</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">get_logger</span><span class="p">(),</span> <span class="s">&#34;Feedback size=%zu&#34;</span><span class="p">,</span> <span class="n">seq</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">      <span class="n">rate</span><span class="p">.</span><span class="n">sleep</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">result</span><span class="o">-&gt;</span><span class="n">sequence</span> <span class="o">=</span> <span class="n">seq</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">goal_handle</span><span class="o">-&gt;</span><span class="n">succeed</span><span class="p">(</span><span class="n">result</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">RCLCPP_INFO</span><span class="p">(</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">get_logger</span><span class="p">(),</span> <span class="s">&#34;Goal succeeded&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">rclcpp</span><span class="o">::</span><span class="n">init</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">rclcpp</span><span class="o">::</span><span class="n">spin</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">FibonacciActionServer</span><span class="o">&gt;</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">  <span class="n">rclcpp</span><span class="o">::</span><span class="n">shutdown</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>Action Client</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;chrono&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;memory&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;rclcpp/rclcpp.hpp&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;rclcpp_action/rclcpp_action.hpp&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;example_interfaces/action/fibonacci.hpp&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="o">::</span><span class="n">chrono_literals</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">rclcpp</span><span class="o">::</span><span class="n">init</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">auto</span> <span class="n">node</span> <span class="o">=</span> <span class="n">rclcpp</span><span class="o">::</span><span class="n">Node</span><span class="o">::</span><span class="n">make_shared</span><span class="p">(</span><span class="s">&#34;fibonacci_action_client_cpp&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">using</span> <span class="n">Fibonacci</span> <span class="o">=</span> <span class="n">example_interfaces</span><span class="o">::</span><span class="n">action</span><span class="o">::</span><span class="n">Fibonacci</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">using</span> <span class="n">GoalHandleFibonacci</span> <span class="o">=</span> <span class="n">rclcpp_action</span><span class="o">::</span><span class="n">ClientGoalHandle</span><span class="o">&lt;</span><span class="n">Fibonacci</span><span class="o">&gt;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">auto</span> <span class="n">client</span> <span class="o">=</span> <span class="n">rclcpp_action</span><span class="o">::</span><span class="n">create_client</span><span class="o">&lt;</span><span class="n">Fibonacci</span><span class="o">&gt;</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="s">&#34;fibonacci&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">client</span><span class="o">-&gt;</span><span class="n">wait_for_action_server</span><span class="p">(</span><span class="mi">5</span><span class="n">s</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">RCLCPP_ERROR</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">get_logger</span><span class="p">(),</span> <span class="s">&#34;Action server not available.&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rclcpp</span><span class="o">::</span><span class="n">shutdown</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">Fibonacci</span><span class="o">::</span><span class="n">Goal</span> <span class="n">goal</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">goal</span><span class="p">.</span><span class="n">order</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">rclcpp_action</span><span class="o">::</span><span class="n">Client</span><span class="o">&lt;</span><span class="n">Fibonacci</span><span class="o">&gt;::</span><span class="n">SendGoalOptions</span> <span class="n">options</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">options</span><span class="p">.</span><span class="n">feedback_callback</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">    <span class="p">[</span><span class="n">node</span><span class="p">](</span><span class="n">GoalHandleFibonacci</span><span class="o">::</span><span class="n">SharedPtr</span> <span class="cm">/*handle*/</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">Fibonacci</span><span class="o">::</span><span class="n">Feedback</span><span class="o">&gt;</span> <span class="n">feedback</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">RCLCPP_INFO</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">get_logger</span><span class="p">(),</span> <span class="s">&#34;Feedback len=%zu&#34;</span><span class="p">,</span> <span class="n">feedback</span><span class="o">-&gt;</span><span class="n">sequence</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">    <span class="p">};</span>
+</span></span><span class="line"><span class="cl">  <span class="n">options</span><span class="p">.</span><span class="n">result_callback</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">    <span class="p">[</span><span class="n">node</span><span class="p">](</span><span class="k">const</span> <span class="n">GoalHandleFibonacci</span><span class="o">::</span><span class="n">WrappedResult</span><span class="o">&amp;</span> <span class="n">result</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">code</span> <span class="o">==</span> <span class="n">rclcpp_action</span><span class="o">::</span><span class="n">ResultCode</span><span class="o">::</span><span class="n">SUCCEEDED</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">RCLCPP_INFO</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">get_logger</span><span class="p">(),</span> <span class="s">&#34;Result len=%zu&#34;</span><span class="p">,</span> <span class="n">result</span><span class="p">.</span><span class="n">result</span><span class="o">-&gt;</span><span class="n">sequence</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">RCLCPP_WARN</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">get_logger</span><span class="p">(),</span> <span class="s">&#34;Result code=%d&#34;</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">result</span><span class="p">.</span><span class="n">code</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="n">rclcpp</span><span class="o">::</span><span class="n">shutdown</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">client</span><span class="o">-&gt;</span><span class="n">async_send_goal</span><span class="p">(</span><span class="n">goal</span><span class="p">,</span> <span class="n">options</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">rclcpp</span><span class="o">::</span><span class="n">spin</span><span class="p">(</span><span class="n">node</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="4-action例程python写脚本调试更快">4. action例程（Python，写脚本/调试更快）
+</h3><blockquote>
+<p>Action Server</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">time</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">rclpy</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">rclpy.node</span> <span class="kn">import</span> <span class="n">Node</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">rclpy.action</span> <span class="kn">import</span> <span class="n">ActionServer</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">example_interfaces.action</span> <span class="kn">import</span> <span class="n">Fibonacci</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">FibonacciActionServer</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&#34;fibonacci_action_server_py&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="bp">self</span><span class="o">.</span><span class="n">server_</span> <span class="o">=</span> <span class="n">ActionServer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Fibonacci</span><span class="p">,</span> <span class="s2">&#34;fibonacci&#34;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute_callback</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="bp">self</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&#34;Fibonacci action server ready.&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">def</span> <span class="nf">execute_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">goal_handle</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">order</span> <span class="o">=</span> <span class="n">goal_handle</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">order</span>
+</span></span><span class="line"><span class="cl">    <span class="bp">self</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Received goal, order=</span><span class="si">{</span><span class="n">order</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">feedback_msg</span> <span class="o">=</span> <span class="n">Fibonacci</span><span class="o">.</span><span class="n">Feedback</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">seq</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">order</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">      <span class="n">seq</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">order</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="n">goal_handle</span><span class="o">.</span><span class="n">is_cancel_requested</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">goal_handle</span><span class="o">.</span><span class="n">canceled</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">result</span> <span class="o">=</span> <span class="n">Fibonacci</span><span class="o">.</span><span class="n">Result</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">result</span><span class="o">.</span><span class="n">sequence</span> <span class="o">=</span> <span class="n">seq</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&#34;Goal canceled&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">result</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="n">seq</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">seq</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">seq</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">2</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">      <span class="n">feedback_msg</span><span class="o">.</span><span class="n">sequence</span> <span class="o">=</span> <span class="n">seq</span>
+</span></span><span class="line"><span class="cl">      <span class="n">goal_handle</span><span class="o">.</span><span class="n">publish_feedback</span><span class="p">(</span><span class="n">feedback_msg</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">goal_handle</span><span class="o">.</span><span class="n">succeed</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">result</span> <span class="o">=</span> <span class="n">Fibonacci</span><span class="o">.</span><span class="n">Result</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">result</span><span class="o">.</span><span class="n">sequence</span> <span class="o">=</span> <span class="n">seq</span>
+</span></span><span class="line"><span class="cl">    <span class="bp">self</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&#34;Goal succeeded&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">result</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">  <span class="n">rclpy</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="n">args</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">node</span> <span class="o">=</span> <span class="n">FibonacciActionServer</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="n">rclpy</span><span class="o">.</span><span class="n">spin</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">node</span><span class="o">.</span><span class="n">destroy_node</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="n">rclpy</span><span class="o">.</span><span class="n">shutdown</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="n">main</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>Action Client</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">rclpy</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">rclpy.node</span> <span class="kn">import</span> <span class="n">Node</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">rclpy.action</span> <span class="kn">import</span> <span class="n">ActionClient</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">example_interfaces.action</span> <span class="kn">import</span> <span class="n">Fibonacci</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">FibonacciActionClient</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&#34;fibonacci_action_client_py&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="bp">self</span><span class="o">.</span><span class="n">client_</span> <span class="o">=</span> <span class="n">ActionClient</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Fibonacci</span><span class="p">,</span> <span class="s2">&#34;fibonacci&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">def</span> <span class="nf">send_goal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">goal</span> <span class="o">=</span> <span class="n">Fibonacci</span><span class="o">.</span><span class="n">Goal</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">goal</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="n">order</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="bp">self</span><span class="o">.</span><span class="n">client_</span><span class="o">.</span><span class="n">wait_for_server</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="bp">self</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Sending goal, order=</span><span class="si">{</span><span class="n">order</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client_</span><span class="o">.</span><span class="n">send_goal_async</span><span class="p">(</span><span class="n">goal</span><span class="p">,</span> <span class="n">feedback_callback</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">feedback_callback</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">def</span> <span class="nf">feedback_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feedback_msg</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">seq</span> <span class="o">=</span> <span class="n">feedback_msg</span><span class="o">.</span><span class="n">feedback</span><span class="o">.</span><span class="n">sequence</span>
+</span></span><span class="line"><span class="cl">    <span class="bp">self</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Feedback len=</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">  <span class="n">rclpy</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="n">args</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">node</span> <span class="o">=</span> <span class="n">FibonacciActionClient</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">future</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">send_goal</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">rclpy</span><span class="o">.</span><span class="n">spin_until_future_complete</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">future</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">goal_handle</span> <span class="o">=</span> <span class="n">future</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="ow">not</span> <span class="n">goal_handle</span><span class="o">.</span><span class="n">accepted</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">node</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&#34;Goal rejected&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">node</span><span class="o">.</span><span class="n">destroy_node</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rclpy</span><span class="o">.</span><span class="n">shutdown</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">result_future</span> <span class="o">=</span> <span class="n">goal_handle</span><span class="o">.</span><span class="n">get_result_async</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="n">rclpy</span><span class="o">.</span><span class="n">spin_until_future_complete</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">result_future</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">result</span> <span class="o">=</span> <span class="n">result_future</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">result</span>
+</span></span><span class="line"><span class="cl">  <span class="n">node</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Result len=</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">sequence</span><span class="p">)</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">node</span><span class="o">.</span><span class="n">destroy_node</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="n">rclpy</span><span class="o">.</span><span class="n">shutdown</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="n">main</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="六-参数-parameters"><strong>(六) 参数 (Parameters)</strong>
+</h2><blockquote>
+<p>参数就像“节点的可调旋钮”：比如最大速度、是否启用某个功能、话题名称前缀等等
+参数的好处：不用改代码，运行时就能调</p>
+</blockquote>
+<h3 id="1-参数常用cli工具">1. 参数常用CLI工具
+</h3><ul>
+<li>列出某节点的参数
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ros2 param list &lt;node_name&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>查看参数值
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ros2 param get &lt;node_name&gt; &lt;param_name&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>设置参数值
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ros2 param <span class="nb">set</span> &lt;node_name&gt; &lt;param_name&gt; &lt;value&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>导出 / 导入参数（yaml）
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ros2 param dump &lt;node_name&gt;
+</span></span><span class="line"><span class="cl">ros2 param load &lt;node_name&gt; &lt;yaml_file&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h3 id="2-c节点内声明读取参数工程更常用">2. C++节点内声明/读取参数（工程更常用）
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;memory&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;rclcpp/rclcpp.hpp&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">ParamNode</span> <span class="o">:</span> <span class="k">public</span> <span class="n">rclcpp</span><span class="o">::</span><span class="n">Node</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">   <span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="n">ParamNode</span><span class="p">()</span> <span class="o">:</span> <span class="n">Node</span><span class="p">(</span><span class="s">&#34;param_node_cpp&#34;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="o">-&gt;</span><span class="n">declare_parameter</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&#34;rate&#34;</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="o">-&gt;</span><span class="n">declare_parameter</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&#34;frame_id&#34;</span><span class="p">,</span> <span class="s">&#34;base_link&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kt">double</span> <span class="n">rate</span> <span class="o">=</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">get_parameter</span><span class="p">(</span><span class="s">&#34;rate&#34;</span><span class="p">).</span><span class="n">as_double</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">frame_id</span> <span class="o">=</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">get_parameter</span><span class="p">(</span><span class="s">&#34;frame_id&#34;</span><span class="p">).</span><span class="n">as_string</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">RCLCPP_INFO</span><span class="p">(</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">get_logger</span><span class="p">(),</span> <span class="s">&#34;rate=%.2f, frame_id=%s&#34;</span><span class="p">,</span> <span class="n">rate</span><span class="p">,</span> <span class="n">frame_id</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">rclcpp</span><span class="o">::</span><span class="n">init</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">auto</span> <span class="n">node</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">ParamNode</span><span class="o">&gt;</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="n">rclcpp</span><span class="o">::</span><span class="n">spin</span><span class="p">(</span><span class="n">node</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">rclcpp</span><span class="o">::</span><span class="n">shutdown</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>运行时设置参数</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ros2 run &lt;package_name&gt; param_node_cpp --ros-args -p rate:<span class="o">=</span>10.0 -p frame_id:<span class="o">=</span>map
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="3-python节点内声明读取参数">3. Python节点内声明/读取参数
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">rclpy</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">rclpy.node</span> <span class="kn">import</span> <span class="n">Node</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">ParamNode</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&#34;param_node&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">declare_parameter</span><span class="p">(</span><span class="s2">&#34;rate&#34;</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">declare_parameter</span><span class="p">(</span><span class="s2">&#34;frame_id&#34;</span><span class="p">,</span> <span class="s2">&#34;base_link&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">rate</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_parameter</span><span class="p">(</span><span class="s2">&#34;rate&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">get_parameter_value</span><span class="p">()</span><span class="o">.</span><span class="n">double_value</span>
+</span></span><span class="line"><span class="cl">        <span class="n">frame_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_parameter</span><span class="p">(</span><span class="s2">&#34;frame_id&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">get_parameter_value</span><span class="p">()</span><span class="o">.</span><span class="n">string_value</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;rate=</span><span class="si">{</span><span class="n">rate</span><span class="si">}</span><span class="s2">, frame_id=</span><span class="si">{</span><span class="n">frame_id</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rclpy</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="n">args</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">node</span> <span class="o">=</span> <span class="n">ParamNode</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rclpy</span><span class="o">.</span><span class="n">spin</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">node</span><span class="o">.</span><span class="n">destroy_node</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rclpy</span><span class="o">.</span><span class="n">shutdown</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">main</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>运行时设置参数</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ros2 run &lt;package_name&gt; param_node --ros-args -p rate:<span class="o">=</span>10.0 -p frame_id:<span class="o">=</span>map
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="七-launch-文件启动多个节点"><strong>(七) Launch 文件（启动多个节点）</strong>
+</h2><blockquote>
+<p>当你需要同时启动很多节点，并且要配置参数、重映射、命名空间、引入别的launch时，手敲 <code>ros2 run ...</code> 就会非常痛苦。
+所以：launch 就是“启动脚本”，统一管理一套启动方式。</p>
+</blockquote>
+<blockquote>
+<p>ROS2 常见的 launch 有 2 类：</p>
+<ul>
+<li><strong>Python Launch（最常用）</strong>：<code>xxx.launch.py</code></li>
+<li><strong>XML Launch</strong>：<code>xxx.launch.xml</code></li>
+</ul>
+</blockquote>
+<h3 id="1-launch常用命令">1. launch常用命令
+</h3><ul>
+<li>启动 launch
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ros2 launch &lt;package_name&gt; &lt;launch_file&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>查看某包里有哪些 launch 文件
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ros2 pkg prefix &lt;package_name&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>prefix 告诉你 install 后的位置，launch 文件一般会在 <code>share/&lt;package_name&gt;/launch/</code> 下。</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="2-python-launch最小可用模板">2. Python Launch：最小可用模板
+</h3><blockquote>
+<p><code>launch/demo.launch.py</code></p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">launch</span> <span class="kn">import</span> <span class="n">LaunchDescription</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">launch_ros.actions</span> <span class="kn">import</span> <span class="n">Node</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">generate_launch_description</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="n">talker</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">package</span><span class="o">=</span><span class="s2">&#34;demo_nodes_cpp&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">executable</span><span class="o">=</span><span class="s2">&#34;talker&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">name</span><span class="o">=</span><span class="s2">&#34;talker&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">output</span><span class="o">=</span><span class="s2">&#34;screen&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">listener</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">package</span><span class="o">=</span><span class="s2">&#34;demo_nodes_cpp&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">executable</span><span class="o">=</span><span class="s2">&#34;listener&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">name</span><span class="o">=</span><span class="s2">&#34;listener&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">output</span><span class="o">=</span><span class="s2">&#34;screen&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">LaunchDescription</span><span class="p">([</span><span class="n">talker</span><span class="p">,</span> <span class="n">listener</span><span class="p">])</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>运行</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ros2 launch &lt;package_name&gt; demo.launch.py
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="3-launch里最常用的几个配置动作">3. launch里最常用的几个“配置动作”
+</h3><h4 id="31-重映射-remappings">3.1. 重映射 remappings
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">Node</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">package</span><span class="o">=</span><span class="s2">&#34;demo_nodes_cpp&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">executable</span><span class="o">=</span><span class="s2">&#34;talker&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">remappings</span><span class="o">=</span><span class="p">[(</span><span class="s2">&#34;chatter&#34;</span><span class="p">,</span> <span class="s2">&#34;/demo/chatter&#34;</span><span class="p">)],</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="32-命名空间-namespace">3.2. 命名空间 namespace
+</h4><blockquote>
+<p>命名空间就是“统一加前缀”，适合多机器人/多实例。</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">Node</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">package</span><span class="o">=</span><span class="s2">&#34;demo_nodes_cpp&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">executable</span><span class="o">=</span><span class="s2">&#34;talker&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">namespace</span><span class="o">=</span><span class="s2">&#34;robot1&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="33-传参数-parameters字典-or-yaml">3.3. 传参数 parameters（字典 or yaml）
+</h4><blockquote>
+<p>方式A：直接传字典</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">Node</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">package</span><span class="o">=</span><span class="s2">&#34;&lt;package_name&gt;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">executable</span><span class="o">=</span><span class="s2">&#34;param_node&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">parameters</span><span class="o">=</span><span class="p">[{</span><span class="s2">&#34;rate&#34;</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">,</span> <span class="s2">&#34;frame_id&#34;</span><span class="p">:</span> <span class="s2">&#34;map&#34;</span><span class="p">}],</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>方式B：使用 yaml 文件（更常见，方便管理一堆参数）</p>
+</blockquote>
+<p><code>config/params.yaml</code> 示意：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">param_node</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ros__parameters</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">rate</span><span class="p">:</span><span class="w"> </span><span class="m">10.0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">frame_id</span><span class="p">:</span><span class="w"> </span><span class="l">map</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>launch 里引用：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">ament_index_python.packages</span> <span class="kn">import</span> <span class="n">get_package_share_directory</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">os</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">pkg_share</span> <span class="o">=</span> <span class="n">get_package_share_directory</span><span class="p">(</span><span class="s2">&#34;&lt;package_name&gt;&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">params_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">pkg_share</span><span class="p">,</span> <span class="s2">&#34;config&#34;</span><span class="p">,</span> <span class="s2">&#34;params.yaml&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">Node</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">package</span><span class="o">=</span><span class="s2">&#34;&lt;package_name&gt;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">executable</span><span class="o">=</span><span class="s2">&#34;param_node&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">parameters</span><span class="o">=</span><span class="p">[</span><span class="n">params_file</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="34-launch参数launch-arguments">3.4. launch参数（Launch Arguments）
+</h4><blockquote>
+<p>你可以让 launch 支持命令行传参，比如控制 namespace、是否启用某个节点。</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">launch</span> <span class="kn">import</span> <span class="n">LaunchDescription</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">launch.actions</span> <span class="kn">import</span> <span class="n">DeclareLaunchArgument</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">launch.substitutions</span> <span class="kn">import</span> <span class="n">LaunchConfiguration</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">launch_ros.actions</span> <span class="kn">import</span> <span class="n">Node</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">generate_launch_description</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ns_arg</span> <span class="o">=</span> <span class="n">DeclareLaunchArgument</span><span class="p">(</span><span class="s2">&#34;ns&#34;</span><span class="p">,</span> <span class="n">default_value</span><span class="o">=</span><span class="s2">&#34;robot1&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rate_arg</span> <span class="o">=</span> <span class="n">DeclareLaunchArgument</span><span class="p">(</span><span class="s2">&#34;rate&#34;</span><span class="p">,</span> <span class="n">default_value</span><span class="o">=</span><span class="s2">&#34;2.0&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">package</span><span class="o">=</span><span class="s2">&#34;&lt;package_name&gt;&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">executable</span><span class="o">=</span><span class="s2">&#34;param_node&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">namespace</span><span class="o">=</span><span class="n">LaunchConfiguration</span><span class="p">(</span><span class="s2">&#34;ns&#34;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="n">parameters</span><span class="o">=</span><span class="p">[{</span><span class="s2">&#34;rate&#34;</span><span class="p">:</span> <span class="n">LaunchConfiguration</span><span class="p">(</span><span class="s2">&#34;rate&#34;</span><span class="p">)}],</span>
+</span></span><span class="line"><span class="cl">        <span class="n">output</span><span class="o">=</span><span class="s2">&#34;screen&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">LaunchDescription</span><span class="p">([</span><span class="n">ns_arg</span><span class="p">,</span> <span class="n">rate_arg</span><span class="p">,</span> <span class="n">node</span><span class="p">])</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>运行时传参</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ros2 launch &lt;package_name&gt; demo.launch.py ns:<span class="o">=</span>robot2 rate:<span class="o">=</span>20.0
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="4-include把多个launch拼起来">4. Include：把多个launch拼起来
+</h3><blockquote>
+<p>一个机器人项目往往有：底盘、传感器、建图/导航、可视化……每个模块一个launch最舒服。</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">launch</span> <span class="kn">import</span> <span class="n">LaunchDescription</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">launch.actions</span> <span class="kn">import</span> <span class="n">IncludeLaunchDescription</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">launch.launch_description_sources</span> <span class="kn">import</span> <span class="n">PythonLaunchDescriptionSource</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">ament_index_python.packages</span> <span class="kn">import</span> <span class="n">get_package_share_directory</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">os</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">generate_launch_description</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pkg_share</span> <span class="o">=</span> <span class="n">get_package_share_directory</span><span class="p">(</span><span class="s2">&#34;&lt;package_name&gt;&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">other_launch</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">pkg_share</span><span class="p">,</span> <span class="s2">&#34;launch&#34;</span><span class="p">,</span> <span class="s2">&#34;other.launch.py&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">LaunchDescription</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[</span>
+</span></span><span class="line"><span class="cl">            <span class="n">IncludeLaunchDescription</span><span class="p">(</span><span class="n">PythonLaunchDescriptionSource</span><span class="p">(</span><span class="n">other_launch</span><span class="p">)),</span>
+</span></span><span class="line"><span class="cl">        <span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="5-让-launch-文件能被-ros2-launch-找到安装">5. 让 launch 文件“能被 ros2 launch 找到”（安装）
+</h3><blockquote>
+<p>这一点是很多人第一次写 launch 最容易踩坑的地方：
+你本地 <code>src/&lt;pkg&gt;/launch/</code> 里有文件，但 <code>ros2 launch</code> 找不到，多半就是没 install。</p>
+</blockquote>
+<h4 id="61-ament_cmakec包">6.1. ament_cmake（C++包）
+</h4><p>在 <code>CMakeLists.txt</code> 里加：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cmake" data-lang="cmake"><span class="line"><span class="cl"><span class="nb">install</span><span class="p">(</span><span class="s">DIRECTORY</span>
+</span></span><span class="line"><span class="cl">  <span class="s">launch</span>
+</span></span><span class="line"><span class="cl">  <span class="s">DESTINATION</span> <span class="s">share/</span><span class="o">${</span><span class="nv">PROJECT_NAME</span><span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span><span class="err">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="62-ament_pythonpython包">6.2. ament_python（Python包）
+</h4><p>在 <code>setup.py</code> 里加（示意）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">os</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">glob</span> <span class="kn">import</span> <span class="n">glob</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">data_files</span><span class="o">=</span><span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="s2">&#34;share/ament_index/resource_index/packages&#34;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&#34;resource/&lt;package_name&gt;&#34;</span><span class="p">]),</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="s2">&#34;share/&lt;package_name&gt;&#34;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&#34;package.xml&#34;</span><span class="p">]),</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&#34;share&#34;</span><span class="p">,</span> <span class="s2">&#34;&lt;package_name&gt;&#34;</span><span class="p">,</span> <span class="s2">&#34;launch&#34;</span><span class="p">),</span> <span class="n">glob</span><span class="p">(</span><span class="s2">&#34;launch/*.launch.py&#34;</span><span class="p">)),</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&#34;share&#34;</span><span class="p">,</span> <span class="s2">&#34;&lt;package_name&gt;&#34;</span><span class="p">,</span> <span class="s2">&#34;config&#34;</span><span class="p">),</span> <span class="n">glob</span><span class="p">(</span><span class="s2">&#34;config/*.yaml&#34;</span><span class="p">)),</span>
+</span></span><span class="line"><span class="cl"><span class="p">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>然后重新构建</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">colcon build --symlink-install
+</span></span><span class="line"><span class="cl"><span class="nb">source</span> install/setup.bash
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<blockquote>
+<p>到这里基本就能把“单个节点 -&gt; 多节点系统”串起来了：</p>
+<ul>
+<li>单节点：<code>ros2 run</code></li>
+<li>多节点+配置：<code>ros2 launch</code></li>
+</ul>
+</blockquote>
+
 </section>
 
 

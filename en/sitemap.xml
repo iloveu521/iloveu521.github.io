@@ -3,7 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://iloveu521.github.io/</loc>
-    <lastmod>2026-04-25T16:53:27+08:00</lastmod>
+    <lastmod>2026-04-26T06:07:49+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="ja"
@@ -26,7 +26,12 @@
                 />
   </url><url>
     <loc>https://iloveu521.github.io/categories/</loc>
-    <lastmod>2026-04-25T16:53:27+08:00</lastmod>
+    <lastmod>2026-04-26T06:07:49+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="https://iloveu521.github.io/ja/categories/"
+                />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
@@ -39,14 +44,18 @@
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="ja"
-                href="https://iloveu521.github.io/ja/categories/"
-                />
-    <xhtml:link
-                rel="alternate"
                 hreflang="en-us"
                 href="https://iloveu521.github.io/categories/"
                 />
+  </url><url>
+    <loc>https://iloveu521.github.io/post/</loc>
+    <lastmod>2026-04-26T06:07:49+08:00</lastmod>
+  </url><url>
+    <loc>https://iloveu521.github.io/categories/thoughts/</loc>
+    <lastmod>2026-04-26T06:07:49+08:00</lastmod>
+  </url><url>
+    <loc>https://iloveu521.github.io/p/thoughts/</loc>
+    <lastmod>2026-04-26T06:07:49+08:00</lastmod>
   </url><url>
     <loc>https://iloveu521.github.io/categories/git/</loc>
     <lastmod>2026-04-25T16:53:27+08:00</lastmod>
@@ -55,9 +64,6 @@
     <lastmod>2026-04-25T16:53:27+08:00</lastmod>
   </url><url>
     <loc>https://iloveu521.github.io/categories/note/</loc>
-    <lastmod>2026-04-25T16:53:27+08:00</lastmod>
-  </url><url>
-    <loc>https://iloveu521.github.io/post/</loc>
     <lastmod>2026-04-25T16:53:27+08:00</lastmod>
   </url><url>
     <loc>https://iloveu521.github.io/categories/study/</loc>
