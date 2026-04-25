@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Git 是目前世界上最先进的分布式版本控制系统，几乎是现代软件开发的标配。在这篇博客中，我们将从零开始，带你快速掌握 Git 的核心操作，从创建仓库、代码推送到分支和版本管理。\n1. 初始化与配置 在开始使用 Git 之前，建议先配置用户名和邮箱，这会在每次提交记录中显示：\n1 2 git config --global user.name &#34;你的名字&#34; git config --global user.email &#34;你的邮箱@example.com&#34; 创建本地仓库 要在一个新的或者现有的项目中开始使用 Git，你只需在项目根目录运行：\n1 git init 这会在当前目录下创建一个隐藏的 .git 文件夹，Git 就是通过它来记录版本历史的。\n2. 暂存与提交 (Add &amp; Commit) Git 的工作流主要包括三个区域：工作区、暂存区 和 版本库。\n查看状态：随时可以使用 git status 看一下哪些文件被修改了。 添加到暂存区：将修改的文件加入暂存区，告诉 Git 这些是下次要提交的内容。 1 2 git add &lt;文件名&gt; # 添加指定文件 git add . # 添加所有已修改的文件 提交到版本库：为这次更改写一条简短清晰的说明，并保存为一个版本。 1 git commit -m &#34;feat: 初始化项目结构&#34; 3. 连接与推送到远程仓库 本地有了提交记录后，通常我们需要推送到远程平台。\n">
+<title>Git版本管理</title>
+
+<link rel='canonical' href='https://iloveu521.github.io/p/git%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86/'>
+
+<link rel="stylesheet" href="/scss/style.min.86591c898bd806857815fbb8c47e8d3fed97c133b78e83d9bfc27b164dd0aa2b.css"><meta property='og:title' content="Git版本管理">
+<meta property='og:description' content="Git 是目前世界上最先进的分布式版本控制系统，几乎是现代软件开发的标配。在这篇博客中，我们将从零开始，带你快速掌握 Git 的核心操作，从创建仓库、代码推送到分支和版本管理。\n1. 初始化与配置 在开始使用 Git 之前，建议先配置用户名和邮箱，这会在每次提交记录中显示：\n1 2 git config --global user.name &#34;你的名字&#34; git config --global user.email &#34;你的邮箱@example.com&#34; 创建本地仓库 要在一个新的或者现有的项目中开始使用 Git，你只需在项目根目录运行：\n1 git init 这会在当前目录下创建一个隐藏的 .git 文件夹，Git 就是通过它来记录版本历史的。\n2. 暂存与提交 (Add &amp; Commit) Git 的工作流主要包括三个区域：工作区、暂存区 和 版本库。\n查看状态：随时可以使用 git status 看一下哪些文件被修改了。 添加到暂存区：将修改的文件加入暂存区，告诉 Git 这些是下次要提交的内容。 1 2 git add &lt;文件名&gt; # 添加指定文件 git add . # 添加所有已修改的文件 提交到版本库：为这次更改写一条简短清晰的说明，并保存为一个版本。 1 git commit -m &#34;feat: 初始化项目结构&#34; 3. 连接与推送到远程仓库 本地有了提交记录后，通常我们需要推送到远程平台。\n">
+<meta property='og:url' content='https://iloveu521.github.io/p/git%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86/'>
+<meta property='og:site_name' content='Silly'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-04-25T16:53:27&#43;08:00'/><meta property='article:modified_time' content='2026-04-25T16:53:27&#43;08:00'/>
+<meta name="twitter:title" content="Git版本管理">
+<meta name="twitter:description" content="Git 是目前世界上最先进的分布式版本控制系统，几乎是现代软件开发的标配。在这篇博客中，我们将从零开始，带你快速掌握 Git 的核心操作，从创建仓库、代码推送到分支和版本管理。\n1. 初始化与配置 在开始使用 Git 之前，建议先配置用户名和邮箱，这会在每次提交记录中显示：\n1 2 git config --global user.name &#34;你的名字&#34; git config --global user.email &#34;你的邮箱@example.com&#34; 创建本地仓库 要在一个新的或者现有的项目中开始使用 Git，你只需在项目根目录运行：\n1 git init 这会在当前目录下创建一个隐藏的 .git 文件夹，Git 就是通过它来记录版本历史的。\n2. 暂存与提交 (Add &amp; Commit) Git 的工作流主要包括三个区域：工作区、暂存区 和 版本库。\n查看状态：随时可以使用 git status 看一下哪些文件被修改了。 添加到暂存区：将修改的文件加入暂存区，告诉 Git 这些是下次要提交的内容。 1 2 git add &lt;文件名&gt; # 添加指定文件 git add . # 添加所有已修改的文件 提交到版本库：为这次更改写一条简短清晰的说明，并保存为一个版本。 1 git commit -m &#34;feat: 初始化项目结构&#34; 3. 连接与推送到远程仓库 本地有了提交记录后，通常我们需要推送到远程平台。\n">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/cat_hu_931729ed2902e41d.png" width="300"
+                            height="296" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">😉</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Silly</a></h1>
+            <h2 class="site-description">Welcome!</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/iloveu521'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://twitter.com'
+                        target="_blank"
+                        title="Twitter"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/friend/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Friend</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://iloveu521.github.io/" selected>English</option>
+                                
+                                    <option value="https://iloveu521.github.io/ja/" >日本語</option>
+                                
+                                    <option value="https://iloveu521.github.io/zh-cn/" >简体中文</option>
+                                
+                                    <option value="https://iloveu521.github.io/zh-tw/" >正體中文</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#1-初始化与配置">1. 初始化与配置</a>
+      <ol>
+        <li><a href="#创建本地仓库">创建本地仓库</a></li>
+      </ol>
+    </li>
+    <li><a href="#2-暂存与提交-add--commit">2. 暂存与提交 (Add &amp; Commit)</a></li>
+    <li><a href="#3-连接与推送到远程仓库">3. 连接与推送到远程仓库</a>
+      <ol>
+        <li><a href="#关联远程仓库">关联远程仓库</a></li>
+        <li><a href="#推送代码">推送代码</a></li>
+      </ol>
+    </li>
+    <li><a href="#4-版本管理与分支-branch">4. 版本管理与分支 (Branch)</a>
+      <ol>
+        <li><a href="#创建与切换分支">创建与切换分支</a></li>
+        <li><a href="#合并分支-merge">合并分支 (Merge)</a></li>
+      </ol>
+    </li>
+    <li><a href="#5-模块化开发与代码合并工作流">5. 模块化开发与代码合并工作流</a>
+      <ol>
+        <li><a href="#51-模块化开发的核心思路">5.1 模块化开发的核心思路</a></li>
+        <li><a href="#52-如何管理合并与解决冲突">5.2 如何管理合并与解决冲突</a></li>
+      </ol>
+    </li>
+    <li><a href="#6-撤销与历史版本管理">6. 撤销与历史版本管理</a></li>
+    <li><a href="#结语">结语</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/git%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86/">Git版本管理</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published" datetime='2026-04-25T16:53:27&#43;08:00'>2026-04-25</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    2 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>Git 是目前世界上最先进的分布式版本控制系统，几乎是现代软件开发的标配。在这篇博客中，我们将从零开始，带你快速掌握 Git 的核心操作，从创建仓库、代码推送到分支和版本管理。</p>
+<h2 id="1-初始化与配置">1. 初始化与配置
+</h2><p>在开始使用 Git 之前，建议先配置用户名和邮箱，这会在每次提交记录中显示：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git config --global user.name <span class="s2">&#34;你的名字&#34;</span>
+</span></span><span class="line"><span class="cl">git config --global user.email <span class="s2">&#34;你的邮箱@example.com&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="创建本地仓库">创建本地仓库
+</h3><p>要在一个新的或者现有的项目中开始使用 Git，你只需在项目根目录运行：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git init
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这会在当前目录下创建一个隐藏的 <code>.git</code> 文件夹，Git 就是通过它来记录版本历史的。</p>
+<h2 id="2-暂存与提交-add--commit">2. 暂存与提交 (Add &amp; Commit)
+</h2><p>Git 的工作流主要包括三个区域：<strong>工作区</strong>、<strong>暂存区</strong> 和 <strong>版本库</strong>。</p>
+<ol>
+<li><strong>查看状态</strong>：随时可以使用 <code>git status</code> 看一下哪些文件被修改了。</li>
+<li><strong>添加到暂存区</strong>：将修改的文件加入暂存区，告诉 Git 这些是下次要提交的内容。
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git add &lt;文件名&gt;   <span class="c1"># 添加指定文件</span>
+</span></span><span class="line"><span class="cl">git add .         <span class="c1"># 添加所有已修改的文件</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li><strong>提交到版本库</strong>：为这次更改写一条简短清晰的说明，并保存为一个版本。
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git commit -m <span class="s2">&#34;feat: 初始化项目结构&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+<h2 id="3-连接与推送到远程仓库">3. 连接与推送到远程仓库
+</h2><p>本地有了提交记录后，通常我们需要推送到远程平台。</p>
+<h3 id="关联远程仓库">关联远程仓库
+</h3><p>如果你在个人远程平台上新建了一个空仓库，可以把它的地址关联到本地：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git remote add origin https://github.com/用户名/仓库名.git
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><em>(如果是 SSH 方式则是 <code>git@github.com:用户名/仓库名.git</code>)</em></p>
+<h3 id="推送代码">推送代码
+</h3><p>第一次推送并绑定默认分支（通常是 <code>main</code> 或 <code>master</code>）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git push -u origin main
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>以后只需运行 <code>git push</code> 即可把本地的新提交同步到远程。</p>
+<h2 id="4-版本管理与分支-branch">4. 版本管理与分支 (Branch)
+</h2><p>Git 最强大的功能之一就是分支。它允许你在一条独立的线路上开发新功能，而不影响主代码库。</p>
+<h3 id="创建与切换分支">创建与切换分支
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git branch feature         <span class="c1"># 创建一个名为 feature 的分支</span>
+</span></span><span class="line"><span class="cl">git checkout feature       <span class="c1"># 切换到该分支</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 或者使用更现代的命令：</span>
+</span></span><span class="line"><span class="cl">git checkuot feature
+</span></span><span class="line"><span class="cl">git checkuot -c feature      <span class="c1"># 创建并直接切换</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="合并分支-merge">合并分支 (Merge)
+</h3><p>当新功能在分支上开发完成并 commit 之后，我们需要将它合并回主干（<code>main</code>）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git checkuot main            <span class="c1"># 1. 先切换回主干</span>
+</span></span><span class="line"><span class="cl">git merge feature          <span class="c1"># 2. 将 feature 的代码合并进来</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="5-模块化开发与代码合并工作流">5. 模块化开发与代码合并工作流
+</h2><p>在实际的项目开发中，我们通常会面临多人协作或者同时开发多个独立功能模块的情况。这时候，**基于分支的模块化开发（Feature Branch Workflow）**就显得尤为重要。</p>
+<h3 id="51-模块化开发的核心思路">5.1 模块化开发的核心思路
+</h3><p>永远不要直接在 <code>main</code> 或 <code>master</code> 主分支上写代码。主分支应该始终保持稳定、可运行的状态。任何新功能、bug 修复，都应该在一个独立的“特性分支（Feature Branch）”上进行，可以维护一个<code>dev</code>分支。</p>
+<p><strong>标准开发工作流如下：</strong></p>
+<ol>
+<li>
+<p>**维护<code>dev</code>分支</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git checkout main
+</span></span><span class="line"><span class="cl">git checkout -b dev
+</span></span><span class="line"><span class="cl">git checkout dev
+</span></span><span class="line"><span class="cl">git push -u origin dev
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p><strong>更新本地主分支</strong>：开发新模块前，确保你的本地主干是最新的，避免后续严重的冲突。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git checkuot dev
+</span></span><span class="line"><span class="cl">git pull origin dev
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p><strong>创建独立的模块分支</strong>：为你要开发的新功能创建一个专属分支。推荐使用 <code>feature/</code> 这样的前缀规范命名。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git checkuot -c feature/imu_driver
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p><strong>独立开发与提交</strong>：在这个分支上，你可以自由地编写代码、进行多次 <code>git add</code> 和 <code>git commit</code>。这个环境是隔离的，不会影响主干。</p>
+</li>
+<li>
+<p><strong>推送到远程</strong>：开发完成后，将这个纯粹的模块分支推送到远程仓库。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git push -u origin feature/imu_driver
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+<h3 id="52-如何管理合并与解决冲突">5.2 如何管理合并与解决冲突
+</h3><p>当一个模块开发并测试完毕后，我们需要将 <code>feature/imu_driver</code> 的代码合并回 <code>main</code> 分支。</p>
+<ul>
+<li><strong>团队协作环境</strong>：通常不建议直接本地合并。你应该在 GitHub、GitLab 或 Gitee 平台上，基于刚才推送的分支发起一个 <strong>Pull Request (PR)</strong> 或 <strong>Merge Request (MR)</strong>。这样可以让同事进行代码审查（Code Review），审核通过后由管理员在网页端合并。</li>
+<li><strong>个人开发环境</strong>：你可以直接在本地完成合并：
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git checkuot dev
+</span></span><span class="line"><span class="cl">git merge feature/imu_driver
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<p><strong>遇到代码冲突（Conflict）怎么办？</strong>
+如果不同分支的人恰好修改了同一个文件的同一行代码，Git 会无法自动合并，并提示合并冲突。处理冲突非常简单：</p>
+<ol>
+<li>打开提示冲突的文件，Git 会用 <code>&lt;</code>、<code>=</code>、<code>&gt;</code> 符号标记出两份不同的代码段。</li>
+<li>人工检查并决定保留哪一部分，把 Git 产生的那些冲突标记符号（<code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code> 等）删除掉，编写出最终确定的代码。</li>
+<li>告诉 Git 冲突已经解决，并提交：
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git add 冲突的文件
+</span></span><span class="line"><span class="cl">git commit -m <span class="s2">&#34;fix: 解决合并时的代码冲突&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+<p>这样，你的新模块就被安全且完整地集成进项目主干了！</p>
+<h2 id="6-撤销与历史版本管理">6. 撤销与历史版本管理
+</h2><p>日常开发免不了会出现失误或者需要回退历史版本，常用技巧如下：</p>
+<ul>
+<li><strong>撤销工作区修改</strong>（还没 add）：
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git restore &lt;文件名&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li><strong>查看历史记录</strong>：
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git log --oneline
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li><strong>版本回退 (Reset)</strong>（<strong>有风险，慎用</strong>）：
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git reset --hard &lt;commit-id&gt;   <span class="c1"># 彻底退回到该版本并且丢弃之后的更改</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li><strong>安全撤销历史提交 (Revert)</strong>：
+用一次新的提交来抵消掉某个历史提交的修改（适合公共分支）：
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git revert &lt;commit-id&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h2 id="结语">结语
+</h2><p>掌握了上述关于 <code>init</code>、<code>add</code>、<code>commit</code>、<code>push</code> 以及基本的分支模型和回退方案，你已经具备了应对日常绝大多数 Git 场景的能力了！养成经常提交（commit）与同步（push）的习惯，是代码安全最大的保障。</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        const elementsToRender = [".main-article", ".widget--toc"];
+
+        elementsToRender.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    ignoredClasses: ["gist"]
+                });
+            }
+        });
+    });
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2026 Silly
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.34.2">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+    
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
