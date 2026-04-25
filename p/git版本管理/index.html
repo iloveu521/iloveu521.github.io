@@ -317,7 +317,11 @@
       </ol>
     </li>
     <li><a href="#6-撤销与历史版本管理">6. 撤销与历史版本管理</a></li>
-    <li><a href="#结语">结语</a></li>
+    <li><a href="#7-常见技巧与问题处理">7. 常见技巧与问题处理</a>
+      <ol>
+        <li><a href="#添加了-gitignore-后为什么-installbuild-等文件夹还是被-push-上去了">添加了 <code>.gitignore</code> 后，为什么 <code>install</code>/<code>build</code> 等文件夹还是被 push 上去了？</a></li>
+      </ol>
+    </li>
   </ol>
 </nav>
         </div>
@@ -333,6 +337,31 @@
     <header class="article-header">
 
     <div class="article-details">
+    
+    <header class="article-category">
+        
+            
+            
+            
+            <a href="/categories/git/" style="background-color: hsl(203, 60%, 84%); color: hsl(203, 60%, 15%);">
+                Git
+            </a>
+        
+            
+            
+            
+            <a href="/categories/note/" style="background-color: hsl(325, 60%, 84%); color: hsl(325, 60%, 15%);">
+                Note
+            </a>
+        
+            
+            
+            
+            <a href="/categories/study/" style="background-color: hsl(262, 60%, 84%); color: hsl(262, 60%, 15%);">
+                Study
+            </a>
+        
+    </header>
     
 
     <div class="article-title-wrapper">
@@ -502,7 +531,7 @@
 <p><strong>标准开发工作流如下：</strong></p>
 <ol>
 <li>
-<p>**维护<code>dev</code>分支</p>
+<p><strong>维护<code>dev</code>分支</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -528,6 +557,21 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git checkuot dev
 </span></span><span class="line"><span class="cl">git pull origin dev
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>在此之后更新只需要</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git add &lt;file_name&gt;
+</span></span><span class="line"><span class="cl">git commit -m <span class="s2">&#34;一些简单的描述&#34;</span>
+</span></span><span class="line"><span class="cl">git push
 </span></span></code></pre></td></tr></table>
 </div>
 </div></li>
@@ -638,8 +682,62 @@
 </div>
 </div></li>
 </ul>
-<h2 id="结语">结语
-</h2><p>掌握了上述关于 <code>init</code>、<code>add</code>、<code>commit</code>、<code>push</code> 以及基本的分支模型和回退方案，你已经具备了应对日常绝大多数 Git 场景的能力了！养成经常提交（commit）与同步（push）的习惯，是代码安全最大的保障。</p>
+<h2 id="7-常见技巧与问题处理">7. 常见技巧与问题处理
+</h2><h3 id="添加了-gitignore-后为什么-installbuild-等文件夹还是被-push-上去了">添加了 <code>.gitignore</code> 后，为什么 <code>install</code>/<code>build</code> 等文件夹还是被 push 上去了？
+</h3><p><strong>问题原因</strong>：<code>.gitignore</code> 只能忽略未被追踪的文件。如果文件或文件夹在添加到 <code>.gitignore</code> 之前就已经被 <code>git add</code> 或者提交进了 Git 仓库，那么即使你后添加了 <code>.gitignore</code>，它们依然会被追踪并 push。</p>
+<ol>
+<li>
+<p><strong>更新 <code>.gitignore</code> 文件</strong>：首先确保在项目根目录的 <code>.gitignore</code> 里忽略了所有的编译输出目录。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl"># 在 .gitignore 中添加通配符，忽略所有二级目录下的这三个文件夹
+</span></span><span class="line"><span class="cl">*/install/
+</span></span><span class="line"><span class="cl">*/build/
+</span></span><span class="line"><span class="cl">*/log/
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p><strong>清除 Git 的缓存记录</strong>：使用 <code>git rm --cached</code> 命令可以取消 Git 对这些文件夹的追踪。比如针对你提到的 <code>dev_ws</code>、<code>lidar_ws</code> 和 <code>racing_ws</code>，执行如下命令：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 取消追踪各个工作空间下的具体文件夹</span>
+</span></span><span class="line"><span class="cl">git rm -r --cached &lt;path_to_file&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 或者直接清空所有暂存区缓存，然后重新所有的 add</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># git rm -r --cached .</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># git add .</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p><strong>提交并推送变更</strong>：告诉 Git 记录上述更改，推送到远程仓库。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git commit -m <span class="s2">&#34;清除install文件&#34;</span>
+</span></span><span class="line"><span class="cl">git push
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
 
 </section>
 
@@ -700,6 +798,39 @@
     
 
     
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/ros2%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+        
+        
+            <div class="article-image">
+                <img src="/p/ros2%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/ros.edab4578afaff5cd76e4da875388dea7_hu_ab8ebbcbccbb79f8.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Ros2学习笔记"
+                        
+                        data-hash="md5-7atFeK&#43;v9c125NqHU4jepw==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Ros2学习笔记</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
 
      
     

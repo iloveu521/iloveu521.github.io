@@ -7,7 +7,31 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>Silly</copyright>
-        <lastBuildDate>Fri, 24 Apr 2026 13:35:47 +0800</lastBuildDate><atom:link href="https://iloveu521.github.io/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 25 Apr 2026 16:53:27 +0800</lastBuildDate><atom:link href="https://iloveu521.github.io/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Git</title>
+        <link>https://iloveu521.github.io/categories/git/</link>
+        <pubDate>Sat, 25 Apr 2026 16:53:27 +0800</pubDate>
+        
+        <guid>https://iloveu521.github.io/categories/git/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Note</title>
+        <link>https://iloveu521.github.io/categories/note/</link>
+        <pubDate>Sat, 25 Apr 2026 16:53:27 +0800</pubDate>
+        
+        <guid>https://iloveu521.github.io/categories/note/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Study</title>
+        <link>https://iloveu521.github.io/categories/study/</link>
+        <pubDate>Sat, 25 Apr 2026 16:53:27 +0800</pubDate>
+        
+        <guid>https://iloveu521.github.io/categories/study/</guid>
+        <description></description>
+        </item>
+        <item>
         <title>Issue</title>
         <link>https://iloveu521.github.io/categories/issue/</link>
         <pubDate>Fri, 24 Apr 2026 13:35:47 +0800</pubDate>
@@ -16,27 +40,11 @@
         <description></description>
         </item>
         <item>
-        <title>Note</title>
-        <link>https://iloveu521.github.io/categories/note/</link>
-        <pubDate>Thu, 23 Apr 2026 01:06:24 +0800</pubDate>
-        
-        <guid>https://iloveu521.github.io/categories/note/</guid>
-        <description></description>
-        </item>
-        <item>
         <title>Ros2</title>
         <link>https://iloveu521.github.io/categories/ros2/</link>
         <pubDate>Thu, 23 Apr 2026 01:06:24 +0800</pubDate>
         
         <guid>https://iloveu521.github.io/categories/ros2/</guid>
-        <description></description>
-        </item>
-        <item>
-        <title>Study</title>
-        <link>https://iloveu521.github.io/categories/study/</link>
-        <pubDate>Thu, 23 Apr 2026 01:06:24 +0800</pubDate>
-        
-        <guid>https://iloveu521.github.io/categories/study/</guid>
         <description></description>
         </item>
         <item>
