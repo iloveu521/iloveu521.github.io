@@ -6,13 +6,15 @@
 
 <link rel='canonical' href='https://iloveu521.github.io/p/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/'>
 
-<link rel="stylesheet" href="/scss/style.min.86591c898bd806857815fbb8c47e8d3fed97c133b78e83d9bfc27b164dd0aa2b.css"><meta property='og:title' content="Linux常用命令">
+<link rel="stylesheet" href="/scss/style.min.a417f02c916931d7cdb31ab7abe48ac8b095f84732b48b43aa856697d22bf940.css"><meta property='og:title' content="Linux常用命令">
 <meta property='og:description' content="1. 常用命令概览 1.1 文件与目录管理 ls / ls -l / ll: 列出目录内容 cd &lt;dir&gt;: 切换到指定目录 pwd: 显示当前工作目录 mkdir &lt;dir&gt;: 创建新目录 rm -rf &lt;file/dir&gt;: 强制级联删除文件或目录（高危） cp -r &lt;src&gt; &lt;dest&gt;: 复制文件或目录 mv &lt;src&gt; &lt;dest&gt;: 移动/重命名文件或目录 touch &lt;file&gt;: 创建空文件或修改时间戳 cat &lt;file&gt;: 查看文件内容 less &lt;file&gt; / more &lt;file&gt;: 分页查看文件内容 tail -f &lt;file&gt;: 实时查看文件末尾内容（常用看日志） head -n 10 &lt;file&gt;: 查看文件前10行 find &lt;path&gt; -name &quot;*name*&quot;: 按名称查找文件或目录 find &lt;path&gt; -type d -name &quot;*name*&quot;: 仅查找目录(文件夹) find &lt;path&gt; -type f -name &quot;*name*&quot;: 仅查找普通文件 grep &quot;&lt;text&gt;&quot; &lt;file&gt;: 在文件中搜索指定文本内容 1.2 系统与进程管理 top / htop: 实时显示系统进程状态和资源占用 ps -ef / ps aux: 查看所有活动进程 kill -9 &lt;pid&gt;: 强制终止指定进程 free -h: 查看内存和交换空间使用情况 df -h: 查看磁盘分区和使用情况 du -sh &lt;dir&gt;: 查看指定目录的大小 uname -a: 查看系统内核及硬件架构信息 history: 查看命令历史记录 1.3 网络操作 ping &lt;ip/domain&gt;: 测试网络连通性 ifconfig / ip addr: 查看网络接口和IP地址 netstat -tulnp / ss -tulnp: 查看端口占用情况 curl -O &lt;url&gt; / wget &lt;url&gt;: 下载文件 scp &lt;file&gt; user@host:&lt;path&gt;: 通过SSH远程安全传输文件 ssh user@host: 远程登录服务器 1.4 用户与权限管理 chmod 755 &lt;file&gt;: 修改文件或目录权限 chown user:group &lt;file&gt;: 修改文件或目录的所有者和所属组 su - &lt;user&gt;: 切换用户 sudo &lt;command&gt;: 以超级用户权限执行命令 useradd &lt;user&gt; / userdel &lt;user&gt;: 增加/删除用户 passwd &lt;user&gt;: 修改用户密码 2. Vim常用快捷键与命令 Vim 主要有三种模式：普通模式（Command Mode）、插入模式（Insert Mode） 和 底线命令模式（Last line Mode）。\n">
 <meta property='og:url' content='https://iloveu521.github.io/p/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/'>
 <meta property='og:site_name' content='Silly'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-04-27T20:50:20&#43;08:00'/><meta property='article:modified_time' content='2026-04-27T20:50:20&#43;08:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-04-27T20:50:20&#43;08:00'/><meta property='article:modified_time' content='2026-04-27T21:18:43&#43;08:00'/>
 <meta name="twitter:title" content="Linux常用命令">
 <meta name="twitter:description" content="1. 常用命令概览 1.1 文件与目录管理 ls / ls -l / ll: 列出目录内容 cd &lt;dir&gt;: 切换到指定目录 pwd: 显示当前工作目录 mkdir &lt;dir&gt;: 创建新目录 rm -rf &lt;file/dir&gt;: 强制级联删除文件或目录（高危） cp -r &lt;src&gt; &lt;dest&gt;: 复制文件或目录 mv &lt;src&gt; &lt;dest&gt;: 移动/重命名文件或目录 touch &lt;file&gt;: 创建空文件或修改时间戳 cat &lt;file&gt;: 查看文件内容 less &lt;file&gt; / more &lt;file&gt;: 分页查看文件内容 tail -f &lt;file&gt;: 实时查看文件末尾内容（常用看日志） head -n 10 &lt;file&gt;: 查看文件前10行 find &lt;path&gt; -name &quot;*name*&quot;: 按名称查找文件或目录 find &lt;path&gt; -type d -name &quot;*name*&quot;: 仅查找目录(文件夹) find &lt;path&gt; -type f -name &quot;*name*&quot;: 仅查找普通文件 grep &quot;&lt;text&gt;&quot; &lt;file&gt;: 在文件中搜索指定文本内容 1.2 系统与进程管理 top / htop: 实时显示系统进程状态和资源占用 ps -ef / ps aux: 查看所有活动进程 kill -9 &lt;pid&gt;: 强制终止指定进程 free -h: 查看内存和交换空间使用情况 df -h: 查看磁盘分区和使用情况 du -sh &lt;dir&gt;: 查看指定目录的大小 uname -a: 查看系统内核及硬件架构信息 history: 查看命令历史记录 1.3 网络操作 ping &lt;ip/domain&gt;: 测试网络连通性 ifconfig / ip addr: 查看网络接口和IP地址 netstat -tulnp / ss -tulnp: 查看端口占用情况 curl -O &lt;url&gt; / wget &lt;url&gt;: 下载文件 scp &lt;file&gt; user@host:&lt;path&gt;: 通过SSH远程安全传输文件 ssh user@host: 远程登录服务器 1.4 用户与权限管理 chmod 755 &lt;file&gt;: 修改文件或目录权限 chown user:group &lt;file&gt;: 修改文件或目录的所有者和所属组 su - &lt;user&gt;: 切换用户 sudo &lt;command&gt;: 以超级用户权限执行命令 useradd &lt;user&gt; / userdel &lt;user&gt;: 增加/删除用户 passwd &lt;user&gt;: 修改用户密码 2. Vim常用快捷键与命令 Vim 主要有三种模式：普通模式（Command Mode）、插入模式（Insert Mode） 和 底线命令模式（Last line Mode）。\n">
+    <link rel="shortcut icon" href="/favicon.ico" />
+
     </head>
     <body class="
     article-page
@@ -317,6 +319,39 @@
 
             
         
+            
+                <section class="widget tagCloud">
+    <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-tag" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11 3L20 12a1.5 1.5 0 0 1 0 2L14 20a1.5 1.5 0 0 1 -2 0L3 11v-4a4 4 0 0 1 4 -4h4" />
+  <circle cx="9" cy="9" r="2" />
+</svg>
+
+
+
+    </div>
+    <h2 class="widget-title section-title">Series</h2>
+
+    <div class="tagCloud-tags">
+        
+            <a href="/series/issue/">
+                Issue
+            </a>
+        
+            <a href="/series/study/">
+                Study
+            </a>
+        
+            <a href="/series/thoughts/">
+                Thoughts
+            </a>
+        
+    </div>
+</section>
+
+            
+        
     </aside>
 
 
@@ -521,6 +556,11 @@
 
 
     <footer class="article-footer">
+    <section class="article-tags">
+    
+        <a href="/series/study/">Study</a>
+    
+</section>
     
 
     
@@ -535,7 +575,31 @@
 
         <span>Licensed under CC BY-NC-SA 4.0</span>
     </section>
-    </footer>
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <span>
+            Last updated on Apr 27, 2026 21:18 &#43;0800
+        </span>
+    </section><div class="article-lastmod">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+            <time>
+                Apr 27, 2026 21:18 &#43;0800
+            </time>
+        </div></footer>
 
 
     
@@ -781,6 +845,221 @@
         document.head.appendChild(customFont);
     }());
 </script>
+<style>
+    #TableOfContents > ul, ol {
+        ul, ol {
+            display: none;
+        }
+        .open {
+            display: block;
+        }
+    }
+</style>
+
+<script>
+    function initTocHide() {
+        
+        let toc = document.querySelector(".widget--toc");
+        if (!toc) {
+            return;
+        }
+        
+        window.addEventListener('scroll', function() {
+            
+            let openUl = document.querySelectorAll(".open");
+            if (openUl.length > 0) {
+              openUl.forEach((ul) => {
+                ul.classList.remove("open")
+              })
+            }
+            
+            let currentLi = document.querySelector(".active-class");
+            if (!currentLi) {
+                return
+            }
+            
+            if (currentLi.children.length > 1) {
+                currentLi.children[1].classList.add("open")
+            }
+            
+            let ul = currentLi.parentElement;
+            do {
+                ul.classList.add("open");
+                ul = ul.parentElement.parentElement
+            } while (ul !== undefined && (ul.localName === 'ul' || ul.localName === 'ol'))
+        });
+    }
+    initTocHide()
+</script>
+
+<style>
+    #backTopBtn {
+        display: none;
+        position: fixed;
+        bottom: 30px;
+        z-index: 99;
+        cursor: pointer;
+        width: 30px;
+        height: 30px;
+        background-image: url(https://iloveu521.github.io/icons/backTop.svg);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 18px 18px;
+        border-radius: var(--card-border-radius);
+    }
+
+    #backTopBtn::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: var(--card-background);
+        opacity: 0.7;
+        border: 1px solid var(--card-separator-color);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        z-index: -1;
+    }
+
+    #backTopBtn:hover::before {
+        opacity: 0.85;
+    }
+</style>
+
+<script>
+    
+
+    function initScrollTop() {
+        let rightSideBar = document.querySelector(".right-sidebar");
+        if (!rightSideBar) {
+            return;
+        }
+        
+        let btn = document.createElement("div");
+        btn.id = "backTopBtn";
+        btn.onclick = backToTop
+        rightSideBar.appendChild(btn)
+        
+        window.onscroll = function() {
+            
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
+            }
+        };
+    }
+
+    
+
+    function backToTop(){
+        window.scrollTo({ top: 0, behavior: "smooth" })
+    }
+
+    initScrollTop();
+</script>
+
+
+<div id="particles-js"></div>
+
+<script src=https://iloveu521.github.io/background/particles.min.js></script>
+<script>
+  particlesJS.load('particles-js', "https://iloveu521.github.io/background/particlesjs-config.json", function() {
+    console.log('particles.js loaded - callback');
+  });
+</script>
+
+<style>
+  #particles-js {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: -1;
+  }
+</style>
+
+<style>
+    .highlight {
+         
+        max-height: 400px;
+        overflow: hidden;
+    }
+
+    .code-show {
+        max-height: none !important;
+    }
+
+    .code-more-box {
+        width: 100%;
+        padding-top: 78px;
+        background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0)), to(#fff));
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+    }
+
+    .code-more-btn {
+        display: block;
+        margin: auto;
+        width: 44px;
+        height: 22px;
+        background: #f0f0f5;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        padding-top: 6px;
+        cursor: pointer;
+    }
+
+    .code-more-img {
+        cursor: pointer !important;
+        display: block;
+        margin: auto;
+        width: 22px;
+        height: 16px;
+    }
+</style>
+
+<script>
+  function initCodeMoreBox() {
+    let codeBlocks = document.querySelectorAll(".highlight");
+    if (!codeBlocks) {
+      return;
+    }
+    codeBlocks.forEach(codeBlock => {
+      
+      if (codeBlock.scrollHeight <= codeBlock.clientHeight) {
+        return;
+      }
+      
+      
+      let codeMoreBox = document.createElement('div');
+      codeMoreBox.classList.add('code-more-box');
+      
+      let codeMoreBtn = document.createElement('span');
+      codeMoreBtn.classList.add('code-more-btn');
+      codeMoreBtn.addEventListener('click', () => {
+        codeBlock.classList.add('code-show');
+        codeMoreBox.style.display = 'none';
+        
+        window.dispatchEvent(new Event('resize'))
+      })
+      
+      let img = document.createElement('img');
+      img.classList.add('code-more-img');
+      img.src = "https://iloveu521.github.io/icons/codeMore.png"
+      
+      codeMoreBtn.appendChild(img);
+      codeMoreBox.appendChild(codeMoreBtn);
+      codeBlock.appendChild(codeMoreBox)
+    })
+  }
+  
+  initCodeMoreBox();
+</script>
+
+
 
     </body>
 </html>
