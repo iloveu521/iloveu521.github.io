@@ -3,7 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://iloveu521.github.io/</loc>
-    <lastmod>2026-04-27T20:04:50+08:00</lastmod>
+    <lastmod>2026-04-27T20:50:20+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="ja"
@@ -26,7 +26,12 @@
                 />
   </url><url>
     <loc>https://iloveu521.github.io/categories/</loc>
-    <lastmod>2026-04-27T20:04:50+08:00</lastmod>
+    <lastmod>2026-04-27T20:50:20+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-tw"
+                href="https://iloveu521.github.io/zh-tw/categories/"
+                />
     <xhtml:link
                 rel="alternate"
                 hreflang="ja"
@@ -39,25 +44,35 @@
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="zh-tw"
-                href="https://iloveu521.github.io/zh-tw/categories/"
-                />
-    <xhtml:link
-                rel="alternate"
                 hreflang="en-us"
                 href="https://iloveu521.github.io/categories/"
                 />
   </url><url>
-    <loc>https://iloveu521.github.io/categories/issue/</loc>
-    <lastmod>2026-04-27T20:04:50+08:00</lastmod>
+    <loc>https://iloveu521.github.io/categories/linux/</loc>
+    <lastmod>2026-04-27T20:50:20+08:00</lastmod>
+  </url><url>
+    <loc>https://iloveu521.github.io/p/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</loc>
+    <lastmod>2026-04-27T20:50:20+08:00</lastmod>
   </url><url>
     <loc>https://iloveu521.github.io/post/</loc>
+    <lastmod>2026-04-27T20:50:20+08:00</lastmod>
+  </url><url>
+    <loc>https://iloveu521.github.io/categories/study/</loc>
+    <lastmod>2026-04-27T20:50:20+08:00</lastmod>
+  </url><url>
+    <loc>https://iloveu521.github.io/categories/issue/</loc>
     <lastmod>2026-04-27T20:04:50+08:00</lastmod>
   </url><url>
     <loc>https://iloveu521.github.io/categories/resolved/</loc>
     <lastmod>2026-04-27T20:04:50+08:00</lastmod>
   </url><url>
     <loc>https://iloveu521.github.io/p/stm32_error_l6407e/</loc>
+    <lastmod>2026-04-27T20:04:50+08:00</lastmod>
+  </url><url>
+    <loc>https://iloveu521.github.io/categories/unresolved/</loc>
+    <lastmod>2026-04-27T20:04:50+08:00</lastmod>
+  </url><url>
+    <loc>https://iloveu521.github.io/p/%E9%9B%B7%E7%A5%9En10%E5%90%AF%E5%8A%A8error/</loc>
     <lastmod>2026-04-27T20:04:50+08:00</lastmod>
   </url><url>
     <loc>https://iloveu521.github.io/categories/thoughts/</loc>
@@ -73,9 +88,6 @@
     <lastmod>2026-04-25T16:53:27+08:00</lastmod>
   </url><url>
     <loc>https://iloveu521.github.io/categories/note/</loc>
-    <lastmod>2026-04-25T16:53:27+08:00</lastmod>
-  </url><url>
-    <loc>https://iloveu521.github.io/categories/study/</loc>
     <lastmod>2026-04-25T16:53:27+08:00</lastmod>
   </url><url>
     <loc>https://iloveu521.github.io/p/code-server-extension-issue/</loc>

@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="1. 常用命令概览 1.1 文件与目录管理 ls / ls -l / ll: 列出目录内容 cd &lt;dir&gt;: 切换到指定目录 pwd: 显示当前工作目录 mkdir &lt;dir&gt;: 创建新目录 rm -rf &lt;file/dir&gt;: 强制级联删除文件或目录（高危） cp -r &lt;src&gt; &lt;dest&gt;: 复制文件或目录 mv &lt;src&gt; &lt;dest&gt;: 移动/重命名文件或目录 touch &lt;file&gt;: 创建空文件或修改时间戳 cat &lt;file&gt;: 查看文件内容 less &lt;file&gt; / more &lt;file&gt;: 分页查看文件内容 tail -f &lt;file&gt;: 实时查看文件末尾内容（常用看日志） head -n 10 &lt;file&gt;: 查看文件前10行 find &lt;path&gt; -name &quot;*name*&quot;: 按名称查找文件或目录 find &lt;path&gt; -type d -name &quot;*name*&quot;: 仅查找目录(文件夹) find &lt;path&gt; -type f -name &quot;*name*&quot;: 仅查找普通文件 grep &quot;&lt;text&gt;&quot; &lt;file&gt;: 在文件中搜索指定文本内容 1.2 系统与进程管理 top / htop: 实时显示系统进程状态和资源占用 ps -ef / ps aux: 查看所有活动进程 kill -9 &lt;pid&gt;: 强制终止指定进程 free -h: 查看内存和交换空间使用情况 df -h: 查看磁盘分区和使用情况 du -sh &lt;dir&gt;: 查看指定目录的大小 uname -a: 查看系统内核及硬件架构信息 history: 查看命令历史记录 1.3 网络操作 ping &lt;ip/domain&gt;: 测试网络连通性 ifconfig / ip addr: 查看网络接口和IP地址 netstat -tulnp / ss -tulnp: 查看端口占用情况 curl -O &lt;url&gt; / wget &lt;url&gt;: 下载文件 scp &lt;file&gt; user@host:&lt;path&gt;: 通过SSH远程安全传输文件 ssh user@host: 远程登录服务器 1.4 用户与权限管理 chmod 755 &lt;file&gt;: 修改文件或目录权限 chown user:group &lt;file&gt;: 修改文件或目录的所有者和所属组 su - &lt;user&gt;: 切换用户 sudo &lt;command&gt;: 以超级用户权限执行命令 useradd &lt;user&gt; / userdel &lt;user&gt;: 增加/删除用户 passwd &lt;user&gt;: 修改用户密码 2. Vim常用快捷键与命令 Vim 主要有三种模式：普通模式（Command Mode）、插入模式（Insert Mode） 和 底线命令模式（Last line Mode）。\n">
+<title>Linux常用命令</title>
+
+<link rel='canonical' href='https://iloveu521.github.io/p/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/'>
+
+<link rel="stylesheet" href="/scss/style.min.86591c898bd806857815fbb8c47e8d3fed97c133b78e83d9bfc27b164dd0aa2b.css"><meta property='og:title' content="Linux常用命令">
+<meta property='og:description' content="1. 常用命令概览 1.1 文件与目录管理 ls / ls -l / ll: 列出目录内容 cd &lt;dir&gt;: 切换到指定目录 pwd: 显示当前工作目录 mkdir &lt;dir&gt;: 创建新目录 rm -rf &lt;file/dir&gt;: 强制级联删除文件或目录（高危） cp -r &lt;src&gt; &lt;dest&gt;: 复制文件或目录 mv &lt;src&gt; &lt;dest&gt;: 移动/重命名文件或目录 touch &lt;file&gt;: 创建空文件或修改时间戳 cat &lt;file&gt;: 查看文件内容 less &lt;file&gt; / more &lt;file&gt;: 分页查看文件内容 tail -f &lt;file&gt;: 实时查看文件末尾内容（常用看日志） head -n 10 &lt;file&gt;: 查看文件前10行 find &lt;path&gt; -name &quot;*name*&quot;: 按名称查找文件或目录 find &lt;path&gt; -type d -name &quot;*name*&quot;: 仅查找目录(文件夹) find &lt;path&gt; -type f -name &quot;*name*&quot;: 仅查找普通文件 grep &quot;&lt;text&gt;&quot; &lt;file&gt;: 在文件中搜索指定文本内容 1.2 系统与进程管理 top / htop: 实时显示系统进程状态和资源占用 ps -ef / ps aux: 查看所有活动进程 kill -9 &lt;pid&gt;: 强制终止指定进程 free -h: 查看内存和交换空间使用情况 df -h: 查看磁盘分区和使用情况 du -sh &lt;dir&gt;: 查看指定目录的大小 uname -a: 查看系统内核及硬件架构信息 history: 查看命令历史记录 1.3 网络操作 ping &lt;ip/domain&gt;: 测试网络连通性 ifconfig / ip addr: 查看网络接口和IP地址 netstat -tulnp / ss -tulnp: 查看端口占用情况 curl -O &lt;url&gt; / wget &lt;url&gt;: 下载文件 scp &lt;file&gt; user@host:&lt;path&gt;: 通过SSH远程安全传输文件 ssh user@host: 远程登录服务器 1.4 用户与权限管理 chmod 755 &lt;file&gt;: 修改文件或目录权限 chown user:group &lt;file&gt;: 修改文件或目录的所有者和所属组 su - &lt;user&gt;: 切换用户 sudo &lt;command&gt;: 以超级用户权限执行命令 useradd &lt;user&gt; / userdel &lt;user&gt;: 增加/删除用户 passwd &lt;user&gt;: 修改用户密码 2. Vim常用快捷键与命令 Vim 主要有三种模式：普通模式（Command Mode）、插入模式（Insert Mode） 和 底线命令模式（Last line Mode）。\n">
+<meta property='og:url' content='https://iloveu521.github.io/p/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/'>
+<meta property='og:site_name' content='Silly'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-04-27T20:50:20&#43;08:00'/><meta property='article:modified_time' content='2026-04-27T20:50:20&#43;08:00'/>
+<meta name="twitter:title" content="Linux常用命令">
+<meta name="twitter:description" content="1. 常用命令概览 1.1 文件与目录管理 ls / ls -l / ll: 列出目录内容 cd &lt;dir&gt;: 切换到指定目录 pwd: 显示当前工作目录 mkdir &lt;dir&gt;: 创建新目录 rm -rf &lt;file/dir&gt;: 强制级联删除文件或目录（高危） cp -r &lt;src&gt; &lt;dest&gt;: 复制文件或目录 mv &lt;src&gt; &lt;dest&gt;: 移动/重命名文件或目录 touch &lt;file&gt;: 创建空文件或修改时间戳 cat &lt;file&gt;: 查看文件内容 less &lt;file&gt; / more &lt;file&gt;: 分页查看文件内容 tail -f &lt;file&gt;: 实时查看文件末尾内容（常用看日志） head -n 10 &lt;file&gt;: 查看文件前10行 find &lt;path&gt; -name &quot;*name*&quot;: 按名称查找文件或目录 find &lt;path&gt; -type d -name &quot;*name*&quot;: 仅查找目录(文件夹) find &lt;path&gt; -type f -name &quot;*name*&quot;: 仅查找普通文件 grep &quot;&lt;text&gt;&quot; &lt;file&gt;: 在文件中搜索指定文本内容 1.2 系统与进程管理 top / htop: 实时显示系统进程状态和资源占用 ps -ef / ps aux: 查看所有活动进程 kill -9 &lt;pid&gt;: 强制终止指定进程 free -h: 查看内存和交换空间使用情况 df -h: 查看磁盘分区和使用情况 du -sh &lt;dir&gt;: 查看指定目录的大小 uname -a: 查看系统内核及硬件架构信息 history: 查看命令历史记录 1.3 网络操作 ping &lt;ip/domain&gt;: 测试网络连通性 ifconfig / ip addr: 查看网络接口和IP地址 netstat -tulnp / ss -tulnp: 查看端口占用情况 curl -O &lt;url&gt; / wget &lt;url&gt;: 下载文件 scp &lt;file&gt; user@host:&lt;path&gt;: 通过SSH远程安全传输文件 ssh user@host: 远程登录服务器 1.4 用户与权限管理 chmod 755 &lt;file&gt;: 修改文件或目录权限 chown user:group &lt;file&gt;: 修改文件或目录的所有者和所属组 su - &lt;user&gt;: 切换用户 sudo &lt;command&gt;: 以超级用户权限执行命令 useradd &lt;user&gt; / userdel &lt;user&gt;: 增加/删除用户 passwd &lt;user&gt;: 修改用户密码 2. Vim常用快捷键与命令 Vim 主要有三种模式：普通模式（Command Mode）、插入模式（Insert Mode） 和 底线命令模式（Last line Mode）。\n">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/cat_hu_931729ed2902e41d.png" width="300"
+                            height="296" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">😉</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Silly</a></h1>
+            <h2 class="site-description">Welcome!</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/iloveu521'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://twitter.com'
+                        target="_blank"
+                        title="Twitter"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/friend/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Friend</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://iloveu521.github.io/" selected>English</option>
+                                
+                                    <option value="https://iloveu521.github.io/ja/" >日本語</option>
+                                
+                                    <option value="https://iloveu521.github.io/zh-cn/" >简体中文</option>
+                                
+                                    <option value="https://iloveu521.github.io/zh-tw/" >正體中文</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#1-常用命令概览">1. 常用命令概览</a>
+      <ol>
+        <li><a href="#11-文件与目录管理">1.1 文件与目录管理</a></li>
+        <li><a href="#12-系统与进程管理">1.2 系统与进程管理</a></li>
+        <li><a href="#13-网络操作">1.3 网络操作</a></li>
+        <li><a href="#14-用户与权限管理">1.4 用户与权限管理</a></li>
+      </ol>
+    </li>
+    <li><a href="#2-vim常用快捷键与命令">2. Vim常用快捷键与命令</a>
+      <ol>
+        <li><a href="#21-模式切换">2.1 模式切换</a></li>
+        <li><a href="#22-光标移动普通模式下">2.2 光标移动（普通模式下）</a></li>
+        <li><a href="#23-文本编辑普通模式下">2.3 文本编辑（普通模式下）</a></li>
+        <li><a href="#24-查找与替换底线及普通模式">2.4 查找与替换（底线及普通模式）</a></li>
+        <li><a href="#25-保存与退出底线命令模式">2.5 保存与退出（底线命令模式）</a></li>
+      </ol>
+    </li>
+    <li><a href="#3-其他高效快捷键-终端shell">3. 其他高效快捷键 (终端/Shell)</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            
+            
+            
+            <a href="/categories/linux/" style="background-color: hsl(237, 60%, 84%); color: hsl(237, 60%, 15%);">
+                Linux
+            </a>
+        
+            
+            
+            
+            <a href="/categories/study/" style="background-color: hsl(262, 60%, 84%); color: hsl(262, 60%, 15%);">
+                Study
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">Linux常用命令</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published" datetime='2026-04-27T20:50:20&#43;08:00'>2026-04-27</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    2 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="1-常用命令概览">1. 常用命令概览
+</h2><h3 id="11-文件与目录管理">1.1 文件与目录管理
+</h3><ul>
+<li><code>ls</code> / <code>ls -l</code> / <code>ll</code>: 列出目录内容</li>
+<li><code>cd &lt;dir&gt;</code>: 切换到指定目录</li>
+<li><code>pwd</code>: 显示当前工作目录</li>
+<li><code>mkdir &lt;dir&gt;</code>: 创建新目录</li>
+<li><code>rm -rf &lt;file/dir&gt;</code>: 强制级联删除文件或目录（高危）</li>
+<li><code>cp -r &lt;src&gt; &lt;dest&gt;</code>: 复制文件或目录</li>
+<li><code>mv &lt;src&gt; &lt;dest&gt;</code>: 移动/重命名文件或目录</li>
+<li><code>touch &lt;file&gt;</code>: 创建空文件或修改时间戳</li>
+<li><code>cat &lt;file&gt;</code>: 查看文件内容</li>
+<li><code>less &lt;file&gt;</code> / <code>more &lt;file&gt;</code>: 分页查看文件内容</li>
+<li><code>tail -f &lt;file&gt;</code>: 实时查看文件末尾内容（常用看日志）</li>
+<li><code>head -n 10 &lt;file&gt;</code>: 查看文件前10行</li>
+<li><code>find &lt;path&gt; -name &quot;*name*&quot;</code>: 按名称查找文件或目录</li>
+<li><code>find &lt;path&gt; -type d -name &quot;*name*&quot;</code>: 仅查找目录(文件夹)</li>
+<li><code>find &lt;path&gt; -type f -name &quot;*name*&quot;</code>: 仅查找普通文件</li>
+<li><code>grep &quot;&lt;text&gt;&quot; &lt;file&gt;</code>: 在文件中搜索指定文本内容</li>
+</ul>
+<h3 id="12-系统与进程管理">1.2 系统与进程管理
+</h3><ul>
+<li><code>top</code> / <code>htop</code>: 实时显示系统进程状态和资源占用</li>
+<li><code>ps -ef</code> / <code>ps aux</code>: 查看所有活动进程</li>
+<li><code>kill -9 &lt;pid&gt;</code>: 强制终止指定进程</li>
+<li><code>free -h</code>: 查看内存和交换空间使用情况</li>
+<li><code>df -h</code>: 查看磁盘分区和使用情况</li>
+<li><code>du -sh &lt;dir&gt;</code>: 查看指定目录的大小</li>
+<li><code>uname -a</code>: 查看系统内核及硬件架构信息</li>
+<li><code>history</code>: 查看命令历史记录</li>
+</ul>
+<h3 id="13-网络操作">1.3 网络操作
+</h3><ul>
+<li><code>ping &lt;ip/domain&gt;</code>: 测试网络连通性</li>
+<li><code>ifconfig</code> / <code>ip addr</code>: 查看网络接口和IP地址</li>
+<li><code>netstat -tulnp</code> / <code>ss -tulnp</code>: 查看端口占用情况</li>
+<li><code>curl -O &lt;url&gt;</code> / <code>wget &lt;url&gt;</code>: 下载文件</li>
+<li><code>scp &lt;file&gt; user@host:&lt;path&gt;</code>: 通过SSH远程安全传输文件</li>
+<li><code>ssh user@host</code>: 远程登录服务器</li>
+</ul>
+<h3 id="14-用户与权限管理">1.4 用户与权限管理
+</h3><ul>
+<li><code>chmod 755 &lt;file&gt;</code>: 修改文件或目录权限</li>
+<li><code>chown user:group &lt;file&gt;</code>: 修改文件或目录的所有者和所属组</li>
+<li><code>su - &lt;user&gt;</code>: 切换用户</li>
+<li><code>sudo &lt;command&gt;</code>: 以超级用户权限执行命令</li>
+<li><code>useradd &lt;user&gt;</code> / <code>userdel &lt;user&gt;</code>: 增加/删除用户</li>
+<li><code>passwd &lt;user&gt;</code>: 修改用户密码</li>
+</ul>
+<hr>
+<h2 id="2-vim常用快捷键与命令">2. Vim常用快捷键与命令
+</h2><p>Vim 主要有三种模式：<strong>普通模式（Command Mode）</strong>、<strong>插入模式（Insert Mode）</strong> 和 <strong>底线命令模式（Last line Mode）</strong>。</p>
+<h3 id="21-模式切换">2.1 模式切换
+</h3><ul>
+<li><code>i</code>: 在光标前插入（进入插入模式）</li>
+<li><code>a</code>: 在光标后插入（进入插入模式）</li>
+<li><code>o</code>: 在当前行下方新建一行并插入</li>
+<li><code>O</code>: 在当前行上方新建一行并插入</li>
+<li><code>ESC</code>: 退出或返回普通模式</li>
+<li><code>:</code>: 进入底线命令模式（须在普通模式下）</li>
+</ul>
+<h3 id="22-光标移动普通模式下">2.2 光标移动（普通模式下）
+</h3><ul>
+<li><code>h/j/k/l</code>: 左/下/上/右 移动</li>
+<li><code>w</code> / <code>b</code>: 移动到下一个单词开头 / 移动到上一个单词开头</li>
+<li><code>0</code> (数字零) / <code>^</code>: 移动到行首 / 移动到非空白行首</li>
+<li><code>$</code>: 移动到行尾</li>
+<li><code>gg</code>: 移动到文件开头第一行</li>
+<li><code>G</code>: 移动到文件最后一行</li>
+<li><code>nG</code> / <code>&lt;n&gt; + shift+g</code>: 移动到第 n 行</li>
+<li><code>Ctrl+f</code> / <code>Ctrl+b</code>: 向下/向上翻页</li>
+<li><code>Ctrl+d</code> / <code>Ctrl+u</code>: 向下/向上翻半页</li>
+</ul>
+<h3 id="23-文本编辑普通模式下">2.3 文本编辑（普通模式下）
+</h3><ul>
+<li><code>x</code>: 删除光标所在字符</li>
+<li><code>dd</code>: 删除/剪切当前行</li>
+<li><code>ndd</code>: 向下删除/剪切 n 行</li>
+<li><code>yy</code>: 复制当前行</li>
+<li><code>nyy</code>: 向下复制 n 行</li>
+<li><code>p</code>: 粘贴到光标后/下方</li>
+<li><code>P</code>: 粘贴到光标前/上方</li>
+<li><code>u</code>: 撤销上一步操作</li>
+<li><code>Ctrl+r</code>: 恢复撤销（重做）</li>
+<li><code>v</code>: 字符可视化模式（结合方向键选择文本）</li>
+<li><code>V</code>: 行可视化模式</li>
+<li><code>r</code>: 替换光标所在的单个字符</li>
+</ul>
+<h3 id="24-查找与替换底线及普通模式">2.4 查找与替换（底线及普通模式）
+</h3><ul>
+<li><code>/keyword</code>: 向下查找 keyword，按 <code>n</code> 找下一个，按 <code>N</code> 找上一个</li>
+<li><code>?keyword</code>: 向上查找 keyword</li>
+<li><code>:%s/old/new/g</code>: 全局替换文档中的 old 为 new</li>
+<li><code>:n1,n2s/old/new/g</code>: 在第 n1 行到第 n2 行之间替换 old 为 new</li>
+</ul>
+<h3 id="25-保存与退出底线命令模式">2.5 保存与退出（底线命令模式）
+</h3><ul>
+<li><code>:w</code>: 保存修改</li>
+<li><code>:q</code>: 退出（若未修改）</li>
+<li><code>:q!</code>: 强制退出（不保存修改）</li>
+<li><code>:wq</code> / <code>:x</code>: 保存并退出</li>
+<li><code>ZZ</code>: 保存并退出（普通模式下的大写ZZ）</li>
+</ul>
+<hr>
+<h2 id="3-其他高效快捷键-终端shell">3. 其他高效快捷键 (终端/Shell)
+</h2><ul>
+<li><code>Ctrl+C</code>: 终止当前运行的命令</li>
+<li><code>Ctrl+Z</code>: 将当前进程挂起至后台</li>
+<li><code>Ctrl+D</code>: 退出当前终端/退出SSH会话 (EOF)</li>
+<li><code>Ctrl+L</code>: 清屏 (等同于 <code>clear</code> 命令)</li>
+<li><code>Ctrl+A</code>: 快速移动光标至命令行行首</li>
+<li><code>Ctrl+E</code>: 快速移动光标至命令行行尾</li>
+<li><code>Ctrl+R</code>: 搜索历史执行过的命令</li>
+<li><code>Ctrl+U</code>: 删除光标所在位置到行首的字符</li>
+<li><code>Ctrl+K</code>: 删除光标所在位置到行尾的字符</li>
+<li><code>Tab</code>: 自动补全命令或文件路径</li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        const elementsToRender = [".main-article", ".widget--toc"];
+
+        elementsToRender.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    ignoredClasses: ["gist"]
+                });
+            }
+        });
+    });
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/git%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Git版本管理</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/ros2%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+        
+        
+            <div class="article-image">
+                <img src="/p/ros2%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/ros.edab4578afaff5cd76e4da875388dea7_hu_ab8ebbcbccbb79f8.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Ros2学习笔记"
+                        
+                        data-hash="md5-7atFeK&#43;v9c125NqHU4jepw==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Ros2学习笔记</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2026 Silly
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.34.2">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+    
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
