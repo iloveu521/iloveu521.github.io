@@ -7,12 +7,12 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>Silly</copyright>
-        <lastBuildDate>Fri, 08 May 2026 13:13:38 +0800</lastBuildDate><atom:link href="https://iloveu521.github.io/bugs/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 08 May 2026 16:17:47 +0800</lastBuildDate><atom:link href="https://iloveu521.github.io/bugs/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>n10-lidar start:Error</title>
-        <link>https://iloveu521.github.io/bugs/ros2/n10-lidar-starterror/</link>
+        <link>https://iloveu521.github.io/bugs/ros2/n10-lidar-start_error/</link>
         <pubDate>Mon, 27 Apr 2026 20:04:50 +0800</pubDate>
         
-        <guid>https://iloveu521.github.io/bugs/ros2/n10-lidar-starterror/</guid>
+        <guid>https://iloveu521.github.io/bugs/ros2/n10-lidar-start_error/</guid>
         <description>&lt;h3 id=&#34;平台rdkx5&#34;&gt;平台：rdkx5
 &lt;/h3&gt;&lt;p&gt;在上电后启动雷达驱动&lt;code&gt;ros2 launch lsn10.launch.py&lt;/code&gt;正常启动，通过&lt;code&gt;ros2 topic list&lt;/code&gt;我们可以看到雷达节点已经成功输出&lt;code&gt;/scan&lt;/code&gt;，但是过一段时间后，雷达驱动自动关闭，显示&lt;code&gt;Killed&lt;/code&gt;，或者没有自动被杀死，手动关闭之后，&lt;code&gt;/scan&lt;/code&gt;仍有输出，通过查询进程&lt;code&gt;ps aux | grep &amp;quot;*lsn10*&amp;quot;&lt;/code&gt;发现&lt;code&gt;lsn10.launch&lt;/code&gt;的进程被杀死，而&lt;code&gt;lsn10_driver_node&lt;/code&gt;仍然存活，后续重新上电后，未遇到此类问题。&lt;/p&gt;
 </description>
@@ -34,10 +34,10 @@
         </item>
         <item>
         <title>code-server:Extension not fond</title>
-        <link>https://iloveu521.github.io/bugs/code-server/code-serverextension-not-fond/</link>
+        <link>https://iloveu521.github.io/bugs/code-server/code-server_extension-not-fond/</link>
         <pubDate>Fri, 24 Apr 2026 13:35:47 +0800</pubDate>
         
-        <guid>https://iloveu521.github.io/bugs/code-server/code-serverextension-not-fond/</guid>
+        <guid>https://iloveu521.github.io/bugs/code-server/code-server_extension-not-fond/</guid>
         <description>&lt;blockquote&gt;
 &lt;p&gt;我们在使用code-server的时候经常需要用到各种插件，来帮助我们开发，但是在安装插件的时候发现许多官方的插件在code-server里都搜索不到，这里提供两种安装的方式&lt;/p&gt;
 &lt;/blockquote&gt;
