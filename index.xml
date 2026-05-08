@@ -6,7 +6,8 @@
         <description>Recent content on Silly</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <copyright>Silly</copyright><atom:link href="https://iloveu521.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <copyright>Silly</copyright>
+        <lastBuildDate>Fri, 08 May 2026 12:41:42 +0800</lastBuildDate><atom:link href="https://iloveu521.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Linux常用命令</title>
         <link>https://iloveu521.github.io/p/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link>
         <pubDate>Mon, 27 Apr 2026 20:50:20 +0800</pubDate>
@@ -133,10 +134,10 @@
         </item>
         <item>
         <title>Stm32_error_L6407E</title>
-        <link>https://iloveu521.github.io/p/stm32_error_l6407e/</link>
+        <link>https://iloveu521.github.io/bugs/stm32/stm32_error_l6407e/</link>
         <pubDate>Mon, 27 Apr 2026 20:04:50 +0800</pubDate>
         
-        <guid>https://iloveu521.github.io/p/stm32_error_l6407e/</guid>
+        <guid>https://iloveu521.github.io/bugs/stm32/stm32_error_l6407e/</guid>
         <description>&lt;p&gt;今天在使用EIDE编译STM32CubeMx生成的工程时，报了一个错误：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Error: L6407E: Sections of aggregate size 0x10e8 bytes could not fit into .ANY selector(s).&lt;/p&gt;
@@ -148,20 +149,20 @@
         </item>
         <item>
         <title>雷神n10启动Error</title>
-        <link>https://iloveu521.github.io/p/%E9%9B%B7%E7%A5%9En10%E5%90%AF%E5%8A%A8error/</link>
+        <link>https://iloveu521.github.io/bugs/ros2/n10-lidar-starterror/</link>
         <pubDate>Mon, 27 Apr 2026 20:04:50 +0800</pubDate>
         
-        <guid>https://iloveu521.github.io/p/%E9%9B%B7%E7%A5%9En10%E5%90%AF%E5%8A%A8error/</guid>
+        <guid>https://iloveu521.github.io/bugs/ros2/n10-lidar-starterror/</guid>
         <description>&lt;h3 id=&#34;平台rdkx5&#34;&gt;平台：rdkx5
 &lt;/h3&gt;&lt;p&gt;在上电后启动雷达驱动&lt;code&gt;ros2 launch lsn10.launch.py&lt;/code&gt;正常启动，通过&lt;code&gt;ros2 topic list&lt;/code&gt;我们可以看到雷达节点已经成功输出&lt;code&gt;/scan&lt;/code&gt;，但是过一段时间后，雷达驱动自动关闭，显示&lt;code&gt;Killed&lt;/code&gt;，或者没有自动被杀死，手动关闭之后，&lt;code&gt;/scan&lt;/code&gt;仍有输出，通过查询进程&lt;code&gt;ps aux | grep &amp;quot;*lsn10*&amp;quot;&lt;/code&gt;发现&lt;code&gt;lsn10.launch&lt;/code&gt;的进程被杀死，而&lt;code&gt;lsn10_driver_node&lt;/code&gt;仍然存活，后续重新上电后，未遇到此类问题。&lt;/p&gt;
 </description>
         </item>
         <item>
-        <title>Thoughts</title>
-        <link>https://iloveu521.github.io/p/thoughts/</link>
+        <title>火车站有感</title>
+        <link>https://iloveu521.github.io/thoughts/thoughts_at_train_station/</link>
         <pubDate>Sun, 26 Apr 2026 06:07:49 +0800</pubDate>
         
-        <guid>https://iloveu521.github.io/p/thoughts/</guid>
+        <guid>https://iloveu521.github.io/thoughts/thoughts_at_train_station/</guid>
         <description>&lt;p&gt;最近总能刷到许多人在坐火车时突然有了感悟，便将其记录下来，发到了抖音上，苦于失眠的我，突然想起这类视频，于是我便也打开备忘录，开始敲打起来。一开始敲打，就又好像刚才所想的东西都已经悄悄溜走了，抓不住，但好歹还能抓住一些。&lt;/p&gt;
 &lt;p&gt;来自“十八”线城市的我，出远门如果不是坐飞机，那肯定第一趟是要坐火车的。我们的火车站，不大，就只有一个进站口，但总让我有点不解的是，他总要刷两次身份证。候车大厅，很小，但也有许多的座位。由于火车站很小，也只有一条进出的轨道，所以基本一天也只有那么一两趟火车，起点和终点总是固定的。&lt;/p&gt;
 &lt;p&gt;每一次进入候车大厅，总会被熙熙攘攘的人群所震撼到，来之前，心里总想着这个时间点应该不会有人出去了吧，但是每次我都错了，进去该挤满人的地方还是挤满了人。好在，这个车站总与我去过的那么多车站有所不同，无论候车的人再多，我总能在这么多位置中找到一个舒服的位置坐下。&lt;/p&gt;
@@ -501,10 +502,10 @@
         </item>
         <item>
         <title>code-server extension issue</title>
-        <link>https://iloveu521.github.io/p/code-server-extension-issue/</link>
+        <link>https://iloveu521.github.io/bugs/code-server/code-serverextension-not-fond/</link>
         <pubDate>Fri, 24 Apr 2026 13:35:47 +0800</pubDate>
         
-        <guid>https://iloveu521.github.io/p/code-server-extension-issue/</guid>
+        <guid>https://iloveu521.github.io/bugs/code-server/code-serverextension-not-fond/</guid>
         <description>&lt;blockquote&gt;
 &lt;p&gt;我们在使用code-server的时候经常需要用到各种插件，来帮助我们开发，但是在安装插件的时候发现许多官方的插件在code-server里都搜索不到，这里提供两种安装的方式&lt;/p&gt;
 &lt;/blockquote&gt;

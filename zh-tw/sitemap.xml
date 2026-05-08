@@ -2,29 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://iloveu521.github.io/zh-tw/</loc>
-    <lastmod>2026-04-23T00:36:58+08:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-us"
-                href="https://iloveu521.github.io/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="ja"
-                href="https://iloveu521.github.io/ja/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://iloveu521.github.io/zh-cn/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-tw"
-                href="https://iloveu521.github.io/zh-tw/"
-                />
-  </url><url>
     <loc>https://iloveu521.github.io/zh-tw/categories/</loc>
     <xhtml:link
                 rel="alternate"
@@ -55,18 +32,40 @@
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="zh-cn"
-                href="https://iloveu521.github.io/zh-cn/series/"
-                />
-    <xhtml:link
-                rel="alternate"
                 hreflang="ja"
                 href="https://iloveu521.github.io/ja/series/"
                 />
     <xhtml:link
                 rel="alternate"
+                hreflang="zh-cn"
+                href="https://iloveu521.github.io/zh-cn/series/"
+                />
+    <xhtml:link
+                rel="alternate"
                 hreflang="zh-tw"
                 href="https://iloveu521.github.io/zh-tw/series/"
+                />
+  </url><url>
+    <loc>https://iloveu521.github.io/zh-tw/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-us"
+                href="https://iloveu521.github.io/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="https://iloveu521.github.io/ja/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://iloveu521.github.io/zh-cn/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-tw"
+                href="https://iloveu521.github.io/zh-tw/"
                 />
   </url><url>
     <loc>https://iloveu521.github.io/zh-tw/tags/</loc>
@@ -77,13 +76,13 @@
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="ja"
-                href="https://iloveu521.github.io/ja/tags/"
+                hreflang="zh-cn"
+                href="https://iloveu521.github.io/zh-cn/tags/"
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="zh-cn"
-                href="https://iloveu521.github.io/zh-cn/tags/"
+                hreflang="ja"
+                href="https://iloveu521.github.io/ja/tags/"
                 />
     <xhtml:link
                 rel="alternate"
