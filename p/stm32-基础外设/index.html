@@ -1,0 +1,1517 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="STM32F103C8T6 HAL库基础外设配置">
+<title>STM32 基础外设</title>
+
+<link rel='canonical' href='https://iloveu521.github.io/p/stm32-%E5%9F%BA%E7%A1%80%E5%A4%96%E8%AE%BE/'>
+
+<link rel="stylesheet" href="/scss/style.min.a417f02c916931d7cdb31ab7abe48ac8b095f84732b48b43aa856697d22bf940.css"><meta property='og:title' content="STM32 基础外设">
+<meta property='og:description' content="STM32F103C8T6 HAL库基础外设配置">
+<meta property='og:url' content='https://iloveu521.github.io/p/stm32-%E5%9F%BA%E7%A1%80%E5%A4%96%E8%AE%BE/'>
+<meta property='og:site_name' content='Silly'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-05-09T00:00:00&#43;08:00'/><meta property='article:modified_time' content='2026-05-09T23:45:00&#43;08:00'/>
+<meta name="twitter:title" content="STM32 基础外设">
+<meta name="twitter:description" content="STM32F103C8T6 HAL库基础外设配置">
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/cat_hu_931729ed2902e41d.png" width="300"
+                            height="296" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">😉</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Silly</a></h1>
+            <h2 class="site-description">Welcome!</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/iloveu521'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://twitter.com'
+                        target="_blank"
+                        title="Twitter"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/friend/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Friend</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://iloveu521.github.io/" selected>English</option>
+                                
+                                    <option value="https://iloveu521.github.io/ja/" >日本語</option>
+                                
+                                    <option value="https://iloveu521.github.io/zh-cn/" >简体中文</option>
+                                
+                                    <option value="https://iloveu521.github.io/zh-tw/" >正體中文</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#芯片信息">芯片信息</a></li>
+    <li><a href="#时钟配置">时钟配置</a></li>
+    <li><a href="#gpio-配置">GPIO 配置</a>
+      <ol>
+        <li><a href="#项目点亮-led">项目：点亮 LED</a>
+          <ol>
+            <li><a href="#gpio-模式说明">GPIO 模式说明</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#exti-配置">EXTI 配置</a>
+      <ol>
+        <li><a href="#项目按键中断翻转-ledexit">项目：按键中断翻转 LED（EXIT）</a></li>
+        <li><a href="#gpio-初始化含-exti">GPIO 初始化（含 EXTI）</a></li>
+        <li><a href="#中断服务函数">中断服务函数</a></li>
+        <li><a href="#中断回调">中断回调</a>
+          <ol>
+            <li><a href="#exti-线与引脚的对应关系">EXTI 线与引脚的对应关系</a></li>
+            <li><a href="#触发方式">触发方式</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#usart-配置">USART 配置</a>
+      <ol>
+        <li><a href="#项目串口打印usatr">项目：串口打印（USATR）</a></li>
+        <li><a href="#逻辑参数初始化">逻辑参数初始化</a></li>
+        <li><a href="#msp-底层配置引脚--时钟--中断">MSP 底层配置（引脚 + 时钟 + 中断）</a></li>
+        <li><a href="#printf-重定向">printf 重定向</a></li>
+        <li><a href="#接线">接线</a></li>
+      </ol>
+    </li>
+    <li><a href="#初始化调用顺序">初始化调用顺序</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+            
+                <section class="widget tagCloud">
+    <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-tag" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11 3L20 12a1.5 1.5 0 0 1 0 2L14 20a1.5 1.5 0 0 1 -2 0L3 11v-4a4 4 0 0 1 4 -4h4" />
+  <circle cx="9" cy="9" r="2" />
+</svg>
+
+
+
+    </div>
+    <h2 class="widget-title section-title">Series</h2>
+
+    <div class="tagCloud-tags">
+        
+            <a href="/series/issue/">
+                Issue
+            </a>
+        
+            <a href="/series/study/">
+                Study
+            </a>
+        
+            <a href="/series/stm32/">
+                STM32
+            </a>
+        
+            <a href="/series/thoughts/">
+                Thoughts
+            </a>
+        
+    </div>
+</section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            
+            
+            
+            <a href="/categories/stm32/" style="background-color: hsl(160, 60%, 84%); color: hsl(160, 60%, 15%);">
+                STM32
+            </a>
+        
+            
+            
+            
+            <a href="/categories/hal/" style="background-color: hsl(66, 60%, 84%); color: hsl(66, 60%, 15%);">
+                HAL
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/stm32-%E5%9F%BA%E7%A1%80%E5%A4%96%E8%AE%BE/">STM32 基础外设</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            STM32F103C8T6 HAL库基础外设配置
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published" datetime='2026-05-09T00:00:00&#43;08:00'>2026-05-09</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    4 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="芯片信息">芯片信息
+</h2><ul>
+<li>芯片：STM32F103C8T6（Blue Pill）</li>
+<li>主频：72 MHz（HSE 8 MHz × PLL × 9）</li>
+<li>工具链：STM32CubeMX + HAL + Keil MDK-ARM</li>
+</ul>
+<hr>
+<h2 id="时钟配置">时钟配置
+</h2><p>时钟使用外部高速时钟HES，并使用PLL锁相环倍频到72MHz，在 <code>SystemClock_Config()</code> 中完成：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">SystemClock_Config</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">RCC_OscInitTypeDef</span> <span class="n">RCC_OscInitStruct</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">    <span class="n">RCC_ClkInitTypeDef</span> <span class="n">RCC_ClkInitStruct</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 使能 HSE，PLL 倍频 ×9
+</span></span></span><span class="line"><span class="cl">    <span class="n">RCC_OscInitStruct</span><span class="p">.</span><span class="n">OscillatorType</span> <span class="o">=</span> <span class="n">RCC_OSCILLATORTYPE_HSE</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">RCC_OscInitStruct</span><span class="p">.</span><span class="n">HSEState</span>       <span class="o">=</span> <span class="n">RCC_HSE_ON</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">RCC_OscInitStruct</span><span class="p">.</span><span class="n">HSEPredivValue</span> <span class="o">=</span> <span class="n">RCC_HSE_PREDIV_DIV1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">RCC_OscInitStruct</span><span class="p">.</span><span class="n">PLL</span><span class="p">.</span><span class="n">PLLState</span>   <span class="o">=</span> <span class="n">RCC_PLL_ON</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">RCC_OscInitStruct</span><span class="p">.</span><span class="n">PLL</span><span class="p">.</span><span class="n">PLLSource</span>  <span class="o">=</span> <span class="n">RCC_PLLSOURCE_HSE</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">RCC_OscInitStruct</span><span class="p">.</span><span class="n">PLL</span><span class="p">.</span><span class="n">PLLMUL</span>     <span class="o">=</span> <span class="n">RCC_PLL_MUL9</span><span class="p">;</span>  <span class="c1">// 8 MHz × 9 = 72 MHz
+</span></span></span><span class="line"><span class="cl">    <span class="nf">HAL_RCC_OscConfig</span><span class="p">(</span><span class="o">&amp;</span><span class="n">RCC_OscInitStruct</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 配置总线分频
+</span></span></span><span class="line"><span class="cl">    <span class="n">RCC_ClkInitStruct</span><span class="p">.</span><span class="n">ClockType</span>      <span class="o">=</span> <span class="n">RCC_CLOCKTYPE_HCLK</span> <span class="o">|</span> <span class="n">RCC_CLOCKTYPE_SYSCLK</span>
+</span></span><span class="line"><span class="cl">                                     <span class="o">|</span> <span class="n">RCC_CLOCKTYPE_PCLK1</span> <span class="o">|</span> <span class="n">RCC_CLOCKTYPE_PCLK2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">RCC_ClkInitStruct</span><span class="p">.</span><span class="n">SYSCLKSource</span>   <span class="o">=</span> <span class="n">RCC_SYSCLKSOURCE_PLLCLK</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">RCC_ClkInitStruct</span><span class="p">.</span><span class="n">AHBCLKDivider</span>  <span class="o">=</span> <span class="n">RCC_SYSCLK_DIV1</span><span class="p">;</span>   <span class="c1">// HCLK  = 72 MHz
+</span></span></span><span class="line"><span class="cl">    <span class="n">RCC_ClkInitStruct</span><span class="p">.</span><span class="n">APB1CLKDivider</span> <span class="o">=</span> <span class="n">RCC_HCLK_DIV2</span><span class="p">;</span>     <span class="c1">// APB1  = 36 MHz（最大 36 MHz）
+</span></span></span><span class="line"><span class="cl">    <span class="n">RCC_ClkInitStruct</span><span class="p">.</span><span class="n">APB2CLKDivider</span> <span class="o">=</span> <span class="n">RCC_HCLK_DIV1</span><span class="p">;</span>     <span class="c1">// APB2  = 72 MHz
+</span></span></span><span class="line"><span class="cl">    <span class="nf">HAL_RCC_ClockConfig</span><span class="p">(</span><span class="o">&amp;</span><span class="n">RCC_ClkInitStruct</span><span class="p">,</span> <span class="n">FLASH_LATENCY_2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>时钟域</th>
+          <th>频率</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>HSE</td>
+          <td>8 MHz</td>
+          <td>外部晶振</td>
+      </tr>
+      <tr>
+          <td>SYSCLK</td>
+          <td>72 MHz</td>
+          <td>PLL 输出，系统主频</td>
+      </tr>
+      <tr>
+          <td>HCLK (AHB)</td>
+          <td>72 MHz</td>
+          <td>CPU、DMA、Flash</td>
+      </tr>
+      <tr>
+          <td>PCLK1 (APB1)</td>
+          <td>36 MHz</td>
+          <td>TIM2-7、USART2/3、SPI2、I2C</td>
+      </tr>
+      <tr>
+          <td>PCLK2 (APB2)</td>
+          <td>72 MHz</td>
+          <td>USART1、SPI1、TIM1、ADC、GPIO</td>
+      </tr>
+  </tbody>
+</table></div>
+<p><code>FLASH_LATENCY_2</code> 是 72 MHz 时 Flash 访问所需的等待周期数，必须与主频匹配，否则程序跑飞。</p>
+<hr>
+<h2 id="gpio-配置">GPIO 配置
+</h2><h3 id="项目点亮-led">项目：点亮 LED
+</h3><p>LED 接在 PA0，按键接在 PA1（普通输入，轮询读取）。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">MX_GPIO_Init</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">GPIO_InitTypeDef</span> <span class="n">GPIO_InitStruct</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 使能端口时钟
+</span></span></span><span class="line"><span class="cl">    <span class="nf">__HAL_RCC_GPIOA_CLK_ENABLE</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">__HAL_RCC_GPIOD_CLK_ENABLE</span><span class="p">();</span>  <span class="c1">// HSE 晶振引脚所在端口
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 初始化输出电平为低
+</span></span></span><span class="line"><span class="cl">    <span class="nf">HAL_GPIO_WritePin</span><span class="p">(</span><span class="n">LED_GPIO_Port</span><span class="p">,</span> <span class="n">LED_Pin</span><span class="p">,</span> <span class="n">GPIO_PIN_RESET</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// LED：推挽输出
+</span></span></span><span class="line"><span class="cl">    <span class="n">GPIO_InitStruct</span><span class="p">.</span><span class="n">Pin</span>   <span class="o">=</span> <span class="n">LED_Pin</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">GPIO_InitStruct</span><span class="p">.</span><span class="n">Mode</span>  <span class="o">=</span> <span class="n">GPIO_MODE_OUTPUT_PP</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">GPIO_InitStruct</span><span class="p">.</span><span class="n">Pull</span>  <span class="o">=</span> <span class="n">GPIO_NOPULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">GPIO_InitStruct</span><span class="p">.</span><span class="n">Speed</span> <span class="o">=</span> <span class="n">GPIO_SPEED_FREQ_LOW</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">HAL_GPIO_Init</span><span class="p">(</span><span class="n">LED_GPIO_Port</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">GPIO_InitStruct</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// KEY：浮空输入（轮询）
+</span></span></span><span class="line"><span class="cl">    <span class="n">GPIO_InitStruct</span><span class="p">.</span><span class="n">Pin</span>  <span class="o">=</span> <span class="n">KEY_Pin</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">GPIO_InitStruct</span><span class="p">.</span><span class="n">Mode</span> <span class="o">=</span> <span class="n">GPIO_MODE_INPUT</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">GPIO_InitStruct</span><span class="p">.</span><span class="n">Pull</span> <span class="o">=</span> <span class="n">GPIO_NOPULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">HAL_GPIO_Init</span><span class="p">(</span><span class="n">KEY_GPIO_Port</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">GPIO_InitStruct</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>主循环中直接写引脚电平：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">HAL_GPIO_WritePin</span><span class="p">(</span><span class="n">LED_GPIO_Port</span><span class="p">,</span> <span class="n">LED_Pin</span><span class="p">,</span> <span class="n">GPIO_PIN_SET</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="gpio-模式说明">GPIO 模式说明
+</h4><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>模式宏</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>GPIO_MODE_OUTPUT_PP</code></td>
+          <td>推挽输出，可驱动高低电平</td>
+      </tr>
+      <tr>
+          <td><code>GPIO_MODE_OUTPUT_OD</code></td>
+          <td>开漏输出，需外部上拉才能输出高电平</td>
+      </tr>
+      <tr>
+          <td><code>GPIO_MODE_INPUT</code></td>
+          <td>浮空输入，引脚电平由外部决定</td>
+      </tr>
+      <tr>
+          <td><code>GPIO_MODE_AF_PP</code></td>
+          <td>复用推挽，引脚由外设（USART/SPI 等）控制</td>
+      </tr>
+      <tr>
+          <td><code>GPIO_MODE_IT_FALLING</code></td>
+          <td>下降沿触发外部中断</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>GPIO 时钟默认关闭，使用前必须通过 <code>__HAL_RCC_GPIOx_CLK_ENABLE()</code> 使能，否则写引脚无效。</p>
+<hr>
+<h2 id="exti-配置">EXTI 配置
+</h2><h3 id="项目按键中断翻转-ledexit">项目：按键中断翻转 LED（EXIT）
+</h3><p>LED 接在 PA0，按键接在 PB11，按下触发下降沿中断，在回调中翻转 LED。</p>
+<h3 id="gpio-初始化含-exti">GPIO 初始化（含 EXTI）
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">MX_GPIO_Init</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">GPIO_InitTypeDef</span> <span class="n">GPIO_InitStruct</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nf">__HAL_RCC_GPIOA_CLK_ENABLE</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">__HAL_RCC_GPIOB_CLK_ENABLE</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">__HAL_RCC_GPIOD_CLK_ENABLE</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nf">HAL_GPIO_WritePin</span><span class="p">(</span><span class="n">LED_GPIO_Port</span><span class="p">,</span> <span class="n">LED_Pin</span><span class="p">,</span> <span class="n">GPIO_PIN_RESET</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// LED：推挽输出
+</span></span></span><span class="line"><span class="cl">    <span class="n">GPIO_InitStruct</span><span class="p">.</span><span class="n">Pin</span>   <span class="o">=</span> <span class="n">LED_Pin</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">GPIO_InitStruct</span><span class="p">.</span><span class="n">Mode</span>  <span class="o">=</span> <span class="n">GPIO_MODE_OUTPUT_PP</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">GPIO_InitStruct</span><span class="p">.</span><span class="n">Pull</span>  <span class="o">=</span> <span class="n">GPIO_NOPULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">GPIO_InitStruct</span><span class="p">.</span><span class="n">Speed</span> <span class="o">=</span> <span class="n">GPIO_SPEED_FREQ_LOW</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">HAL_GPIO_Init</span><span class="p">(</span><span class="n">LED_GPIO_Port</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">GPIO_InitStruct</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// KEY：下降沿中断 + 内部上拉
+</span></span></span><span class="line"><span class="cl">    <span class="n">GPIO_InitStruct</span><span class="p">.</span><span class="n">Pin</span>  <span class="o">=</span> <span class="n">KEY_Pin</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">GPIO_InitStruct</span><span class="p">.</span><span class="n">Mode</span> <span class="o">=</span> <span class="n">GPIO_MODE_IT_FALLING</span><span class="p">;</span>  <span class="c1">// 下降沿触发
+</span></span></span><span class="line"><span class="cl">    <span class="n">GPIO_InitStruct</span><span class="p">.</span><span class="n">Pull</span> <span class="o">=</span> <span class="n">GPIO_PULLUP</span><span class="p">;</span>            <span class="c1">// 内部上拉，按下为低
+</span></span></span><span class="line"><span class="cl">    <span class="nf">HAL_GPIO_Init</span><span class="p">(</span><span class="n">KEY_GPIO_Port</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">GPIO_InitStruct</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 使能 EXTI15_10 中断（PB11 在 EXTI 线 11，属于 EXTI15_10 组）
+</span></span></span><span class="line"><span class="cl">    <span class="nf">HAL_NVIC_SetPriority</span><span class="p">(</span><span class="n">EXTI15_10_IRQn</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">HAL_NVIC_EnableIRQ</span><span class="p">(</span><span class="n">EXTI15_10_IRQn</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="中断服务函数">中断服务函数
+</h3><p><code>stm32f1xx_it.c</code> 中的 IRQ Handler 调用 HAL 处理函数：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">EXTI15_10_IRQHandler</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">HAL_GPIO_EXTI_IRQHandler</span><span class="p">(</span><span class="n">KEY_Pin</span><span class="p">);</span>  <span class="c1">// 清除中断标志，调用回调
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="中断回调">中断回调
+</h3><p>在 <code>main.c</code> 中实现回调（弱符号覆盖）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">HAL_GPIO_EXTI_Callback</span><span class="p">(</span><span class="kt">uint16_t</span> <span class="n">GPIO_Pin</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">GPIO_Pin</span> <span class="o">==</span> <span class="n">KEY_Pin</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">HAL_GPIO_TogglePin</span><span class="p">(</span><span class="n">LED_GPIO_Port</span><span class="p">,</span> <span class="n">LED_Pin</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="exti-线与引脚的对应关系">EXTI 线与引脚的对应关系
+</h4><p>STM32F1 的 EXTI 线与引脚编号一一对应，但每条线只能连接一个端口：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>EXTI 线</th>
+          <th>可选引脚</th>
+          <th>IRQ Handler</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>EXTI0</td>
+          <td>PA0/PB0/PC0/&hellip;</td>
+          <td><code>EXTI0_IRQHandler</code></td>
+      </tr>
+      <tr>
+          <td>EXTI1~4</td>
+          <td>Px1~Px4</td>
+          <td><code>EXTI1_IRQHandler</code> 等</td>
+      </tr>
+      <tr>
+          <td>EXTI5~9</td>
+          <td>Px5~Px9</td>
+          <td><code>EXTI9_5_IRQHandler</code></td>
+      </tr>
+      <tr>
+          <td>EXTI10~15</td>
+          <td>Px10~Px15</td>
+          <td><code>EXTI15_10_IRQHandler</code></td>
+      </tr>
+  </tbody>
+</table></div>
+<p>PB11 使用 EXTI 线 11，属于 <code>EXTI15_10_IRQn</code> 组，所以使能 <code>EXTI15_10_IRQn</code>。</p>
+<h4 id="触发方式">触发方式
+</h4><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>模式宏</th>
+          <th>触发条件</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>GPIO_MODE_IT_RISING</code></td>
+          <td>上升沿（低→高）</td>
+      </tr>
+      <tr>
+          <td><code>GPIO_MODE_IT_FALLING</code></td>
+          <td>下降沿（高→低）</td>
+      </tr>
+      <tr>
+          <td><code>GPIO_MODE_IT_RISING_FALLING</code></td>
+          <td>双边沿</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>按键接地、内部上拉时，按下产生下降沿，选 <code>GPIO_MODE_IT_FALLING</code>。</p>
+<hr>
+<h2 id="usart-配置">USART 配置
+</h2><h3 id="项目串口打印usatr">项目：串口打印（USATR）
+</h3><p>USART1 每秒通过 <code>printf</code> 发送字符串，波特率 115200。</p>
+<h3 id="逻辑参数初始化">逻辑参数初始化
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">UART_HandleTypeDef</span> <span class="n">huart1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">MX_USART1_UART_Init</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">huart1</span><span class="p">.</span><span class="n">Instance</span>          <span class="o">=</span> <span class="n">USART1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">huart1</span><span class="p">.</span><span class="n">Init</span><span class="p">.</span><span class="n">BaudRate</span>     <span class="o">=</span> <span class="mi">115200</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">huart1</span><span class="p">.</span><span class="n">Init</span><span class="p">.</span><span class="n">WordLength</span>   <span class="o">=</span> <span class="n">UART_WORDLENGTH_8B</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">huart1</span><span class="p">.</span><span class="n">Init</span><span class="p">.</span><span class="n">StopBits</span>     <span class="o">=</span> <span class="n">UART_STOPBITS_1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">huart1</span><span class="p">.</span><span class="n">Init</span><span class="p">.</span><span class="n">Parity</span>       <span class="o">=</span> <span class="n">UART_PARITY_NONE</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">huart1</span><span class="p">.</span><span class="n">Init</span><span class="p">.</span><span class="n">Mode</span>         <span class="o">=</span> <span class="n">UART_MODE_TX_RX</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">huart1</span><span class="p">.</span><span class="n">Init</span><span class="p">.</span><span class="n">HwFlowCtl</span>    <span class="o">=</span> <span class="n">UART_HWCONTROL_NONE</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">huart1</span><span class="p">.</span><span class="n">Init</span><span class="p">.</span><span class="n">OverSampling</span> <span class="o">=</span> <span class="n">UART_OVERSAMPLING_16</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">HAL_UART_Init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">huart1</span><span class="p">);</span>  <span class="c1">// 内部调用 HAL_UART_MspInit
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>值</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>BaudRate</code></td>
+          <td>115200</td>
+          <td>波特率，串口工具需一致</td>
+      </tr>
+      <tr>
+          <td><code>WordLength</code></td>
+          <td>8B</td>
+          <td>每帧 8 位数据</td>
+      </tr>
+      <tr>
+          <td><code>StopBits</code></td>
+          <td>1</td>
+          <td>1 位停止位</td>
+      </tr>
+      <tr>
+          <td><code>Parity</code></td>
+          <td>NONE</td>
+          <td>无校验位</td>
+      </tr>
+      <tr>
+          <td><code>Mode</code></td>
+          <td>TX_RX</td>
+          <td>同时使能发送和接收</td>
+      </tr>
+      <tr>
+          <td><code>HwFlowCtl</code></td>
+          <td>NONE</td>
+          <td>不使用硬件流控</td>
+      </tr>
+      <tr>
+          <td><code>OverSampling</code></td>
+          <td>16</td>
+          <td>16 倍过采样，抗噪声能力强</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="msp-底层配置引脚--时钟--中断">MSP 底层配置（引脚 + 时钟 + 中断）
+</h3><p><code>HAL_UART_MspInit</code> 是 HAL 的 MSP 回调，负责与具体硬件绑定的初始化，由 <code>HAL_UART_Init</code> 自动调用：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">HAL_UART_MspInit</span><span class="p">(</span><span class="n">UART_HandleTypeDef</span> <span class="o">*</span><span class="n">uartHandle</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">GPIO_InitTypeDef</span> <span class="n">GPIO_InitStruct</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">uartHandle</span><span class="o">-&gt;</span><span class="n">Instance</span> <span class="o">==</span> <span class="n">USART1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 使能外设时钟
+</span></span></span><span class="line"><span class="cl">        <span class="nf">__HAL_RCC_USART1_CLK_ENABLE</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">__HAL_RCC_GPIOA_CLK_ENABLE</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// PA9 (TX)：复用推挽输出，由 USART1 外设驱动
+</span></span></span><span class="line"><span class="cl">        <span class="n">GPIO_InitStruct</span><span class="p">.</span><span class="n">Pin</span>   <span class="o">=</span> <span class="n">GPIO_PIN_9</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">GPIO_InitStruct</span><span class="p">.</span><span class="n">Mode</span>  <span class="o">=</span> <span class="n">GPIO_MODE_AF_PP</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">GPIO_InitStruct</span><span class="p">.</span><span class="n">Speed</span> <span class="o">=</span> <span class="n">GPIO_SPEED_FREQ_HIGH</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">HAL_GPIO_Init</span><span class="p">(</span><span class="n">GPIOA</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">GPIO_InitStruct</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// PA10 (RX)：浮空输入，由对端设备驱动
+</span></span></span><span class="line"><span class="cl">        <span class="n">GPIO_InitStruct</span><span class="p">.</span><span class="n">Pin</span>  <span class="o">=</span> <span class="n">GPIO_PIN_10</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">GPIO_InitStruct</span><span class="p">.</span><span class="n">Mode</span> <span class="o">=</span> <span class="n">GPIO_MODE_INPUT</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">GPIO_InitStruct</span><span class="p">.</span><span class="n">Pull</span> <span class="o">=</span> <span class="n">GPIO_NOPULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">HAL_GPIO_Init</span><span class="p">(</span><span class="n">GPIOA</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">GPIO_InitStruct</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 配置 USART1 中断
+</span></span></span><span class="line"><span class="cl">        <span class="nf">HAL_NVIC_SetPriority</span><span class="p">(</span><span class="n">USART1_IRQn</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">HAL_NVIC_EnableIRQ</span><span class="p">(</span><span class="n">USART1_IRQn</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>引脚</th>
+          <th>方向</th>
+          <th>GPIO 模式</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>PA9</td>
+          <td>TX（输出）</td>
+          <td><code>GPIO_MODE_AF_PP</code></td>
+          <td>复用推挽，USART1 外设控制</td>
+      </tr>
+      <tr>
+          <td>PA10</td>
+          <td>RX（输入）</td>
+          <td><code>GPIO_MODE_INPUT</code> + <code>GPIO_NOPULL</code></td>
+          <td>浮空输入，外部信号驱动</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>TX 必须配置为复用推挽（AF_PP），让 USART1 外设直接控制引脚电平。RX 配置为浮空输入，由对端设备驱动。</p>
+<h3 id="printf-重定向">printf 重定向
+</h3><p>在 <code>usart.c</code> 中重定向 <code>fputc</code>/<code>fgetc</code>，并在 Keil Target 选项中勾选 <strong>Use MicroLIB</strong>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">fputc</span><span class="p">(</span><span class="kt">int</span> <span class="n">ch</span><span class="p">,</span> <span class="n">FILE</span> <span class="o">*</span><span class="n">f</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">HAL_UART_Transmit</span><span class="p">(</span><span class="o">&amp;</span><span class="n">huart1</span><span class="p">,</span> <span class="p">(</span><span class="kt">uint8_t</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">ch</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mh">0xffff</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">ch</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">fgetc</span><span class="p">(</span><span class="n">FILE</span> <span class="o">*</span><span class="n">f</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint8_t</span> <span class="n">ch</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">HAL_UART_Receive</span><span class="p">(</span><span class="o">&amp;</span><span class="n">huart1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ch</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mh">0xffff</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">ch</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>主循环中直接使用 <code>printf</code>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;text</span><span class="se">\r\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">HAL_Delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>详见：<a class="link" href="../stm32_printf_redirect/" >STM32 HAL printf 重定向原理与实现</a></p>
+<h3 id="接线">接线
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">STM32 PA9  (TX)  →  USB 转串口模块 RXD
+</span></span><span class="line"><span class="cl">STM32 PA10 (RX)  →  USB 转串口模块 TXD
+</span></span><span class="line"><span class="cl">STM32 GND        →  USB 转串口模块 GND
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>TX 与 RXD 交叉连接，同名相接（TX→TXD）会导致 PC 端收不到数据。</p>
+<hr>
+<h2 id="初始化调用顺序">初始化调用顺序
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="nf">HAL_Init</span><span class="p">();</span>             <span class="c1">// 初始化 HAL，配置 SysTick（1 ms）
+</span></span></span><span class="line"><span class="cl"><span class="nf">SystemClock_Config</span><span class="p">();</span>   <span class="c1">// 配置 PLL，主频 72 MHz
+</span></span></span><span class="line"><span class="cl"><span class="nf">MX_GPIO_Init</span><span class="p">();</span>         <span class="c1">// 使能 GPIO 时钟，配置引脚
+</span></span></span><span class="line"><span class="cl"><span class="nf">MX_USART1_UART_Init</span><span class="p">();</span>  <span class="c1">// 初始化 USART1（内部调用 MspInit）
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>MX_GPIO_Init</code> 必须在 <code>MX_USART1_UART_Init</code> 之前，因为 USART 初始化依赖 GPIOA 时钟已使能。</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    <section class="article-tags">
+    
+        <a href="/series/stm32/">STM32</a>
+    
+</section>
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <span>
+            Last updated on May 09, 2026 23:45 &#43;0800
+        </span>
+    </section><div class="article-lastmod">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+            <time>
+                May 09, 2026 23:45 &#43;0800
+            </time>
+        </div></footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        const elementsToRender = [".main-article", ".widget--toc"];
+
+        elementsToRender.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    ignoredClasses: ["gist"]
+                });
+            }
+        });
+    });
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/stm32-hal-printf-%E9%87%8D%E5%AE%9A%E5%90%91%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">STM32 HAL printf 重定向原理与实现</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2026 Silly
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.34.2">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+    
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+<style>
+    #TableOfContents > ul, ol {
+        ul, ol {
+            display: none;
+        }
+        .open {
+            display: block;
+        }
+    }
+</style>
+
+<script>
+    function initTocHide() {
+        
+        let toc = document.querySelector(".widget--toc");
+        if (!toc) {
+            return;
+        }
+        
+        window.addEventListener('scroll', function() {
+            
+            let openUl = document.querySelectorAll(".open");
+            if (openUl.length > 0) {
+              openUl.forEach((ul) => {
+                ul.classList.remove("open")
+              })
+            }
+            
+            let currentLi = document.querySelector(".active-class");
+            if (!currentLi) {
+                return
+            }
+            
+            if (currentLi.children.length > 1) {
+                currentLi.children[1].classList.add("open")
+            }
+            
+            let ul = currentLi.parentElement;
+            do {
+                ul.classList.add("open");
+                ul = ul.parentElement.parentElement
+            } while (ul !== undefined && (ul.localName === 'ul' || ul.localName === 'ol'))
+        });
+    }
+    initTocHide()
+</script>
+
+<style>
+    #backTopBtn {
+        display: none;
+        position: fixed;
+        bottom: 30px;
+        z-index: 99;
+        cursor: pointer;
+        width: 30px;
+        height: 30px;
+        background-image: url(https://iloveu521.github.io/icons/backTop.svg);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 18px 18px;
+        border-radius: var(--card-border-radius);
+    }
+
+    #backTopBtn::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: var(--card-background);
+        opacity: 0.7;
+        border: 1px solid var(--card-separator-color);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        z-index: -1;
+    }
+
+    #backTopBtn:hover::before {
+        opacity: 0.85;
+    }
+</style>
+
+<script>
+    
+
+    function initScrollTop() {
+        let rightSideBar = document.querySelector(".right-sidebar");
+        if (!rightSideBar) {
+            return;
+        }
+        
+        let btn = document.createElement("div");
+        btn.id = "backTopBtn";
+        btn.onclick = backToTop
+        rightSideBar.appendChild(btn)
+        
+        window.onscroll = function() {
+            
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
+            }
+        };
+    }
+
+    
+
+    function backToTop(){
+        window.scrollTo({ top: 0, behavior: "smooth" })
+    }
+
+    initScrollTop();
+</script>
+
+
+<div id="particles-js"></div>
+
+<script src=https://iloveu521.github.io/background/particles.min.js></script>
+<script>
+  particlesJS.load('particles-js', "https://iloveu521.github.io/background/particlesjs-config.json", function() {
+    console.log('particles.js loaded - callback');
+  });
+</script>
+
+<style>
+  #particles-js {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: -1;
+  }
+</style>
+
+<style>
+    .highlight {
+         
+        max-height: 400px;
+        overflow: hidden;
+    }
+
+    .code-show {
+        max-height: none !important;
+    }
+
+    .code-more-box {
+        width: 100%;
+        padding-top: 78px;
+        background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0)), to(#fff));
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+    }
+
+    .code-more-btn {
+        display: block;
+        margin: auto;
+        width: 44px;
+        height: 22px;
+        background: #f0f0f5;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        padding-top: 6px;
+        cursor: pointer;
+    }
+
+    .code-more-img {
+        cursor: pointer !important;
+        display: block;
+        margin: auto;
+        width: 22px;
+        height: 16px;
+    }
+</style>
+
+<script>
+  function initCodeMoreBox() {
+    let codeBlocks = document.querySelectorAll(".highlight");
+    if (!codeBlocks) {
+      return;
+    }
+    codeBlocks.forEach(codeBlock => {
+      
+      if (codeBlock.scrollHeight <= codeBlock.clientHeight) {
+        return;
+      }
+      
+      
+      let codeMoreBox = document.createElement('div');
+      codeMoreBox.classList.add('code-more-box');
+      
+      let codeMoreBtn = document.createElement('span');
+      codeMoreBtn.classList.add('code-more-btn');
+      codeMoreBtn.addEventListener('click', () => {
+        codeBlock.classList.add('code-show');
+        codeMoreBox.style.display = 'none';
+        
+        window.dispatchEvent(new Event('resize'))
+      })
+      
+      let img = document.createElement('img');
+      img.classList.add('code-more-img');
+      img.src = "https://iloveu521.github.io/icons/codeMore.png"
+      
+      codeMoreBtn.appendChild(img);
+      codeMoreBox.appendChild(codeMoreBtn);
+      codeBlock.appendChild(codeMoreBox)
+    })
+  }
+  
+  initCodeMoreBox();
+</script>
+
+
+
+    </body>
+</html>

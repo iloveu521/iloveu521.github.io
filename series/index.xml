@@ -7,20 +7,28 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>Silly</copyright>
-        <lastBuildDate>Fri, 08 May 2026 16:17:47 +0800</lastBuildDate><atom:link href="https://iloveu521.github.io/series/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 09 May 2026 23:45:00 +0800</lastBuildDate><atom:link href="https://iloveu521.github.io/series/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Issue</title>
+        <link>https://iloveu521.github.io/series/issue/</link>
+        <pubDate>Sat, 09 May 2026 00:00:00 +0800</pubDate>
+        
+        <guid>https://iloveu521.github.io/series/issue/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>STM32</title>
+        <link>https://iloveu521.github.io/series/stm32/</link>
+        <pubDate>Sat, 09 May 2026 00:00:00 +0800</pubDate>
+        
+        <guid>https://iloveu521.github.io/series/stm32/</guid>
+        <description></description>
+        </item>
+        <item>
         <title>Study</title>
         <link>https://iloveu521.github.io/series/study/</link>
         <pubDate>Mon, 27 Apr 2026 20:50:20 +0800</pubDate>
         
         <guid>https://iloveu521.github.io/series/study/</guid>
-        <description></description>
-        </item>
-        <item>
-        <title>Issue</title>
-        <link>https://iloveu521.github.io/series/issue/</link>
-        <pubDate>Mon, 27 Apr 2026 20:04:50 +0800</pubDate>
-        
-        <guid>https://iloveu521.github.io/series/issue/</guid>
         <description></description>
         </item>
         <item>
