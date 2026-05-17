@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="通过USB串口与STM32通信时版本查询握手失败，原因是Linux打开串口时DTR/RTS同时拉高，STM32进入bootloader 而非运行应用程序。">
+<title>ROS2 串口通信握手失败：DTR/RTS 导致 STM32 进入 bootloader</title>
+
+<link rel='canonical' href='https://iloveu521.github.io/bugs/stm32/stm32_serial_handshake_dtr_rts/'>
+
+<link rel="stylesheet" href="/scss/style.min.a417f02c916931d7cdb31ab7abe48ac8b095f84732b48b43aa856697d22bf940.css"><meta property='og:title' content="ROS2 串口通信握手失败：DTR/RTS 导致 STM32 进入 bootloader">
+<meta property='og:description' content="通过USB串口与STM32通信时版本查询握手失败，原因是Linux打开串口时DTR/RTS同时拉高，STM32进入bootloader 而非运行应用程序。">
+<meta property='og:url' content='https://iloveu521.github.io/bugs/stm32/stm32_serial_handshake_dtr_rts/'>
+<meta property='og:site_name' content='Silly'>
+<meta property='og:type' content='article'><meta property='article:section' content='Bugs' /><meta property='article:published_time' content='2026-05-16T00:00:00&#43;08:00'/><meta property='article:modified_time' content='2026-05-17T11:23:16&#43;08:00'/>
+<meta name="twitter:title" content="ROS2 串口通信握手失败：DTR/RTS 导致 STM32 进入 bootloader">
+<meta name="twitter:description" content="通过USB串口与STM32通信时版本查询握手失败，原因是Linux打开串口时DTR/RTS同时拉高，STM32进入bootloader 而非运行应用程序。">
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/cat_hu_931729ed2902e41d.png" width="300"
+                            height="296" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">😉</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Silly</a></h1>
+            <h2 class="site-description">Welcome!</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/iloveu521'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://twitter.com'
+                        target="_blank"
+                        title="Twitter"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <?xml version="1.0" ?><svg data-name="Layer 1" id="Layer_1" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><title/><path d="M46.34,20.52l-21-19a2,2,0,0,0-2.68,0l-21,19a2,2,0,1,0,2.68,3L24,5.7,43.66,23.48a2,2,0,0,0,2.68-3Z"/><path d="M42,26a2,2,0,0,0-2,2V43H8V28a2,2,0,0,0-4,0V45a2,2,0,0,0,2,2H42a2,2,0,0,0,2-2V28A2,2,0,0,0,42,26Z"/></svg>
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/series/' >
+                
+                
+                
+                    <?xml version="1.0" ?><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><defs><style>.cls-1{fill:#101820;}</style></defs><title/><g data-name="Layer 39" id="Layer_39"><path class="cls-1" d="M4,28a3,3,0,0,1-3-3V7A3,3,0,0,1,4,4h7a1,1,0,0,1,.77.36L14.8,8H27a1,1,0,0,1,0,2H14.33a1,1,0,0,1-.76-.36L10.53,6H4A1,1,0,0,0,3,7V25a1,1,0,0,0,1,1,1,1,0,0,1,0,2Z"/><path class="cls-1" d="M25.38,28H4a1,1,0,0,1-1-1.21l3-14A1,1,0,0,1,7,12H30a1,1,0,0,1,1,1.21L28.32,25.63A3,3,0,0,1,25.38,28ZM5.24,26H25.38a1,1,0,0,0,1-.79L28.76,14h-21Z"/></g></svg>
+                
+                <span>Series</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/friend/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Friend</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://iloveu521.github.io/" selected>English</option>
+                                
+                                    <option value="https://iloveu521.github.io/ja/" >日本語</option>
+                                
+                                    <option value="https://iloveu521.github.io/zh-cn/" >简体中文</option>
+                                
+                                    <option value="https://iloveu521.github.io/zh-tw/" >正體中文</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#现象">现象</a></li>
+    <li><a href="#调试过程">调试过程</a>
+      <ol>
+        <li><a href="#1-检查波特率和协议">1. 检查波特率和协议</a></li>
+        <li><a href="#2-检查上位机代码">2. 检查上位机代码</a></li>
+        <li><a href="#3-检查下位机代码">3. 检查下位机代码</a></li>
+        <li><a href="#4-官方上位机软件测试">4. 官方上位机软件测试</a></li>
+        <li><a href="#5-串口调试助手测试">5. 串口调试助手测试</a></li>
+        <li><a href="#6-echo-直接写串口无效尝试">6. echo 直接写串口（无效尝试）</a></li>
+        <li><a href="#7-python-脚本逐步诊断">7. Python 脚本逐步诊断</a></li>
+        <li><a href="#8-验证rts先拉低再拉低dtr">8. 验证：RTS先拉低再拉低DTR</a></li>
+      </ol>
+    </li>
+    <li><a href="#根因">根因</a></li>
+    <li><a href="#解决">解决</a></li>
+    <li><a href="#知识点">知识点</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+            
+                <section class="widget tagCloud">
+    <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-tag" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11 3L20 12a1.5 1.5 0 0 1 0 2L14 20a1.5 1.5 0 0 1 -2 0L3 11v-4a4 4 0 0 1 4 -4h4" />
+  <circle cx="9" cy="9" r="2" />
+</svg>
+
+
+
+    </div>
+    <h2 class="widget-title section-title">Series</h2>
+
+    <div class="tagCloud-tags">
+        
+            <a href="/series/issue/">
+                Issue
+            </a>
+        
+            <a href="/series/stm32/">
+                STM32
+            </a>
+        
+            <a href="/series/git/">
+                Git
+            </a>
+        
+            <a href="/series/linux/">
+                LINUX
+            </a>
+        
+            <a href="/series/ros2/">
+                ROS2
+            </a>
+        
+            <a href="/series/thoughts/">
+                Thoughts
+            </a>
+        
+    </div>
+</section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            
+            
+            
+            <a href="/categories/issue/" style="background-color: hsl(72, 60%, 84%); color: hsl(72, 60%, 15%);">
+                Issue
+            </a>
+        
+            
+            
+            
+            <a href="/categories/resolved/" style="background-color: hsl(141, 60%, 84%); color: hsl(141, 60%, 15%);">
+                Resolved
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/bugs/stm32/stm32_serial_handshake_dtr_rts/">ROS2 串口通信握手失败：DTR/RTS 导致 STM32 进入 bootloader</a>
+        </h2>
+
+        
+        <h3 class="article-subtitle">
+            通过USB串口与STM32通信时版本查询握手失败，原因是Linux打开串口时DTR/RTS同时拉高，STM32进入bootloader 而非运行应用程序。
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published" datetime='2026-05-16T00:00:00&#43;08:00'>2026-05-16</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    2 minute read
+                </time>
+            </div>
+        
+
+        <div class="article-time--views">
+            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
+            <time class="article-time--reading">
+                <span id="vercount_value_page_pv">loading...</span> 次
+            </time>
+        </div>
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="现象">现象
+</h2><p>ROS2 <code>arm_base</code> 节点打开 <code>/dev/ttyUSB0</code> 后发送版本查询帧 <code>55 55 02 01</code>，下位机 STM32 无任何回复。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>arm_base-1<span class="o">]</span> 串口已打开: /dev/ttyUSB0 @ <span class="m">9600</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>arm_base-1<span class="o">]</span> 已发送版本查询: <span class="m">55</span> <span class="m">55</span> <span class="m">02</span> <span class="m">01</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>arm_base-1<span class="o">]</span> 版本查询回复长度错误: 期望 6, 实际 <span class="m">0</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>arm_base-1<span class="o">]</span> 串口通信握手失败，坐标指令将被丢弃。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>另外：关掉终端后舵机会轻微响一声——说明 STM32 硬件正常，但只在串口关闭后才启动。</p>
+<h2 id="调试过程">调试过程
+</h2><h3 id="1-检查波特率和协议">1. 检查波特率和协议
+</h3><p>比对下位机协议和上位机代码：</p>
+<ul>
+<li>波特率：9600，8N1，一致</li>
+<li>帧格式：<code>[0x55][0x55][data_len][cmd][payload...]</code>，一致</li>
+<li>版本查询帧：<code>55 55 02 01</code>，正确</li>
+</ul>
+<h3 id="2-检查上位机代码">2. 检查上位机代码
+</h3><p>检查 <code>arm_base.cpp</code> 和 <code>serial</code> 库代码：</p>
+<ul>
+<li>串口配置正确（9600, 8-bit, no parity, 1 stop bit）</li>
+<li>数据发送逻辑正确</li>
+<li>超时设置 100ms，足够 STM32 回复</li>
+</ul>
+<p>怀疑是串口打开时 DTR 拉高导致 STM32 复位，加 2 秒延时，无效。</p>
+<h3 id="3-检查下位机代码">3. 检查下位机代码
+</h3><p>对照协议文档审查 STM32 固件逻辑：</p>
+<ul>
+<li><code>unpack()</code> 状态机正常，<code>data_len=2</code> 时读 0 字节 payload 合法</li>
+<li><code>CMD_VERSION_QUERY</code> 分支会回复 6 字节</li>
+<li>未发现固件侧问题</li>
+</ul>
+<h3 id="4-官方上位机软件测试">4. 官方上位机软件测试
+</h3><p>用厂商提供 Windows 上位机软件测试，可以正常控制机械臂。排除硬件故障和固件 bug。</p>
+<h3 id="5-串口调试助手测试">5. 串口调试助手测试
+</h3><p>Windows 端用串口调试助手直接发 <code>55 55 02 01</code>，STM32 正常回复 <code>55 55 04 01 02 01</code>。</p>
+<p>说明：</p>
+<ul>
+<li>STM32 硬件、固件、接线全部正常</li>
+<li>问题一定在 Linux 端串口通信层面</li>
+</ul>
+<h3 id="6-echo-直接写串口无效尝试">6. echo 直接写串口（无效尝试）
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;05 05 02 01&#34;</span> &gt; /dev/ttyUSB0
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>无反应。后来才发现两个问题：</p>
+<ol>
+<li><code>echo</code> 发送的是 <strong>ASCII 文本</strong> <code>&quot;05 05 02 01\n&quot;</code>，不是二进制 hex <code>\x55\x55\x02\x01</code></li>
+<li>当时 STM32 拔插过，<code>/dev/ttyUSB0</code> 被 <code>echo</code> 重定向创建成了<strong>普通文件</strong>而非字符设备</li>
+</ol>
+<p>但之前 ROS2 程序发送的是真正的二进制数据，所以问题不在这里。</p>
+<h3 id="7-python-脚本逐步诊断">7. Python 脚本逐步诊断
+</h3><p>用 Python + pyserial 写调试脚本，打印 modem 线状态：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">ser</span> <span class="o">=</span> <span class="n">serial</span><span class="o">.</span><span class="n">Serial</span><span class="p">(</span><span class="s1">&#39;/dev/ttyUSB0&#39;</span><span class="p">,</span> <span class="mi">9600</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 打印 DTR/RTS 状态</span>
+</span></span><span class="line"><span class="cl"><span class="n">flags</span> <span class="o">=</span> <span class="n">fcntl</span><span class="o">.</span><span class="n">ioctl</span><span class="p">(</span><span class="n">ser</span><span class="o">.</span><span class="n">fd</span><span class="p">,</span> <span class="n">termios</span><span class="o">.</span><span class="n">TIOCMGET</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>结果：</p>
+<ul>
+<li><code>open()</code> 后：DTR=High, RTS=High</li>
+<li><code>ser.dtr = False</code> 后：DTR=Low, RTS=High ← <strong>DTR拉低了但STM32仍未启动</strong></li>
+</ul>
+<p>加上 &ldquo;关终端舵机会响&rdquo; 的现象，怀疑RTS连接到了BOOT0。</p>
+<h3 id="8-验证rts先拉低再拉低dtr">8. 验证：RTS先拉低再拉低DTR
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">ser</span><span class="o">.</span><span class="n">rts</span> <span class="o">=</span> <span class="kc">False</span>    <span class="c1"># 先拉低 RTS → BOOT0=0</span>
+</span></span><span class="line"><span class="cl"><span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">ser</span><span class="o">.</span><span class="n">dtr</span> <span class="o">=</span> <span class="kc">False</span>    <span class="c1"># 再拉低 DTR → 释放复位</span>
+</span></span><span class="line"><span class="cl"><span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">ser</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;</span><span class="se">\x55\x55\x02\x01</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">rx</span> <span class="o">=</span> <span class="n">ser</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 收到：55 55 04 01 02 01  ← 握手成功！</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="根因">根因
+</h2><p>Linux 打开串口时 <strong>DTR 和 RTS 同时被拉高</strong>。</p>
+<p>STM32 板子实际硬件连接：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>信号</th>
+          <th>连接</th>
+          <th>高电平效果</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>DTR</td>
+          <td>RESET</td>
+          <td>STM32 处于复位状态</td>
+      </tr>
+      <tr>
+          <td>RTS</td>
+          <td>BOOT0</td>
+          <td>复位后进入 ROM bootloader</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>如果只拉低 DTR（释放复位）而 RTS 仍为高，STM32 复位后检测到 BOOT0=1，进入 <strong>ROM bootloader</strong> 模式，应用程序不运行，自然不会回复版本查询。</p>
+<p>当程序退出 / 终端关闭时，RTS 被释放变低，STM32 再次复位 → BOOT0=0 → 正常启动 → 舵机响一声。</p>
+<h2 id="解决">解决
+</h2><p>打开串口后，必须<strong>先拉低 RTS，再拉低 DTR</strong>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">arm_serial_</span><span class="p">.</span><span class="n">open</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="n">arm_serial_</span><span class="p">.</span><span class="n">setRTS</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>                          <span class="c1">// BOOT0=0，确保正常启动
+</span></span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">this_thread</span><span class="o">::</span><span class="n">sleep_for</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">milliseconds</span><span class="p">(</span><span class="mi">100</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="n">arm_serial_</span><span class="p">.</span><span class="n">setDTR</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>                          <span class="c1">// 释放复位
+</span></span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">this_thread</span><span class="o">::</span><span class="n">sleep_for</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">seconds</span><span class="p">(</span><span class="mi">2</span><span class="p">));</span> <span class="c1">// 等待启动
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="知识点">知识点
+</h2><ul>
+<li>Linux <code>open()</code> TTY 设备时，内核会拉高 DTR 和 RTS</li>
+<li>STM32 BOOT0 引脚决定启动模式：低电平=闪存启动(正常)，高电平=系统存储器(bootloader)</li>
+<li>用 <code>TIOCMGET</code> ioctl 可以读取 modem 线实际状态，比盲猜高效</li>
+<li><code>echo &quot;hex&quot; &gt; /dev/ttyUSB0</code> 写入的是 ASCII 文本，不是二进制——要用 <code>echo -ne &quot;\xHH\xHH&quot;</code></li>
+<li>pyserial 的 <code>ser.dtr</code> / <code>ser.rts</code> 属性可以控制 modem 线</li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    <section class="article-tags">
+    
+        <a href="/series/issue/">Issue</a>
+    
+</section>
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <span>
+            Last updated on May 17, 2026 11:23 &#43;0800
+        </span>
+    </section><div class="article-lastmod">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+            <time>
+                May 17, 2026 11:23 &#43;0800
+            </time>
+        </div></footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        const elementsToRender = [".main-article", ".widget--toc"];
+
+        elementsToRender.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    ignoredClasses: ["gist"]
+                });
+            }
+        });
+    });
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/bugs/stm32/stm32_uart_fputc_redirect/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Stm32_uart_fputc_redirect</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/bugs/stm32/stm32_uart_tx_rx_swap/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Stm32_uart_tx_rx_swap</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/bugs/stm32/stm32_error_l6407e/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Stm32_error_L6407E</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/bugs/ros2/topic_dead_lock/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">topic通信死锁</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/bugs/code-server/code-server_extension-not-fond/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">code-server:Extension not fond</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2026 Silly
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.34.2">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+    
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+<style>
+    #TableOfContents > ul, ol {
+        ul, ol {
+            display: none;
+        }
+        .open {
+            display: block;
+        }
+    }
+</style>
+
+<script>
+    function initTocHide() {
+        
+        let toc = document.querySelector(".widget--toc");
+        if (!toc) {
+            return;
+        }
+        
+        window.addEventListener('scroll', function() {
+            
+            let openUl = document.querySelectorAll(".open");
+            if (openUl.length > 0) {
+              openUl.forEach((ul) => {
+                ul.classList.remove("open")
+              })
+            }
+            
+            let currentLi = document.querySelector(".active-class");
+            if (!currentLi) {
+                return
+            }
+            
+            if (currentLi.children.length > 1) {
+                currentLi.children[1].classList.add("open")
+            }
+            
+            let ul = currentLi.parentElement;
+            do {
+                ul.classList.add("open");
+                ul = ul.parentElement.parentElement
+            } while (ul !== undefined && (ul.localName === 'ul' || ul.localName === 'ol'))
+        });
+    }
+    initTocHide()
+</script>
+
+<style>
+    #backTopBtn {
+        display: none;
+        position: fixed;
+        bottom: 30px;
+        z-index: 99;
+        cursor: pointer;
+        width: 30px;
+        height: 30px;
+        background-image: url(https://iloveu521.github.io/icons/backTop.svg);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 18px 18px;
+        border-radius: var(--card-border-radius);
+    }
+
+    #backTopBtn::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: var(--card-background);
+        opacity: 0.7;
+        border: 1px solid var(--card-separator-color);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        z-index: -1;
+    }
+
+    #backTopBtn:hover::before {
+        opacity: 0.85;
+    }
+</style>
+
+<script>
+    
+
+    function initScrollTop() {
+        let rightSideBar = document.querySelector(".right-sidebar");
+        if (!rightSideBar) {
+            return;
+        }
+        
+        let btn = document.createElement("div");
+        btn.id = "backTopBtn";
+        btn.onclick = backToTop
+        rightSideBar.appendChild(btn)
+        
+        window.onscroll = function() {
+            
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
+            }
+        };
+    }
+
+    
+
+    function backToTop(){
+        window.scrollTo({ top: 0, behavior: "smooth" })
+    }
+
+    initScrollTop();
+</script>
+
+
+<div id="particles-js"></div>
+
+<script src=https://iloveu521.github.io/background/particles.min.js></script>
+<script>
+  particlesJS.load('particles-js', "https://iloveu521.github.io/background/particlesjs-config.json", function() {
+    console.log('particles.js loaded - callback');
+  });
+</script>
+
+<style>
+  #particles-js {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: -1;
+  }
+</style>
+
+<style>
+    .highlight {
+         
+        max-height: 400px;
+        overflow: hidden;
+    }
+
+    .code-show {
+        max-height: none !important;
+    }
+
+    .code-more-box {
+        width: 100%;
+        padding-top: 78px;
+        background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0)), to(#fff));
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+    }
+
+    .code-more-btn {
+        display: block;
+        margin: auto;
+        width: 44px;
+        height: 22px;
+        background: #f0f0f5;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        padding-top: 6px;
+        cursor: pointer;
+    }
+
+    .code-more-img {
+        cursor: pointer !important;
+        display: block;
+        margin: auto;
+        width: 22px;
+        height: 16px;
+    }
+</style>
+
+<script>
+  function initCodeMoreBox() {
+    let codeBlocks = document.querySelectorAll(".highlight");
+    if (!codeBlocks) {
+      return;
+    }
+    codeBlocks.forEach(codeBlock => {
+      
+      if (codeBlock.scrollHeight <= codeBlock.clientHeight) {
+        return;
+      }
+      
+      
+      let codeMoreBox = document.createElement('div');
+      codeMoreBox.classList.add('code-more-box');
+      
+      let codeMoreBtn = document.createElement('span');
+      codeMoreBtn.classList.add('code-more-btn');
+      codeMoreBtn.addEventListener('click', () => {
+        codeBlock.classList.add('code-show');
+        codeMoreBox.style.display = 'none';
+        
+        window.dispatchEvent(new Event('resize'))
+      })
+      
+      let img = document.createElement('img');
+      img.classList.add('code-more-img');
+      img.src = "https://iloveu521.github.io/icons/codeMore.png"
+      
+      codeMoreBtn.appendChild(img);
+      codeMoreBox.appendChild(codeMoreBtn);
+      codeBlock.appendChild(codeMoreBox)
+    })
+  }
+  
+  initCodeMoreBox();
+</script>
+
+
+
+<script defer src="https://cn.vercount.one/js"></script>
+
+<style>
+     
+    article:not(.main-article) .article-time--views {
+        display: none;
+    }
+</style>
+
+    </body>
+</html>

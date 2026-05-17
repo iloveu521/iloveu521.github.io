@@ -7,18 +7,10 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>Silly</copyright>
-        <lastBuildDate>Mon, 11 May 2026 15:29:54 +0800</lastBuildDate><atom:link href="https://iloveu521.github.io/categories/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>HAL</title>
-        <link>https://iloveu521.github.io/categories/hal/</link>
-        <pubDate>Sat, 09 May 2026 00:00:00 +0800</pubDate>
-        
-        <guid>https://iloveu521.github.io/categories/hal/</guid>
-        <description></description>
-        </item>
-        <item>
+        <lastBuildDate>Sun, 17 May 2026 11:23:16 +0800</lastBuildDate><atom:link href="https://iloveu521.github.io/categories/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Issue</title>
         <link>https://iloveu521.github.io/categories/issue/</link>
-        <pubDate>Sat, 09 May 2026 00:00:00 +0800</pubDate>
+        <pubDate>Sat, 16 May 2026 00:00:00 +0800</pubDate>
         
         <guid>https://iloveu521.github.io/categories/issue/</guid>
         <description></description>
@@ -26,9 +18,17 @@
         <item>
         <title>Resolved</title>
         <link>https://iloveu521.github.io/categories/resolved/</link>
-        <pubDate>Sat, 09 May 2026 00:00:00 +0800</pubDate>
+        <pubDate>Sat, 16 May 2026 00:00:00 +0800</pubDate>
         
         <guid>https://iloveu521.github.io/categories/resolved/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>HAL</title>
+        <link>https://iloveu521.github.io/categories/hal/</link>
+        <pubDate>Sat, 09 May 2026 00:00:00 +0800</pubDate>
+        
+        <guid>https://iloveu521.github.io/categories/hal/</guid>
         <description></description>
         </item>
         <item>

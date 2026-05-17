@@ -7,7 +7,172 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>Silly</copyright>
-        <lastBuildDate>Mon, 11 May 2026 15:29:54 +0800</lastBuildDate><atom:link href="https://iloveu521.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 17 May 2026 11:23:16 +0800</lastBuildDate><atom:link href="https://iloveu521.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>ROS2 串口通信握手失败：DTR/RTS 导致 STM32 进入 bootloader</title>
+        <link>https://iloveu521.github.io/bugs/stm32/stm32_serial_handshake_dtr_rts/</link>
+        <pubDate>Sat, 16 May 2026 00:00:00 +0800</pubDate>
+        
+        <guid>https://iloveu521.github.io/bugs/stm32/stm32_serial_handshake_dtr_rts/</guid>
+        <description>&lt;h2 id=&#34;现象&#34;&gt;现象
+&lt;/h2&gt;&lt;p&gt;ROS2 &lt;code&gt;arm_base&lt;/code&gt; 节点打开 &lt;code&gt;/dev/ttyUSB0&lt;/code&gt; 后发送版本查询帧 &lt;code&gt;55 55 02 01&lt;/code&gt;，下位机 STM32 无任何回复。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;arm_base-1&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; 串口已打开: /dev/ttyUSB0 @ &lt;span class=&#34;m&#34;&gt;9600&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;arm_base-1&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; 已发送版本查询: &lt;span class=&#34;m&#34;&gt;55&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;55&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;02&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;01&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;arm_base-1&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; 版本查询回复长度错误: 期望 6, 实际 &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;arm_base-1&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; 串口通信握手失败，坐标指令将被丢弃。
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;另外：关掉终端后舵机会轻微响一声——说明 STM32 硬件正常，但只在串口关闭后才启动。&lt;/p&gt;
+&lt;h2 id=&#34;调试过程&#34;&gt;调试过程
+&lt;/h2&gt;&lt;h3 id=&#34;1-检查波特率和协议&#34;&gt;1. 检查波特率和协议
+&lt;/h3&gt;&lt;p&gt;比对下位机协议和上位机代码：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;波特率：9600，8N1，一致&lt;/li&gt;
+&lt;li&gt;帧格式：&lt;code&gt;[0x55][0x55][data_len][cmd][payload...]&lt;/code&gt;，一致&lt;/li&gt;
+&lt;li&gt;版本查询帧：&lt;code&gt;55 55 02 01&lt;/code&gt;，正确&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2-检查上位机代码&#34;&gt;2. 检查上位机代码
+&lt;/h3&gt;&lt;p&gt;检查 &lt;code&gt;arm_base.cpp&lt;/code&gt; 和 &lt;code&gt;serial&lt;/code&gt; 库代码：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;串口配置正确（9600, 8-bit, no parity, 1 stop bit）&lt;/li&gt;
+&lt;li&gt;数据发送逻辑正确&lt;/li&gt;
+&lt;li&gt;超时设置 100ms，足够 STM32 回复&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;怀疑是串口打开时 DTR 拉高导致 STM32 复位，加 2 秒延时，无效。&lt;/p&gt;
+&lt;h3 id=&#34;3-检查下位机代码&#34;&gt;3. 检查下位机代码
+&lt;/h3&gt;&lt;p&gt;对照协议文档审查 STM32 固件逻辑：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;unpack()&lt;/code&gt; 状态机正常，&lt;code&gt;data_len=2&lt;/code&gt; 时读 0 字节 payload 合法&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;CMD_VERSION_QUERY&lt;/code&gt; 分支会回复 6 字节&lt;/li&gt;
+&lt;li&gt;未发现固件侧问题&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;4-官方上位机软件测试&#34;&gt;4. 官方上位机软件测试
+&lt;/h3&gt;&lt;p&gt;用厂商提供 Windows 上位机软件测试，可以正常控制机械臂。排除硬件故障和固件 bug。&lt;/p&gt;
+&lt;h3 id=&#34;5-串口调试助手测试&#34;&gt;5. 串口调试助手测试
+&lt;/h3&gt;&lt;p&gt;Windows 端用串口调试助手直接发 &lt;code&gt;55 55 02 01&lt;/code&gt;，STM32 正常回复 &lt;code&gt;55 55 04 01 02 01&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;说明：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;STM32 硬件、固件、接线全部正常&lt;/li&gt;
+&lt;li&gt;问题一定在 Linux 端串口通信层面&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;6-echo-直接写串口无效尝试&#34;&gt;6. echo 直接写串口（无效尝试）
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;05 05 02 01&amp;#34;&lt;/span&gt; &amp;gt; /dev/ttyUSB0
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;无反应。后来才发现两个问题：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;echo&lt;/code&gt; 发送的是 &lt;strong&gt;ASCII 文本&lt;/strong&gt; &lt;code&gt;&amp;quot;05 05 02 01\n&amp;quot;&lt;/code&gt;，不是二进制 hex &lt;code&gt;\x55\x55\x02\x01&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;当时 STM32 拔插过，&lt;code&gt;/dev/ttyUSB0&lt;/code&gt; 被 &lt;code&gt;echo&lt;/code&gt; 重定向创建成了&lt;strong&gt;普通文件&lt;/strong&gt;而非字符设备&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;但之前 ROS2 程序发送的是真正的二进制数据，所以问题不在这里。&lt;/p&gt;
+&lt;h3 id=&#34;7-python-脚本逐步诊断&#34;&gt;7. Python 脚本逐步诊断
+&lt;/h3&gt;&lt;p&gt;用 Python + pyserial 写调试脚本，打印 modem 线状态：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;ser&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;serial&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Serial&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;/dev/ttyUSB0&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;9600&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 打印 DTR/RTS 状态&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;flags&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;fcntl&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ioctl&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ser&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;fd&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;termios&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;TIOCMGET&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;...&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;结果：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;open()&lt;/code&gt; 后：DTR=High, RTS=High&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ser.dtr = False&lt;/code&gt; 后：DTR=Low, RTS=High ← &lt;strong&gt;DTR拉低了但STM32仍未启动&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;加上 &amp;ldquo;关终端舵机会响&amp;rdquo; 的现象，怀疑RTS连接到了BOOT0。&lt;/p&gt;
+&lt;h3 id=&#34;8-验证rts先拉低再拉低dtr&#34;&gt;8. 验证：RTS先拉低再拉低DTR
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;ser&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;rts&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;False&lt;/span&gt;    &lt;span class=&#34;c1&#34;&gt;# 先拉低 RTS → BOOT0=0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;time&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sleep&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;0.1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;ser&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;dtr&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;False&lt;/span&gt;    &lt;span class=&#34;c1&#34;&gt;# 再拉低 DTR → 释放复位&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;time&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sleep&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;ser&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;write&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sa&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\x55\x55\x02\x01&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;rx&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ser&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;read&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;6&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 收到：55 55 04 01 02 01  ← 握手成功！&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;根因&#34;&gt;根因
+&lt;/h2&gt;&lt;p&gt;Linux 打开串口时 &lt;strong&gt;DTR 和 RTS 同时被拉高&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;STM32 板子实际硬件连接：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;信号&lt;/th&gt;
+          &lt;th&gt;连接&lt;/th&gt;
+          &lt;th&gt;高电平效果&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;DTR&lt;/td&gt;
+          &lt;td&gt;RESET&lt;/td&gt;
+          &lt;td&gt;STM32 处于复位状态&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;RTS&lt;/td&gt;
+          &lt;td&gt;BOOT0&lt;/td&gt;
+          &lt;td&gt;复位后进入 ROM bootloader&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;如果只拉低 DTR（释放复位）而 RTS 仍为高，STM32 复位后检测到 BOOT0=1，进入 &lt;strong&gt;ROM bootloader&lt;/strong&gt; 模式，应用程序不运行，自然不会回复版本查询。&lt;/p&gt;
+&lt;p&gt;当程序退出 / 终端关闭时，RTS 被释放变低，STM32 再次复位 → BOOT0=0 → 正常启动 → 舵机响一声。&lt;/p&gt;
+&lt;h2 id=&#34;解决&#34;&gt;解决
+&lt;/h2&gt;&lt;p&gt;打开串口后，必须&lt;strong&gt;先拉低 RTS，再拉低 DTR&lt;/strong&gt;：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;arm_serial_&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;open&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;arm_serial_&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;setRTS&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;false&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;                          &lt;span class=&#34;c1&#34;&gt;// BOOT0=0，确保正常启动
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;std&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;this_thread&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sleep_for&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;std&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;chrono&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;milliseconds&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;100&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;));&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;arm_serial_&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;setDTR&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;false&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;                          &lt;span class=&#34;c1&#34;&gt;// 释放复位
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;std&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;this_thread&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sleep_for&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;std&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;chrono&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;seconds&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;));&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// 等待启动
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;知识点&#34;&gt;知识点
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;Linux &lt;code&gt;open()&lt;/code&gt; TTY 设备时，内核会拉高 DTR 和 RTS&lt;/li&gt;
+&lt;li&gt;STM32 BOOT0 引脚决定启动模式：低电平=闪存启动(正常)，高电平=系统存储器(bootloader)&lt;/li&gt;
+&lt;li&gt;用 &lt;code&gt;TIOCMGET&lt;/code&gt; ioctl 可以读取 modem 线实际状态，比盲猜高效&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;echo &amp;quot;hex&amp;quot; &amp;gt; /dev/ttyUSB0&lt;/code&gt; 写入的是 ASCII 文本，不是二进制——要用 &lt;code&gt;echo -ne &amp;quot;\xHH\xHH&amp;quot;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;pyserial 的 &lt;code&gt;ser.dtr&lt;/code&gt; / &lt;code&gt;ser.rts&lt;/code&gt; 属性可以控制 modem 线&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>STM32 HAL printf 重定向原理与实现</title>
         <link>https://iloveu521.github.io/p/stm32-hal-printf-%E9%87%8D%E5%AE%9A%E5%90%91%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/</link>
         <pubDate>Sat, 09 May 2026 00:00:00 +0800</pubDate>
