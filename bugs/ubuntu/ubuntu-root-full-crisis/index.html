@@ -1,0 +1,1457 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=" Ubuntu 根目录爆满危机：一场由 PCIe 日志引发的血案 楔子：黑屏降临 那是一个普通的夜晚，我像往常一样重启了 Ubuntu。\n然后——黑屏。\n不是那种&quot;等一会儿就好&quot;的黑屏，是那种&quot;我罢工了，你看着办吧&quot;的黑屏。风扇还在转，屏幕却如同一块沉默的黑洞。作为一个从 18.04 一路升级到 24.04 的双系统老用户，我隐约感到事情不简单。\n事后回想起来，这其实是系统发出的最后一声呼救，可惜当时我没听懂。\n第一章：幕后黑手浮出水面 1.1 第一嫌疑人：根分区 双系统用户都知道，当初装机时给 / 分了 75G，给 /home 分了 135G，心想&quot;够用了够用了&quot;。结果 /home 还剩 35G，根分区却悄无声息地被塞爆了。\n为什么会爆？我抱着&quot;让我进去看一眼&quot;的心态，尝试进入 Recovery Mode。\n1 df -h 看到 /dev/nvme0n1pX 100% 的那一刻，我知道第一嫌疑人已经锁定了。\n1.2 地毯式搜查 进入 root shell 后，我开始了逐层排查：\n1 2 # 看看是谁在吃空间 du -xhd1 / | sort -h 重点排查对象：\n">
+<title>Ubuntu 根目录爆满危机：一场由 PCIe 日志引发的血案</title>
+
+<link rel='canonical' href='https://iloveu521.github.io/bugs/ubuntu/ubuntu-root-full-crisis/'>
+
+<link rel="stylesheet" href="/scss/style.min.a417f02c916931d7cdb31ab7abe48ac8b095f84732b48b43aa856697d22bf940.css"><meta property='og:title' content="Ubuntu 根目录爆满危机：一场由 PCIe 日志引发的血案">
+<meta property='og:description' content=" Ubuntu 根目录爆满危机：一场由 PCIe 日志引发的血案 楔子：黑屏降临 那是一个普通的夜晚，我像往常一样重启了 Ubuntu。\n然后——黑屏。\n不是那种&quot;等一会儿就好&quot;的黑屏，是那种&quot;我罢工了，你看着办吧&quot;的黑屏。风扇还在转，屏幕却如同一块沉默的黑洞。作为一个从 18.04 一路升级到 24.04 的双系统老用户，我隐约感到事情不简单。\n事后回想起来，这其实是系统发出的最后一声呼救，可惜当时我没听懂。\n第一章：幕后黑手浮出水面 1.1 第一嫌疑人：根分区 双系统用户都知道，当初装机时给 / 分了 75G，给 /home 分了 135G，心想&quot;够用了够用了&quot;。结果 /home 还剩 35G，根分区却悄无声息地被塞爆了。\n为什么会爆？我抱着&quot;让我进去看一眼&quot;的心态，尝试进入 Recovery Mode。\n1 df -h 看到 /dev/nvme0n1pX 100% 的那一刻，我知道第一嫌疑人已经锁定了。\n1.2 地毯式搜查 进入 root shell 后，我开始了逐层排查：\n1 2 # 看看是谁在吃空间 du -xhd1 / | sort -h 重点排查对象：\n">
+<meta property='og:url' content='https://iloveu521.github.io/bugs/ubuntu/ubuntu-root-full-crisis/'>
+<meta property='og:site_name' content='Silly'>
+<meta property='og:type' content='article'><meta property='article:section' content='Bugs' /><meta property='article:published_time' content='2026-06-02T20:00:00&#43;08:00'/><meta property='article:modified_time' content='2026-06-07T15:00:12&#43;08:00'/>
+<meta name="twitter:title" content="Ubuntu 根目录爆满危机：一场由 PCIe 日志引发的血案">
+<meta name="twitter:description" content=" Ubuntu 根目录爆满危机：一场由 PCIe 日志引发的血案 楔子：黑屏降临 那是一个普通的夜晚，我像往常一样重启了 Ubuntu。\n然后——黑屏。\n不是那种&quot;等一会儿就好&quot;的黑屏，是那种&quot;我罢工了，你看着办吧&quot;的黑屏。风扇还在转，屏幕却如同一块沉默的黑洞。作为一个从 18.04 一路升级到 24.04 的双系统老用户，我隐约感到事情不简单。\n事后回想起来，这其实是系统发出的最后一声呼救，可惜当时我没听懂。\n第一章：幕后黑手浮出水面 1.1 第一嫌疑人：根分区 双系统用户都知道，当初装机时给 / 分了 75G，给 /home 分了 135G，心想&quot;够用了够用了&quot;。结果 /home 还剩 35G，根分区却悄无声息地被塞爆了。\n为什么会爆？我抱着&quot;让我进去看一眼&quot;的心态，尝试进入 Recovery Mode。\n1 df -h 看到 /dev/nvme0n1pX 100% 的那一刻，我知道第一嫌疑人已经锁定了。\n1.2 地毯式搜查 进入 root shell 后，我开始了逐层排查：\n1 2 # 看看是谁在吃空间 du -xhd1 / | sort -h 重点排查对象：\n">
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/cat_hu_931729ed2902e41d.png" width="300"
+                            height="296" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">😉</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Silly</a></h1>
+            <h2 class="site-description">Welcome!</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/iloveu521'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://twitter.com'
+                        target="_blank"
+                        title="Twitter"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <?xml version="1.0" ?><svg data-name="Layer 1" id="Layer_1" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><title/><path d="M46.34,20.52l-21-19a2,2,0,0,0-2.68,0l-21,19a2,2,0,1,0,2.68,3L24,5.7,43.66,23.48a2,2,0,0,0,2.68-3Z"/><path d="M42,26a2,2,0,0,0-2,2V43H8V28a2,2,0,0,0-4,0V45a2,2,0,0,0,2,2H42a2,2,0,0,0,2-2V28A2,2,0,0,0,42,26Z"/></svg>
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/series/' >
+                
+                
+                
+                    <?xml version="1.0" ?><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><defs><style>.cls-1{fill:#101820;}</style></defs><title/><g data-name="Layer 39" id="Layer_39"><path class="cls-1" d="M4,28a3,3,0,0,1-3-3V7A3,3,0,0,1,4,4h7a1,1,0,0,1,.77.36L14.8,8H27a1,1,0,0,1,0,2H14.33a1,1,0,0,1-.76-.36L10.53,6H4A1,1,0,0,0,3,7V25a1,1,0,0,0,1,1,1,1,0,0,1,0,2Z"/><path class="cls-1" d="M25.38,28H4a1,1,0,0,1-1-1.21l3-14A1,1,0,0,1,7,12H30a1,1,0,0,1,1,1.21L28.32,25.63A3,3,0,0,1,25.38,28ZM5.24,26H25.38a1,1,0,0,0,1-.79L28.76,14h-21Z"/></g></svg>
+                
+                <span>Series</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/friend/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Friend</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://iloveu521.github.io/" selected>English</option>
+                                
+                                    <option value="https://iloveu521.github.io/ja/" >日本語</option>
+                                
+                                    <option value="https://iloveu521.github.io/zh-cn/" >简体中文</option>
+                                
+                                    <option value="https://iloveu521.github.io/zh-tw/" >正體中文</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#楔子黑屏降临">楔子：黑屏降临</a></li>
+    <li><a href="#第一章幕后黑手浮出水面">第一章：幕后黑手浮出水面</a>
+      <ol>
+        <li><a href="#11-第一嫌疑人根分区">1.1 第一嫌疑人：根分区</a></li>
+        <li><a href="#12-地毯式搜查">1.2 地毯式搜查</a></li>
+      </ol>
+    </li>
+    <li><a href="#第二章连环案中案">第二章：连环案中案</a>
+      <ol>
+        <li><a href="#21-日志里的罪证">2.1 日志里的罪证</a></li>
+        <li><a href="#22-案发现场的更多线索">2.2 案发现场的更多线索</a></li>
+      </ol>
+    </li>
+    <li><a href="#第三章内核们的前世今生">第三章：内核们的前世今生</a>
+      <ol>
+        <li><a href="#31-三个内核一台戏">3.1 三个内核一台戏</a></li>
+        <li><a href="#32-124-内核为何成为网卡杀手">3.2 124 内核为何成为&quot;网卡杀手&quot;？</a></li>
+      </ol>
+    </li>
+    <li><a href="#第四章拯救大作战">第四章：拯救大作战</a>
+      <ol>
+        <li><a href="#41-紧急避险回到-117">4.1 紧急避险：回到 117</a></li>
+        <li><a href="#42-清扫战场删除-111-内核">4.2 清扫战场：删除 111 内核</a></li>
+        <li><a href="#43-大扫除清理残留">4.3 大扫除：清理残留</a></li>
+        <li><a href="#44-修复-124给新内核补票">4.4 修复 124：给新内核补票</a></li>
+        <li><a href="#45-永绝后患封印-pcie-aer">4.5 永绝后患：封印 PCIe AER</a></li>
+      </ol>
+    </li>
+    <li><a href="#第五章应急预案工具箱">第五章：应急预案工具箱</a>
+      <ol>
+        <li><a href="#无法进系统">无法进系统？</a></li>
+        <li><a href="#网卡挂了没法-apt">网卡挂了没法 apt？</a></li>
+        <li><a href="#常用抢救命令">常用抢救命令</a></li>
+      </ol>
+    </li>
+    <li><a href="#终章复盘与教训">终章：复盘与教训</a>
+      <ol>
+        <li><a href="#整条因果链">整条因果链</a></li>
+        <li><a href="#核心教训">核心教训</a></li>
+        <li><a href="#最后">最后</a></li>
+      </ol>
+    </li>
+    <li><a href="#参考资料">参考资料</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+            
+                <section class="widget tagCloud">
+    <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-tag" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11 3L20 12a1.5 1.5 0 0 1 0 2L14 20a1.5 1.5 0 0 1 -2 0L3 11v-4a4 4 0 0 1 4 -4h4" />
+  <circle cx="9" cy="9" r="2" />
+</svg>
+
+
+
+    </div>
+    <h2 class="widget-title section-title">Series</h2>
+
+    <div class="tagCloud-tags">
+        
+            <a href="/series/issue/">
+                Issue
+            </a>
+        
+            <a href="/series/linux/">
+                LINUX
+            </a>
+        
+            <a href="/series/stm32/">
+                STM32
+            </a>
+        
+            <a href="/series/git/">
+                Git
+            </a>
+        
+            <a href="/series/ros2/">
+                ROS2
+            </a>
+        
+            <a href="/series/thoughts/">
+                Thoughts
+            </a>
+        
+    </div>
+</section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            
+            
+            
+            <a href="/categories/linux/" style="background-color: hsl(237, 60%, 84%); color: hsl(237, 60%, 15%);">
+                Linux
+            </a>
+        
+            
+            
+            
+            <a href="/categories/ubuntu/" style="background-color: hsl(314, 60%, 84%); color: hsl(314, 60%, 15%);">
+                Ubuntu
+            </a>
+        
+            
+            
+            
+            <a href="/categories/bug/" style="background-color: hsl(117, 60%, 84%); color: hsl(117, 60%, 15%);">
+                Bug
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/bugs/ubuntu/ubuntu-root-full-crisis/">Ubuntu 根目录爆满危机：一场由 PCIe 日志引发的血案</a>
+        </h2>
+
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published" datetime='2026-06-02T20:00:00&#43;08:00'>2026-06-02</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    4 minute read
+                </time>
+            </div>
+        
+
+        <div class="article-time--views">
+            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
+            <time class="article-time--reading">
+                <span id="vercount_value_page_pv">loading...</span> 次
+            </time>
+        </div>
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <!-- markdownlint-disable MD033 -->
+<style>
+  * {
+    font-family: "JetBrains Mono", "宋体", "KaiTi", sans-serif !important;
+  }
+</style>
+<!-- markdownlint-restore -->
+<h1 style="text-align: center";>Ubuntu 根目录爆满危机：一场由 PCIe 日志引发的血案</h1>
+<hr>
+<h2 id="楔子黑屏降临">楔子：黑屏降临
+</h2><p>那是一个普通的夜晚，我像往常一样重启了 Ubuntu。</p>
+<p>然后——<strong>黑屏</strong>。</p>
+<p>不是那种&quot;等一会儿就好&quot;的黑屏，是那种&quot;我罢工了，你看着办吧&quot;的黑屏。风扇还在转，屏幕却如同一块沉默的黑洞。作为一个从 18.04 一路升级到 24.04 的双系统老用户，我隐约感到事情不简单。</p>
+<blockquote>
+<p>事后回想起来，这其实是系统发出的最后一声呼救，可惜当时我没听懂。</p>
+</blockquote>
+<hr>
+<h2 id="第一章幕后黑手浮出水面">第一章：幕后黑手浮出水面
+</h2><h3 id="11-第一嫌疑人根分区">1.1 第一嫌疑人：根分区
+</h3><p>双系统用户都知道，当初装机时给 <code>/</code> 分了 75G，给 <code>/home</code> 分了 135G，心想&quot;够用了够用了&quot;。结果 <code>/home</code> 还剩 35G，根分区却悄无声息地被塞爆了。</p>
+<p>为什么会爆？我抱着&quot;让我进去看一眼&quot;的心态，尝试进入 Recovery Mode。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">df -h
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>看到 <code>/dev/nvme0n1pX  100%</code> 的那一刻，我知道第一嫌疑人已经锁定了。</p>
+<h3 id="12-地毯式搜查">1.2 地毯式搜查
+</h3><p>进入 root shell 后，我开始了逐层排查：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 看看是谁在吃空间</span>
+</span></span><span class="line"><span class="cl">du -xhd1 / <span class="p">|</span> sort -h
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>重点排查对象：</p>
+<ul>
+<li><strong><code>/var</code></strong> — apt 缓存、journal 日志的老巢</li>
+<li><strong><code>/usr</code></strong> — Snap 的家</li>
+<li><strong><code>/opt</code></strong> — 各种第三方应用的聚居地</li>
+<li><strong><code>/tmp</code></strong> — 临时的&quot;遗忘角落&quot;</li>
+</ul>
+<p>逐一排查后发现，幕后黑手竟然是——</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 查看日志占用</span>
+</span></span><span class="line"><span class="cl">ls -lh /var/log/syslog
+</span></span><span class="line"><span class="cl">ls -lh /var/log/kern.log
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong><code>syslog</code> 和 <code>kern.log</code>，加起来 2.9GB。</strong></p>
+<p>2.7GB 的系统日志！这是什么概念？正常情况这两个文件加起来也就几十 MB。这就像是家门口的报箱被塞满了同一张传单——有人（或者某个东西）在疯狂地往里面塞东西。</p>
+<hr>
+<h2 id="第二章连环案中案">第二章：连环案中案
+</h2><h3 id="21-日志里的罪证">2.1 日志里的罪证
+</h3><p>谁在刷屏？</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">tail -100 /var/log/kern.log
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>密密麻麻，全是：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">PCIe AER: BadTLP
+</span></span><span class="line"><span class="cl">PCIe AER: BadTLP
+</span></span><span class="line"><span class="cl">PCIe AER: BadTLP
+</span></span><span class="line"><span class="cl">...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>好家伙，**PCIe AER（Advanced Error Reporting）**像个话痨一样，每毫秒都在报告同一个错误：<code>BadTLP</code>（Bad Transaction Layer Packet）。</p>
+<p>翻译成人话就是：PCIe 总线上有人在乱发数据包，NVIDIA 显卡或者某个 PCIe 设备间歇性抽风，每抽一次，内核就认真地记一笔。抽了几百万次，内核就记了几百万条。</p>
+<p>幕后黑手的幕后黑手，找到了。</p>
+<h3 id="22-案发现场的更多线索">2.2 案发现场的更多线索
+</h3><p>问题不止一个。除了日志炸弹，这场灾难还暴露出了一串连环案件：</p>
+<p><strong>嫌疑人档案：</strong></p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th style="text-align: center">嫌疑人</th>
+					<th style="text-align: left">罪名</th>
+					<th style="text-align: center">占用空间</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: center">PCIe AER 日志</td>
+					<td style="text-align: left">疯狂刷屏</td>
+					<td style="text-align: center">~2.7 GB</td>
+			</tr>
+			<tr>
+					<td style="text-align: center">Snap 旧版本缓存</td>
+					<td style="text-align: left">暗度陈仓</td>
+					<td style="text-align: center">数 GB</td>
+			</tr>
+			<tr>
+					<td style="text-align: center">apt 缓存</td>
+					<td style="text-align: left">长期滞留</td>
+					<td style="text-align: center">数 GB</td>
+			</tr>
+			<tr>
+					<td style="text-align: center">旧内核 (111)</td>
+					<td style="text-align: left">占着茅坑</td>
+					<td style="text-align: center">~500 MB</td>
+			</tr>
+			<tr>
+					<td style="text-align: center">旧内核残留 (55~124)</td>
+					<td style="text-align: left">历史遗留</td>
+					<td style="text-align: center">若干 GB</td>
+			</tr>
+			<tr>
+					<td style="text-align: center">Docker 镜像</td>
+					<td style="text-align: left">无声膨胀</td>
+					<td style="text-align: center">不定</td>
+			</tr>
+	</tbody>
+</table></div>
+<blockquote>
+<p>一个根目录爆满，炸出了六个隐藏问题，这排查体验堪比侦探片。</p>
+</blockquote>
+<hr>
+<h2 id="第三章内核们的前世今生">第三章：内核们的前世今生
+</h2><h3 id="31-三个内核一台戏">3.1 三个内核一台戏
+</h3><p>在清理日志、腾出空间、重装 NVIDIA 驱动后，显卡好了——但网卡全没了。</p>
+<p><code>ip link</code> 的输出只有孤零零的 <code>lo</code>、<code>tailscale0</code> 和 <code>docker0</code>。WiFi 和有线网卡，双双人间蒸发。</p>
+<p>这时候我发现系统里居然有三个内核：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">dpkg -l <span class="p">|</span> grep linux-image
+</span></span><span class="line"><span class="cl"><span class="c1"># 6.8.0-111-generic  ← 老古董，显卡驱动曾经挂过</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 6.8.0-117-generic  ← 现任劳模，一切正常</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 6.8.0-124-generic  ← 新来的，网卡全灭</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>故事线是这样的：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">18.04 → 20.04 → 22.04 → 24.04
+</span></span><span class="line"><span class="cl">         ↓
+</span></span><span class="line"><span class="cl">   内核 111（显卡挂）
+</span></span><span class="line"><span class="cl">         ↓ [装显卡驱动]
+</span></span><span class="line"><span class="cl">   内核 117（一切正常 ✓）
+</span></span><span class="line"><span class="cl">         ↓ [apt upgrade]
+</span></span><span class="line"><span class="cl">   内核 124（网卡消失 ✗）
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="32-124-内核为何成为网卡杀手">3.2 124 内核为何成为&quot;网卡杀手&quot;？
+</h3><p>破案的关键命令：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">dpkg -l <span class="p">|</span> grep 6.8.0-124
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>输出真相大白：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ii  linux-image-6.8.0-124-generic           ← 有
+</span></span><span class="line"><span class="cl">ii  linux-modules-6.8.0-124-generic         ← 有
+</span></span><span class="line"><span class="cl">ii  linux-modules-nvidia-580-open-...       ← 有
+</span></span><span class="line"><span class="cl">    linux-modules-extra-6.8.0-124-generic   ← 没有！！！
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong><code>linux-modules-extra</code> 缺失，这就是网卡消失的全部原因。</strong></p>
+<p>Ubuntu 把大量网卡驱动（Intel WiFi、Realtek 有线等）打包在 <code>linux-modules-extra</code> 里面。而 124 内核安装时，根分区已经接近满员，APT 写文件失败，导致这个包没能完整安装。显卡驱动因为是后来单独重装的所以活了，但网卡驱动没人管，就这么被遗忘了。</p>
+<blockquote>
+<p>这就像搬家时搬了床和冰箱，却把路由器和网线落在了旧房子。</p>
+</blockquote>
+<hr>
+<h2 id="第四章拯救大作战">第四章：拯救大作战
+</h2><h3 id="41-紧急避险回到-117">4.1 紧急避险：回到 117
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 进 GRUB → Advanced options → 选 6.8.0-117 启动</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 果然，网卡和显卡都在</span>
+</span></span><span class="line"><span class="cl">ip link   <span class="c1"># wlp..., enp... 全回来了 ✓</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="42-清扫战场删除-111-内核">4.2 清扫战场：删除 111 内核
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt purge <span class="se">\
+</span></span></span><span class="line"><span class="cl">  linux-image-6.8.0-111-generic <span class="se">\
+</span></span></span><span class="line"><span class="cl">  linux-headers-6.8.0-111-generic <span class="se">\
+</span></span></span><span class="line"><span class="cl">  linux-modules-6.8.0-111-generic <span class="se">\
+</span></span></span><span class="line"><span class="cl">  linux-modules-extra-6.8.0-111-generic
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo apt autoremove --purge
+</span></span><span class="line"><span class="cl">sudo apt clean
+</span></span><span class="line"><span class="cl">sudo update-grub
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="43-大扫除清理残留">4.3 大扫除：清理残留
+</h3><p>那些标记为 <code>rc</code>（已卸载但配置残留）的包，从 18.04 时代一路攒到 24.04：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 一键清除所有 rc 残留</span>
+</span></span><span class="line"><span class="cl">sudo dpkg -l <span class="p">|</span> awk <span class="s1">&#39;/^rc/{print $2}&#39;</span> <span class="p">|</span> xargs sudo dpkg --purge
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这包括了：</p>
+<ul>
+<li>旧版本 linux-image（55, 56, 57&hellip; 一路攒过来的）</li>
+<li>旧版本 NVIDIA 驱动（550 系列残留）</li>
+<li>各种历史遗留配置</li>
+</ul>
+<h3 id="44-修复-124给新内核补票">4.4 修复 124：给新内核补票
+</h3><p>在 117 内核下（有网络），把 124 缺失的包装上：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt install linux-modules-extra-6.8.0-124-generic
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后重启进 124 验证——网卡回来了！</p>
+<h3 id="45-永绝后患封印-pcie-aer">4.5 永绝后患：封印 PCIe AER
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo vim /etc/default/grub
+</span></span><span class="line"><span class="cl"><span class="c1"># 在 GRUB_CMDLINE_LINUX_DEFAULT 里加上：</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># pci=noaer</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo update-grub
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这一个参数，让你的系统日志从此告别话痨模式。即使 NVIDIA 以后还想抽风，也不会再炸满你的根分区。</p>
+<hr>
+<h2 id="第五章应急预案工具箱">第五章：应急预案工具箱
+</h2><p>万一以后又碰上类似问题，这套工具箱可以救急：</p>
+<h3 id="无法进系统">无法进系统？
+</h3><div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th style="text-align: left">方案</th>
+					<th style="text-align: left">操作</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: left">Recovery Mode</td>
+					<td style="text-align: left">GRUB → Advanced → recovery → root shell</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">Live USB</td>
+					<td style="text-align: left">Ubuntu 安装盘 → Try Ubuntu → 挂载根分区手动清理</td>
+			</tr>
+	</tbody>
+</table></div>
+<h3 id="网卡挂了没法-apt">网卡挂了没法 apt？
+</h3><div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th style="text-align: left">方案</th>
+					<th style="text-align: left">操作</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: left">旧内核启动</td>
+					<td style="text-align: left">GRUB → 选上一个正常的内核</td>
+			</tr>
+	</tbody>
+</table></div>
+<h3 id="常用抢救命令">常用抢救命令
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 查看分区占用</span>
+</span></span><span class="line"><span class="cl">df -h
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 找大文件</span>
+</span></span><span class="line"><span class="cl">du -xhd1 / <span class="p">|</span> sort -h
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 清理 apt 缓存（通常几 GB）</span>
+</span></span><span class="line"><span class="cl">sudo apt clean
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 清理 journal 日志</span>
+</span></span><span class="line"><span class="cl">journalctl --disk-usage
+</span></span><span class="line"><span class="cl">sudo journalctl --vacuum-time<span class="o">=</span>3d
+</span></span><span class="line"><span class="cl">sudo journalctl --vacuum-size<span class="o">=</span>100M
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 清理 Snap 旧版本</span>
+</span></span><span class="line"><span class="cl">snap list --all
+</span></span><span class="line"><span class="cl"><span class="c1"># 手动清理不需要的旧版本</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 清理 Docker</span>
+</span></span><span class="line"><span class="cl">docker system prune -a
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 删除旧内核</span>
+</span></span><span class="line"><span class="cl">dpkg -l <span class="p">|</span> grep linux-image
+</span></span><span class="line"><span class="cl">sudo apt purge linux-image-旧版本
+</span></span><span class="line"><span class="cl">sudo apt autoremove --purge
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 清理 rc 残留</span>
+</span></span><span class="line"><span class="cl">sudo dpkg -l <span class="p">|</span> awk <span class="s1">&#39;/^rc/{print $2}&#39;</span> <span class="p">|</span> xargs sudo dpkg --purge
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="终章复盘与教训">终章：复盘与教训
+</h2><h3 id="整条因果链">整条因果链
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">NVIDIA PCIe 间歇性错误
+</span></span><span class="line"><span class="cl">        ↓
+</span></span><span class="line"><span class="cl">PCIe AER 疯狂记录 BadTLP
+</span></span><span class="line"><span class="cl">        ↓
+</span></span><span class="line"><span class="cl">kern.log &amp; syslog 膨胀到 2.7GB
+</span></span><span class="line"><span class="cl">        ↓
+</span></span><span class="line"><span class="cl">根分区 100% 满
+</span></span><span class="line"><span class="cl">        ↓
+</span></span><span class="line"><span class="cl">系统无法启动（黑屏）
+</span></span><span class="line"><span class="cl">        ↓
+</span></span><span class="line"><span class="cl">Recovery Mode 清理日志 + 重装 NVIDIA 驱动
+</span></span><span class="line"><span class="cl">        ↓
+</span></span><span class="line"><span class="cl">内核意外升级到 124
+</span></span><span class="line"><span class="cl">        ↓
+</span></span><span class="line"><span class="cl">根分区满致 linux-modules-extra 安装失败
+</span></span><span class="line"><span class="cl">        ↓
+</span></span><span class="line"><span class="cl">网卡驱动缺失（显卡因为单独重装所以幸存）
+</span></span><span class="line"><span class="cl">        ↓
+</span></span><span class="line"><span class="cl">切回 117 内核 → 补装 extra → 达成全线恢复
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="核心教训">核心教训
+</h3><ol>
+<li><strong>别让根分区太小</strong> — 50G 对于 ROS2 + Docker + CUDA 开发来说太紧张了</li>
+<li><strong><code>pci=noaer</code> 是你的朋友</strong> — 遇到 NVIDIA PCIe 报错，先封印 AER</li>
+<li><strong>新内核出问题？立刻切回旧内核</strong> — GRUB 就是你最好的后悔药</li>
+<li><strong>定期 <code>apt autoremove</code> + <code>apt clean</code></strong> — 特别是从低版本一路升级上来的系统</li>
+<li><strong>别在根分区满的时候升级内核</strong> — 先清空间，再升级，否则模块安装不完整就是今天的剧本</li>
+</ol>
+<h3 id="最后">最后
+</h3><p>这场排查耗时两天，从黑屏恐慌到精准定位，从内核追凶到日志封印。写下来，既是给自己留个备份，也希望下一个遇到类似问题的倒霉蛋，能少走点弯路。</p>
+<blockquote>
+<p>毕竟，Linux 用户的日常就是：<strong>今天写的 Bug 记录，就是明天别人的救命稻草。</strong></p>
+</blockquote>
+<hr>
+<h2 id="参考资料">参考资料
+</h2><ul>
+<li><a class="link" href="https://www.kernel.org/doc/Documentation/PCI/pcieaer-howto.txt"  target="_blank" rel="noopener"
+    >PCIe AER 相关内核文档</a></li>
+<li>Ubuntu 24.04 换源指南（中科大 / 南京大学 / 阿里云镜像）</li>
+</ul>
+<hr>
+<p><em>本文记录了 2026 年 5 月一次 Ubuntu 24.04 系统根分区爆满导致的黑屏事故。系统从 18.04 一路升级而来，内含大量历史遗留问题。排查过程由 ChatGPT 协助（是的，没网的时候手机 USB 共享网络救了命）。</em></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    <section class="article-tags">
+    
+        <a href="/series/linux/">LINUX</a>
+    
+</section>
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <span>
+            Last updated on Jun 07, 2026 15:00 &#43;0800
+        </span>
+    </section><div class="article-lastmod">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+            <time>
+                Jun 07, 2026 15:00 &#43;0800
+            </time>
+        </div></footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        const elementsToRender = [".main-article", ".widget--toc"];
+
+        elementsToRender.forEach(selector => {
+            const element = document.querySelector(selector);
+            if (element) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        { left: "$$", right: "$$", display: true },
+                        { left: "$", right: "$", display: false },
+                        { left: "\\(", right: "\\)", display: false },
+                        { left: "\\[", right: "\\]", display: true }
+                    ],
+                    ignoredClasses: ["gist"]
+                });
+            }
+        });
+    });
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Linux常用命令</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+		<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+		<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+	
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2026 Silly
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.34.2">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+    
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+<style>
+    #TableOfContents > ul, ol {
+        ul, ol {
+            display: none;
+        }
+        .open {
+            display: block;
+        }
+    }
+</style>
+
+<script>
+    function initTocHide() {
+        
+        let toc = document.querySelector(".widget--toc");
+        if (!toc) {
+            return;
+        }
+        
+        window.addEventListener('scroll', function() {
+            
+            let openUl = document.querySelectorAll(".open");
+            if (openUl.length > 0) {
+              openUl.forEach((ul) => {
+                ul.classList.remove("open")
+              })
+            }
+            
+            let currentLi = document.querySelector(".active-class");
+            if (!currentLi) {
+                return
+            }
+            
+            if (currentLi.children.length > 1) {
+                currentLi.children[1].classList.add("open")
+            }
+            
+            let ul = currentLi.parentElement;
+            do {
+                ul.classList.add("open");
+                ul = ul.parentElement.parentElement
+            } while (ul !== undefined && (ul.localName === 'ul' || ul.localName === 'ol'))
+        });
+    }
+    initTocHide()
+</script>
+
+<style>
+    #backTopBtn {
+        display: none;
+        position: fixed;
+        bottom: 30px;
+        z-index: 99;
+        cursor: pointer;
+        width: 30px;
+        height: 30px;
+        background-image: url(https://iloveu521.github.io/icons/backTop.svg);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 18px 18px;
+        border-radius: var(--card-border-radius);
+    }
+
+    #backTopBtn::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: var(--card-background);
+        opacity: 0.7;
+        border: 1px solid var(--card-separator-color);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        z-index: -1;
+    }
+
+    #backTopBtn:hover::before {
+        opacity: 0.85;
+    }
+</style>
+
+<script>
+    
+
+    function initScrollTop() {
+        let rightSideBar = document.querySelector(".right-sidebar");
+        if (!rightSideBar) {
+            return;
+        }
+        
+        let btn = document.createElement("div");
+        btn.id = "backTopBtn";
+        btn.onclick = backToTop
+        rightSideBar.appendChild(btn)
+        
+        window.onscroll = function() {
+            
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
+            }
+        };
+    }
+
+    
+
+    function backToTop(){
+        window.scrollTo({ top: 0, behavior: "smooth" })
+    }
+
+    initScrollTop();
+</script>
+
+
+<div id="particles-js"></div>
+
+<script src=https://iloveu521.github.io/background/particles.min.js></script>
+<script>
+  particlesJS.load('particles-js', "https://iloveu521.github.io/background/particlesjs-config.json", function() {
+    console.log('particles.js loaded - callback');
+  });
+</script>
+
+<style>
+  #particles-js {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: -1;
+  }
+</style>
+
+<style>
+    .highlight {
+         
+        max-height: 400px;
+        overflow: hidden;
+    }
+
+    .code-show {
+        max-height: none !important;
+    }
+
+    .code-more-box {
+        width: 100%;
+        padding-top: 78px;
+        background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0)), to(#fff));
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+    }
+
+    .code-more-btn {
+        display: block;
+        margin: auto;
+        width: 44px;
+        height: 22px;
+        background: #f0f0f5;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        padding-top: 6px;
+        cursor: pointer;
+    }
+
+    .code-more-img {
+        cursor: pointer !important;
+        display: block;
+        margin: auto;
+        width: 22px;
+        height: 16px;
+    }
+</style>
+
+<script>
+  function initCodeMoreBox() {
+    let codeBlocks = document.querySelectorAll(".highlight");
+    if (!codeBlocks) {
+      return;
+    }
+    codeBlocks.forEach(codeBlock => {
+      
+      if (codeBlock.scrollHeight <= codeBlock.clientHeight) {
+        return;
+      }
+      
+      
+      let codeMoreBox = document.createElement('div');
+      codeMoreBox.classList.add('code-more-box');
+      
+      let codeMoreBtn = document.createElement('span');
+      codeMoreBtn.classList.add('code-more-btn');
+      codeMoreBtn.addEventListener('click', () => {
+        codeBlock.classList.add('code-show');
+        codeMoreBox.style.display = 'none';
+        
+        window.dispatchEvent(new Event('resize'))
+      })
+      
+      let img = document.createElement('img');
+      img.classList.add('code-more-img');
+      img.src = "https://iloveu521.github.io/icons/codeMore.png"
+      
+      codeMoreBtn.appendChild(img);
+      codeMoreBox.appendChild(codeMoreBtn);
+      codeBlock.appendChild(codeMoreBox)
+    })
+  }
+  
+  initCodeMoreBox();
+</script>
+
+
+
+<script defer src="https://cn.vercount.one/js"></script>
+
+<style>
+     
+    article:not(.main-article) .article-time--views {
+        display: none;
+    }
+</style>
+
+    </body>
+</html>

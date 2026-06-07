@@ -340,16 +340,16 @@
                 Issue
             </a>
         
+            <a href="/series/linux/">
+                LINUX
+            </a>
+        
             <a href="/series/stm32/">
                 STM32
             </a>
         
             <a href="/series/git/">
                 Git
-            </a>
-        
-            <a href="/series/linux/">
-                LINUX
             </a>
         
             <a href="/series/ros2/">
@@ -508,30 +508,30 @@
 <p><code>usart.c</code> 虽然也会被编译，但在某些链接顺序下，链接器可能在解析 <code>fputc</code> 弱符号时还没有处理到 <code>usart.c</code>，导致重定向不生效。</p>
 <p><strong>结论</strong>：</p>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>文件</th>
-          <th>是否可靠</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><code>stm32f1xx_hal_msp.c</code></td>
-          <td>可靠，推荐</td>
-      </tr>
-      <tr>
-          <td><code>main.c</code></td>
-          <td>通常可靠</td>
-      </tr>
-      <tr>
-          <td><code>usart.c</code></td>
-          <td>不可靠，实测无效</td>
-      </tr>
-      <tr>
-          <td>其他外设驱动文件</td>
-          <td>不推荐，链接顺序不确定</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>文件</th>
+					<th>是否可靠</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>stm32f1xx_hal_msp.c</code></td>
+					<td>可靠，推荐</td>
+			</tr>
+			<tr>
+					<td><code>main.c</code></td>
+					<td>通常可靠</td>
+			</tr>
+			<tr>
+					<td><code>usart.c</code></td>
+					<td>不可靠，实测无效</td>
+			</tr>
+			<tr>
+					<td>其他外设驱动文件</td>
+					<td>不推荐，链接顺序不确定</td>
+			</tr>
+	</tbody>
 </table></div>
 <hr>
 <h2 id="实现方法">实现方法
@@ -597,30 +597,30 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>参数</th>
-          <th>类型</th>
-          <th>含义</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><code>ch</code></td>
-          <td><code>int</code></td>
-          <td>要发送的字符，以 <code>int</code> 传入（C 标准规定，实际只用低 8 位）</td>
-      </tr>
-      <tr>
-          <td><code>f</code></td>
-          <td><code>FILE *</code></td>
-          <td>目标文件流（<code>stdout</code>/<code>stderr</code> 等），裸机中通常忽略，直接发到 UART</td>
-      </tr>
-      <tr>
-          <td>返回值</td>
-          <td><code>int</code></td>
-          <td>成功返回 <code>ch</code>，失败返回 <code>EOF</code>（-1）</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>参数</th>
+					<th>类型</th>
+					<th>含义</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>ch</code></td>
+					<td><code>int</code></td>
+					<td>要发送的字符，以 <code>int</code> 传入（C 标准规定，实际只用低 8 位）</td>
+			</tr>
+			<tr>
+					<td><code>f</code></td>
+					<td><code>FILE *</code></td>
+					<td>目标文件流（<code>stdout</code>/<code>stderr</code> 等），裸机中通常忽略，直接发到 UART</td>
+			</tr>
+			<tr>
+					<td>返回值</td>
+					<td><code>int</code></td>
+					<td>成功返回 <code>ch</code>，失败返回 <code>EOF</code>（-1）</td>
+			</tr>
+	</tbody>
 </table></div>
 <p><code>(uint8_t *)&amp;ch</code> 取 <code>ch</code> 的地址并转为字节指针，<code>HAL_UART_Transmit</code> 发送 1 字节，超时 <code>0xffff</code> ms（约 65 秒，实际发送极快）。</p>
 <h3 id="fgetc">fgetc
@@ -633,25 +633,25 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>参数</th>
-          <th>类型</th>
-          <th>含义</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><code>f</code></td>
-          <td><code>FILE *</code></td>
-          <td>源文件流，裸机中忽略，直接从 UART 接收</td>
-      </tr>
-      <tr>
-          <td>返回值</td>
-          <td><code>int</code></td>
-          <td>成功返回读取的字符（0~255），失败返回 <code>EOF</code>（-1）</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>参数</th>
+					<th>类型</th>
+					<th>含义</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>f</code></td>
+					<td><code>FILE *</code></td>
+					<td>源文件流，裸机中忽略，直接从 UART 接收</td>
+			</tr>
+			<tr>
+					<td>返回值</td>
+					<td><code>int</code></td>
+					<td>成功返回读取的字符（0~255），失败返回 <code>EOF</code>（-1）</td>
+			</tr>
+	</tbody>
 </table></div>
 <p><code>fgetc</code> 是 <code>scanf</code> / <code>getchar</code> 的底层实现，重定向后可以用 <code>scanf</code> 从串口读取输入。</p>
 <hr>
@@ -810,8 +810,9 @@
         (d.head || d.body).appendChild(s);
     })();
 </script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+		<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+		<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+	
 </div>
 
 <style>

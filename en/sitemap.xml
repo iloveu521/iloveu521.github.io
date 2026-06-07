@@ -1,12 +1,21 @@
+
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://iloveu521.github.io/categories/bug/</loc>
+    <lastmod>2026-06-07T15:00:12+08:00</lastmod>
+  </url><url>
     <loc>https://iloveu521.github.io/bugs/</loc>
-    <lastmod>2026-05-17T11:23:16+08:00</lastmod>
+    <lastmod>2026-06-07T15:00:12+08:00</lastmod>
   </url><url>
     <loc>https://iloveu521.github.io/categories/</loc>
-    <lastmod>2026-05-17T11:23:16+08:00</lastmod>
+    <lastmod>2026-06-07T15:00:12+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-us"
+                href="https://iloveu521.github.io/categories/"
+                />
     <xhtml:link
                 rel="alternate"
                 hreflang="ja"
@@ -22,26 +31,20 @@
                 hreflang="zh-tw"
                 href="https://iloveu521.github.io/zh-tw/categories/"
                 />
+  </url><url>
+    <loc>https://iloveu521.github.io/categories/linux/</loc>
+    <lastmod>2026-06-07T15:00:12+08:00</lastmod>
+  </url><url>
+    <loc>https://iloveu521.github.io/series/linux/</loc>
+    <lastmod>2026-06-07T15:00:12+08:00</lastmod>
+  </url><url>
+    <loc>https://iloveu521.github.io/series/</loc>
+    <lastmod>2026-06-07T15:00:12+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-us"
-                href="https://iloveu521.github.io/categories/"
+                href="https://iloveu521.github.io/series/"
                 />
-  </url><url>
-    <loc>https://iloveu521.github.io/categories/issue/</loc>
-    <lastmod>2026-05-17T11:23:16+08:00</lastmod>
-  </url><url>
-    <loc>https://iloveu521.github.io/series/issue/</loc>
-    <lastmod>2026-05-17T11:23:16+08:00</lastmod>
-  </url><url>
-    <loc>https://iloveu521.github.io/categories/resolved/</loc>
-    <lastmod>2026-05-17T11:23:16+08:00</lastmod>
-  </url><url>
-    <loc>https://iloveu521.github.io/bugs/stm32/stm32_serial_handshake_dtr_rts/</loc>
-    <lastmod>2026-05-17T11:23:16+08:00</lastmod>
-  </url><url>
-    <loc>https://iloveu521.github.io/series/</loc>
-    <lastmod>2026-05-17T11:23:16+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="ja"
@@ -57,14 +60,14 @@
                 hreflang="zh-tw"
                 href="https://iloveu521.github.io/zh-tw/series/"
                 />
+  </url><url>
+    <loc>https://iloveu521.github.io/</loc>
+    <lastmod>2026-06-07T15:00:12+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-us"
-                href="https://iloveu521.github.io/series/"
+                href="https://iloveu521.github.io/"
                 />
-  </url><url>
-    <loc>https://iloveu521.github.io/</loc>
-    <lastmod>2026-05-17T11:23:16+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="ja"
@@ -80,11 +83,27 @@
                 hreflang="zh-tw"
                 href="https://iloveu521.github.io/zh-tw/"
                 />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-us"
-                href="https://iloveu521.github.io/"
-                />
+  </url><url>
+    <loc>https://iloveu521.github.io/categories/ubuntu/</loc>
+    <lastmod>2026-06-07T15:00:12+08:00</lastmod>
+  </url><url>
+    <loc>https://iloveu521.github.io/bugs/ubuntu/ubuntu-root-full-crisis/</loc>
+    <lastmod>2026-06-07T15:00:12+08:00</lastmod>
+  </url><url>
+    <loc>https://iloveu521.github.io/categories/issue/</loc>
+    <lastmod>2026-06-07T15:00:12+08:00</lastmod>
+  </url><url>
+    <loc>https://iloveu521.github.io/series/issue/</loc>
+    <lastmod>2026-06-07T15:00:12+08:00</lastmod>
+  </url><url>
+    <loc>https://iloveu521.github.io/categories/resolved/</loc>
+    <lastmod>2026-06-07T15:00:12+08:00</lastmod>
+  </url><url>
+    <loc>https://iloveu521.github.io/bugs/stm32/stm32_learm_fixed_pitch_ik/</loc>
+    <lastmod>2026-06-07T15:00:12+08:00</lastmod>
+  </url><url>
+    <loc>https://iloveu521.github.io/bugs/stm32/stm32_serial_handshake_dtr_rts/</loc>
+    <lastmod>2026-05-17T11:23:16+08:00</lastmod>
   </url><url>
     <loc>https://iloveu521.github.io/categories/hal/</loc>
     <lastmod>2026-05-09T23:45:00+08:00</lastmod>
@@ -112,12 +131,6 @@
   </url><url>
     <loc>https://iloveu521.github.io/categories/uart/</loc>
     <lastmod>2026-05-09T23:45:00+08:00</lastmod>
-  </url><url>
-    <loc>https://iloveu521.github.io/categories/linux/</loc>
-    <lastmod>2026-05-10T00:49:21+08:00</lastmod>
-  </url><url>
-    <loc>https://iloveu521.github.io/series/linux/</loc>
-    <lastmod>2026-05-10T00:49:21+08:00</lastmod>
   </url><url>
     <loc>https://iloveu521.github.io/p/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</loc>
     <lastmod>2026-05-10T00:49:21+08:00</lastmod>
@@ -180,26 +193,26 @@
     <lastmod>2026-05-10T00:49:21+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
-                hreflang="zh-cn"
-                href="https://iloveu521.github.io/zh-cn/page/"
+                hreflang="en-us"
+                href="https://iloveu521.github.io/page/"
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="en-us"
-                href="https://iloveu521.github.io/page/"
+                hreflang="zh-cn"
+                href="https://iloveu521.github.io/zh-cn/page/"
                 />
   </url><url>
     <loc>https://iloveu521.github.io/about/</loc>
     <lastmod>2026-05-10T00:49:21+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
-                hreflang="zh-cn"
-                href="https://iloveu521.github.io/zh-cn/%E5%85%B3%E4%BA%8E/"
+                hreflang="en-us"
+                href="https://iloveu521.github.io/about/"
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="en-us"
-                href="https://iloveu521.github.io/about/"
+                hreflang="zh-cn"
+                href="https://iloveu521.github.io/zh-cn/%E5%85%B3%E4%BA%8E/"
                 />
   </url><url>
     <loc>https://iloveu521.github.io/friend/</loc>
@@ -211,13 +224,8 @@
     <loc>https://iloveu521.github.io/tags/</loc>
     <xhtml:link
                 rel="alternate"
-                hreflang="zh-cn"
-                href="https://iloveu521.github.io/zh-cn/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-tw"
-                href="https://iloveu521.github.io/zh-tw/tags/"
+                hreflang="en-us"
+                href="https://iloveu521.github.io/tags/"
                 />
     <xhtml:link
                 rel="alternate"
@@ -226,8 +234,13 @@
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="en-us"
-                href="https://iloveu521.github.io/tags/"
+                hreflang="zh-cn"
+                href="https://iloveu521.github.io/zh-cn/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-tw"
+                href="https://iloveu521.github.io/zh-tw/tags/"
                 />
   </url>
 </urlset>

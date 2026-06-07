@@ -7,10 +7,34 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>Silly</copyright>
-        <lastBuildDate>Sun, 17 May 2026 11:23:16 +0800</lastBuildDate><atom:link href="https://iloveu521.github.io/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 07 Jun 2026 15:00:12 +0800</lastBuildDate><atom:link href="https://iloveu521.github.io/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Bug</title>
+        <link>https://iloveu521.github.io/categories/bug/</link>
+        <pubDate>Tue, 02 Jun 2026 20:00:00 +0800</pubDate>
+        
+        <guid>https://iloveu521.github.io/categories/bug/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Linux</title>
+        <link>https://iloveu521.github.io/categories/linux/</link>
+        <pubDate>Tue, 02 Jun 2026 20:00:00 +0800</pubDate>
+        
+        <guid>https://iloveu521.github.io/categories/linux/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Ubuntu</title>
+        <link>https://iloveu521.github.io/categories/ubuntu/</link>
+        <pubDate>Tue, 02 Jun 2026 20:00:00 +0800</pubDate>
+        
+        <guid>https://iloveu521.github.io/categories/ubuntu/</guid>
+        <description></description>
+        </item>
+        <item>
         <title>Issue</title>
         <link>https://iloveu521.github.io/categories/issue/</link>
-        <pubDate>Sat, 16 May 2026 00:00:00 +0800</pubDate>
+        <pubDate>Sat, 30 May 2026 00:00:00 +0800</pubDate>
         
         <guid>https://iloveu521.github.io/categories/issue/</guid>
         <description></description>
@@ -18,7 +42,7 @@
         <item>
         <title>Resolved</title>
         <link>https://iloveu521.github.io/categories/resolved/</link>
-        <pubDate>Sat, 16 May 2026 00:00:00 +0800</pubDate>
+        <pubDate>Sat, 30 May 2026 00:00:00 +0800</pubDate>
         
         <guid>https://iloveu521.github.io/categories/resolved/</guid>
         <description></description>
@@ -45,14 +69,6 @@
         <pubDate>Sat, 09 May 2026 00:00:00 +0800</pubDate>
         
         <guid>https://iloveu521.github.io/categories/uart/</guid>
-        <description></description>
-        </item>
-        <item>
-        <title>Linux</title>
-        <link>https://iloveu521.github.io/categories/linux/</link>
-        <pubDate>Mon, 27 Apr 2026 20:50:20 +0800</pubDate>
-        
-        <guid>https://iloveu521.github.io/categories/linux/</guid>
         <description></description>
         </item>
         <item>

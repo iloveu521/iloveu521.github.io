@@ -341,16 +341,16 @@
                 Issue
             </a>
         
+            <a href="/series/linux/">
+                LINUX
+            </a>
+        
             <a href="/series/stm32/">
                 STM32
             </a>
         
             <a href="/series/git/">
                 Git
-            </a>
-        
-            <a href="/series/linux/">
-                LINUX
             </a>
         
             <a href="/series/ros2/">
@@ -568,25 +568,25 @@
 </h2><p>Linux 打开串口时 <strong>DTR 和 RTS 同时被拉高</strong>。</p>
 <p>STM32 板子实际硬件连接：</p>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>信号</th>
-          <th>连接</th>
-          <th>高电平效果</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>DTR</td>
-          <td>RESET</td>
-          <td>STM32 处于复位状态</td>
-      </tr>
-      <tr>
-          <td>RTS</td>
-          <td>BOOT0</td>
-          <td>复位后进入 ROM bootloader</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>信号</th>
+					<th>连接</th>
+					<th>高电平效果</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>DTR</td>
+					<td>RESET</td>
+					<td>STM32 处于复位状态</td>
+			</tr>
+			<tr>
+					<td>RTS</td>
+					<td>BOOT0</td>
+					<td>复位后进入 ROM bootloader</td>
+			</tr>
+	</tbody>
 </table></div>
 <p>如果只拉低 DTR（释放复位）而 RTS 仍为高，STM32 复位后检测到 BOOT0=1，进入 <strong>ROM bootloader</strong> 模式，应用程序不运行，自然不会回复版本查询。</p>
 <p>当程序退出 / 终端关闭时，RTS 被释放变低，STM32 再次复位 → BOOT0=0 → 正常启动 → 舵机响一声。</p>
@@ -713,6 +713,19 @@
             
                 
 <article class="">
+    <a href="/bugs/stm32/stm32_learm_fixed_pitch_ik/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">幻尔 LeArm 闭源 IK 库写死 pitch 角度导致 3D 空间大面积坐标解算失败</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
     <a href="/bugs/stm32/stm32_uart_fputc_redirect/">
         
         
@@ -763,19 +776,6 @@
 </article>
 
             
-                
-<article class="">
-    <a href="/bugs/code-server/code-server_extension-not-fond/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">code-server:Extension not fond</h2>
-        </div>
-    </a>
-</article>
-
-            
         </div>
     </div>
 </aside>
@@ -802,8 +802,9 @@
         (d.head || d.body).appendChild(s);
     })();
 </script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+		<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+		<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+	
 </div>
 
 <style>

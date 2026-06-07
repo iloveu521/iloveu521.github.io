@@ -327,16 +327,16 @@
                 Issue
             </a>
         
+            <a href="/series/linux/">
+                LINUX
+            </a>
+        
             <a href="/series/stm32/">
                 STM32
             </a>
         
             <a href="/series/git/">
                 Git
-            </a>
-        
-            <a href="/series/linux/">
-                LINUX
             </a>
         
             <a href="/series/ros2/">
@@ -450,25 +450,25 @@
 </h2><p>TX 和 RX 接线接反。将 STM32 的 TX 接到了模块的 TXD 引脚，RX 接到了模块的 RXD 引脚（同名相接），导致数据无法正确传输。</p>
 <p>USB 转串口模块上的引脚标注是<strong>从模块自身视角</strong>命名的：</p>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>模块引脚</th>
-          <th>含义</th>
-          <th>应接 STM32</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>TXD</td>
-          <td>模块发送（→MCU）</td>
-          <td>STM32 RX</td>
-      </tr>
-      <tr>
-          <td>RXD</td>
-          <td>模块接收（←MCU）</td>
-          <td>STM32 TX</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>模块引脚</th>
+					<th>含义</th>
+					<th>应接 STM32</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>TXD</td>
+					<td>模块发送（→MCU）</td>
+					<td>STM32 RX</td>
+			</tr>
+			<tr>
+					<td>RXD</td>
+					<td>模块接收（←MCU）</td>
+					<td>STM32 TX</td>
+			</tr>
+	</tbody>
 </table></div>
 <p>同名相接（TX→TXD）时，STM32 发出的信号会驱动模块的 TXD 引脚，导致 TXD 灯闪烁，但数据并未经过模块的接收通路，PC 端收不到任何数据。</p>
 <h2 id="解决">解决
@@ -582,6 +582,19 @@
             
                 
 <article class="">
+    <a href="/bugs/stm32/stm32_learm_fixed_pitch_ik/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">幻尔 LeArm 闭源 IK 库写死 pitch 角度导致 3D 空间大面积坐标解算失败</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
     <a href="/bugs/stm32/stm32_serial_handshake_dtr_rts/">
         
         
@@ -632,19 +645,6 @@
 </article>
 
             
-                
-<article class="">
-    <a href="/bugs/code-server/code-server_extension-not-fond/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">code-server:Extension not fond</h2>
-        </div>
-    </a>
-</article>
-
-            
         </div>
     </div>
 </aside>
@@ -671,8 +671,9 @@
         (d.head || d.body).appendChild(s);
     })();
 </script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+		<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+		<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+	
 </div>
 
 <style>

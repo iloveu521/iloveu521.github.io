@@ -359,16 +359,16 @@
                 Issue
             </a>
         
+            <a href="/series/linux/">
+                LINUX
+            </a>
+        
             <a href="/series/stm32/">
                 STM32
             </a>
         
             <a href="/series/git/">
                 Git
-            </a>
-        
-            <a href="/series/linux/">
-                LINUX
             </a>
         
             <a href="/series/ros2/">
@@ -537,40 +537,40 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>时钟域</th>
-          <th>频率</th>
-          <th>说明</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>HSE</td>
-          <td>8 MHz</td>
-          <td>外部晶振</td>
-      </tr>
-      <tr>
-          <td>SYSCLK</td>
-          <td>72 MHz</td>
-          <td>PLL 输出，系统主频</td>
-      </tr>
-      <tr>
-          <td>HCLK (AHB)</td>
-          <td>72 MHz</td>
-          <td>CPU、DMA、Flash</td>
-      </tr>
-      <tr>
-          <td>PCLK1 (APB1)</td>
-          <td>36 MHz</td>
-          <td>TIM2-7、USART2/3、SPI2、I2C</td>
-      </tr>
-      <tr>
-          <td>PCLK2 (APB2)</td>
-          <td>72 MHz</td>
-          <td>USART1、SPI1、TIM1、ADC、GPIO</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>时钟域</th>
+					<th>频率</th>
+					<th>说明</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>HSE</td>
+					<td>8 MHz</td>
+					<td>外部晶振</td>
+			</tr>
+			<tr>
+					<td>SYSCLK</td>
+					<td>72 MHz</td>
+					<td>PLL 输出，系统主频</td>
+			</tr>
+			<tr>
+					<td>HCLK (AHB)</td>
+					<td>72 MHz</td>
+					<td>CPU、DMA、Flash</td>
+			</tr>
+			<tr>
+					<td>PCLK1 (APB1)</td>
+					<td>36 MHz</td>
+					<td>TIM2-7、USART2/3、SPI2、I2C</td>
+			</tr>
+			<tr>
+					<td>PCLK2 (APB2)</td>
+					<td>72 MHz</td>
+					<td>USART1、SPI1、TIM1、ADC、GPIO</td>
+			</tr>
+	</tbody>
 </table></div>
 <p><code>FLASH_LATENCY_2</code> 是 72 MHz 时 Flash 访问所需的等待周期数，必须与主频匹配，否则程序跑飞。</p>
 <hr>
@@ -644,34 +644,34 @@
 </div>
 </div><h4 id="gpio-模式说明">GPIO 模式说明
 </h4><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>模式宏</th>
-          <th>说明</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><code>GPIO_MODE_OUTPUT_PP</code></td>
-          <td>推挽输出，可驱动高低电平</td>
-      </tr>
-      <tr>
-          <td><code>GPIO_MODE_OUTPUT_OD</code></td>
-          <td>开漏输出，需外部上拉才能输出高电平</td>
-      </tr>
-      <tr>
-          <td><code>GPIO_MODE_INPUT</code></td>
-          <td>浮空输入，引脚电平由外部决定</td>
-      </tr>
-      <tr>
-          <td><code>GPIO_MODE_AF_PP</code></td>
-          <td>复用推挽，引脚由外设（USART/SPI 等）控制</td>
-      </tr>
-      <tr>
-          <td><code>GPIO_MODE_IT_FALLING</code></td>
-          <td>下降沿触发外部中断</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>模式宏</th>
+					<th>说明</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>GPIO_MODE_OUTPUT_PP</code></td>
+					<td>推挽输出，可驱动高低电平</td>
+			</tr>
+			<tr>
+					<td><code>GPIO_MODE_OUTPUT_OD</code></td>
+					<td>开漏输出，需外部上拉才能输出高电平</td>
+			</tr>
+			<tr>
+					<td><code>GPIO_MODE_INPUT</code></td>
+					<td>浮空输入，引脚电平由外部决定</td>
+			</tr>
+			<tr>
+					<td><code>GPIO_MODE_AF_PP</code></td>
+					<td>复用推挽，引脚由外设（USART/SPI 等）控制</td>
+			</tr>
+			<tr>
+					<td><code>GPIO_MODE_IT_FALLING</code></td>
+					<td>下降沿触发外部中断</td>
+			</tr>
+	</tbody>
 </table></div>
 <p>GPIO 时钟默认关闭，使用前必须通过 <code>__HAL_RCC_GPIOx_CLK_ENABLE()</code> 使能，否则写引脚无效。</p>
 <hr>
@@ -772,59 +772,59 @@
 </div><h4 id="exti-线与引脚的对应关系">EXTI 线与引脚的对应关系
 </h4><p>STM32F1 的 EXTI 线与引脚编号一一对应，但每条线只能连接一个端口：</p>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>EXTI 线</th>
-          <th>可选引脚</th>
-          <th>IRQ Handler</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>EXTI0</td>
-          <td>PA0/PB0/PC0/&hellip;</td>
-          <td><code>EXTI0_IRQHandler</code></td>
-      </tr>
-      <tr>
-          <td>EXTI1~4</td>
-          <td>Px1~Px4</td>
-          <td><code>EXTI1_IRQHandler</code> 等</td>
-      </tr>
-      <tr>
-          <td>EXTI5~9</td>
-          <td>Px5~Px9</td>
-          <td><code>EXTI9_5_IRQHandler</code></td>
-      </tr>
-      <tr>
-          <td>EXTI10~15</td>
-          <td>Px10~Px15</td>
-          <td><code>EXTI15_10_IRQHandler</code></td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>EXTI 线</th>
+					<th>可选引脚</th>
+					<th>IRQ Handler</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>EXTI0</td>
+					<td>PA0/PB0/PC0/&hellip;</td>
+					<td><code>EXTI0_IRQHandler</code></td>
+			</tr>
+			<tr>
+					<td>EXTI1~4</td>
+					<td>Px1~Px4</td>
+					<td><code>EXTI1_IRQHandler</code> 等</td>
+			</tr>
+			<tr>
+					<td>EXTI5~9</td>
+					<td>Px5~Px9</td>
+					<td><code>EXTI9_5_IRQHandler</code></td>
+			</tr>
+			<tr>
+					<td>EXTI10~15</td>
+					<td>Px10~Px15</td>
+					<td><code>EXTI15_10_IRQHandler</code></td>
+			</tr>
+	</tbody>
 </table></div>
 <p>PB11 使用 EXTI 线 11，属于 <code>EXTI15_10_IRQn</code> 组，所以使能 <code>EXTI15_10_IRQn</code>。</p>
 <h4 id="触发方式">触发方式
 </h4><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>模式宏</th>
-          <th>触发条件</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><code>GPIO_MODE_IT_RISING</code></td>
-          <td>上升沿（低→高）</td>
-      </tr>
-      <tr>
-          <td><code>GPIO_MODE_IT_FALLING</code></td>
-          <td>下降沿（高→低）</td>
-      </tr>
-      <tr>
-          <td><code>GPIO_MODE_IT_RISING_FALLING</code></td>
-          <td>双边沿</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>模式宏</th>
+					<th>触发条件</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>GPIO_MODE_IT_RISING</code></td>
+					<td>上升沿（低→高）</td>
+			</tr>
+			<tr>
+					<td><code>GPIO_MODE_IT_FALLING</code></td>
+					<td>下降沿（高→低）</td>
+			</tr>
+			<tr>
+					<td><code>GPIO_MODE_IT_RISING_FALLING</code></td>
+					<td>双边沿</td>
+			</tr>
+	</tbody>
 </table></div>
 <p>按键接地、内部上拉时，按下产生下降沿，选 <code>GPIO_MODE_IT_FALLING</code>。</p>
 <hr>
@@ -865,50 +865,50 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>参数</th>
-          <th>值</th>
-          <th>说明</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><code>BaudRate</code></td>
-          <td>115200</td>
-          <td>波特率，串口工具需一致</td>
-      </tr>
-      <tr>
-          <td><code>WordLength</code></td>
-          <td>8B</td>
-          <td>每帧 8 位数据</td>
-      </tr>
-      <tr>
-          <td><code>StopBits</code></td>
-          <td>1</td>
-          <td>1 位停止位</td>
-      </tr>
-      <tr>
-          <td><code>Parity</code></td>
-          <td>NONE</td>
-          <td>无校验位</td>
-      </tr>
-      <tr>
-          <td><code>Mode</code></td>
-          <td>TX_RX</td>
-          <td>同时使能发送和接收</td>
-      </tr>
-      <tr>
-          <td><code>HwFlowCtl</code></td>
-          <td>NONE</td>
-          <td>不使用硬件流控</td>
-      </tr>
-      <tr>
-          <td><code>OverSampling</code></td>
-          <td>16</td>
-          <td>16 倍过采样，抗噪声能力强</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>参数</th>
+					<th>值</th>
+					<th>说明</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>BaudRate</code></td>
+					<td>115200</td>
+					<td>波特率，串口工具需一致</td>
+			</tr>
+			<tr>
+					<td><code>WordLength</code></td>
+					<td>8B</td>
+					<td>每帧 8 位数据</td>
+			</tr>
+			<tr>
+					<td><code>StopBits</code></td>
+					<td>1</td>
+					<td>1 位停止位</td>
+			</tr>
+			<tr>
+					<td><code>Parity</code></td>
+					<td>NONE</td>
+					<td>无校验位</td>
+			</tr>
+			<tr>
+					<td><code>Mode</code></td>
+					<td>TX_RX</td>
+					<td>同时使能发送和接收</td>
+			</tr>
+			<tr>
+					<td><code>HwFlowCtl</code></td>
+					<td>NONE</td>
+					<td>不使用硬件流控</td>
+			</tr>
+			<tr>
+					<td><code>OverSampling</code></td>
+					<td>16</td>
+					<td>16 倍过采样，抗噪声能力强</td>
+			</tr>
+	</tbody>
 </table></div>
 <h3 id="msp-底层配置引脚--时钟--中断">MSP 底层配置（引脚 + 时钟 + 中断）
 </h3><p><code>HAL_UART_MspInit</code> 是 HAL 的 MSP 回调，负责与具体硬件绑定的初始化，由 <code>HAL_UART_Init</code> 自动调用：</p>
@@ -967,28 +967,28 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>引脚</th>
-          <th>方向</th>
-          <th>GPIO 模式</th>
-          <th>说明</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>PA9</td>
-          <td>TX（输出）</td>
-          <td><code>GPIO_MODE_AF_PP</code></td>
-          <td>复用推挽，USART1 外设控制</td>
-      </tr>
-      <tr>
-          <td>PA10</td>
-          <td>RX（输入）</td>
-          <td><code>GPIO_MODE_INPUT</code> + <code>GPIO_NOPULL</code></td>
-          <td>浮空输入，外部信号驱动</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>引脚</th>
+					<th>方向</th>
+					<th>GPIO 模式</th>
+					<th>说明</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>PA9</td>
+					<td>TX（输出）</td>
+					<td><code>GPIO_MODE_AF_PP</code></td>
+					<td>复用推挽，USART1 外设控制</td>
+			</tr>
+			<tr>
+					<td>PA10</td>
+					<td>RX（输入）</td>
+					<td><code>GPIO_MODE_INPUT</code> + <code>GPIO_NOPULL</code></td>
+					<td>浮空输入，外部信号驱动</td>
+			</tr>
+	</tbody>
 </table></div>
 <p>TX 必须配置为复用推挽（AF_PP），让 USART1 外设直接控制引脚电平。RX 配置为浮空输入，由对端设备驱动。</p>
 <h3 id="printf-重定向">printf 重定向
@@ -1200,8 +1200,9 @@
         (d.head || d.body).appendChild(s);
     })();
 </script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+		<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+		<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+	
 </div>
 
 <style>

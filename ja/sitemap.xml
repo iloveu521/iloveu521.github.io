@@ -1,3 +1,4 @@
+
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
@@ -10,11 +11,6 @@
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="zh-cn"
-                href="https://iloveu521.github.io/zh-cn/categories/"
-                />
-    <xhtml:link
-                rel="alternate"
                 hreflang="zh-tw"
                 href="https://iloveu521.github.io/zh-tw/categories/"
                 />
@@ -23,12 +19,22 @@
                 hreflang="ja"
                 href="https://iloveu521.github.io/ja/categories/"
                 />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://iloveu521.github.io/zh-cn/categories/"
+                />
   </url><url>
     <loc>https://iloveu521.github.io/ja/series/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-us"
                 href="https://iloveu521.github.io/series/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="https://iloveu521.github.io/ja/series/"
                 />
     <xhtml:link
                 rel="alternate"
@@ -40,17 +46,17 @@
                 hreflang="zh-tw"
                 href="https://iloveu521.github.io/zh-tw/series/"
                 />
-    <xhtml:link
-                rel="alternate"
-                hreflang="ja"
-                href="https://iloveu521.github.io/ja/series/"
-                />
   </url><url>
     <loc>https://iloveu521.github.io/ja/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-us"
                 href="https://iloveu521.github.io/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="https://iloveu521.github.io/ja/"
                 />
     <xhtml:link
                 rel="alternate"
@@ -61,11 +67,6 @@
                 rel="alternate"
                 hreflang="zh-tw"
                 href="https://iloveu521.github.io/zh-tw/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="ja"
-                href="https://iloveu521.github.io/ja/"
                 />
   </url><url>
     <loc>https://iloveu521.github.io/ja/tags/</loc>
