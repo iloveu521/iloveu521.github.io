@@ -10,7 +10,7 @@
 <meta property='og:description' content="free -h 显示内存充足，但 ROS2 节点启动后仍被 OOM Killer 杀死的排查过程">
 <meta property='og:url' content='https://iloveu521.github.io/bugs/ros2/rdkx5-oom-ekf/'>
 <meta property='og:site_name' content='Silly'>
-<meta property='og:type' content='article'><meta property='article:section' content='Bugs' /><meta property='article:published_time' content='2026-07-05T22:00:00&#43;08:00'/><meta property='article:modified_time' content='2026-07-05T19:12:53&#43;08:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Bugs' /><meta property='article:published_time' content='2026-07-05T22:00:00&#43;08:00'/><meta property='article:modified_time' content='2026-07-05T23:31:27&#43;08:00'/>
 <meta name="twitter:title" content="RDK X5 启动 ROS2 节点被 OOM Killer 杀死">
 <meta name="twitter:description" content="free -h 显示内存充足，但 ROS2 节点启动后仍被 OOM Killer 杀死的排查过程">
     <link rel="shortcut icon" href="/favicon.ico" />
@@ -465,7 +465,7 @@
 </h2><ul>
 <li>RDK X5 (arm64, 6.5GB RAM)</li>
 <li>ROS2 Humble</li>
-<li>OriginCar 竞赛小车</li>
+<li>OriginCar</li>
 </ul>
 <hr>
 <h2 id="问题描述">问题描述
@@ -595,7 +595,7 @@
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">killall node
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><strong>禁用 openclaw-gateway</strong>（一个 npm 全局包，占用 ~286MB）：</p>
+</div><p><strong>禁用 openclaw-gateway</strong>（一个 npm 全局包，部署官方RDK Claw是自动部署的服务，占用 ~286MB）：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -716,7 +716,7 @@
 
 
         <span>
-            Last updated on Jul 05, 2026 19:12 &#43;0800
+            Last updated on Jul 05, 2026 23:31 &#43;0800
         </span>
     </section><div class="article-lastmod">
             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -728,7 +728,7 @@
 
 
             <time>
-                Jul 05, 2026 19:12 &#43;0800
+                Jul 05, 2026 23:31 &#43;0800
             </time>
         </div></footer>
 

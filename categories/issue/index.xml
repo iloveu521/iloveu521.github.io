@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>Silly</copyright>
-        <lastBuildDate>Sun, 05 Jul 2026 19:12:53 +0800</lastBuildDate><atom:link href="https://iloveu521.github.io/categories/issue/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 05 Jul 2026 23:31:27 +0800</lastBuildDate><atom:link href="https://iloveu521.github.io/categories/issue/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>RDK X5 启动 ROS2 节点被 OOM Killer 杀死</title>
         <link>https://iloveu521.github.io/bugs/ros2/rdkx5-oom-ekf/</link>
         <pubDate>Sun, 05 Jul 2026 22:00:00 +0800</pubDate>
@@ -17,7 +17,7 @@
 &lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;RDK X5 (arm64, 6.5GB RAM)&lt;/li&gt;
 &lt;li&gt;ROS2 Humble&lt;/li&gt;
-&lt;li&gt;OriginCar 竞赛小车&lt;/li&gt;
+&lt;li&gt;OriginCar&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;问题描述&#34;&gt;问题描述
@@ -147,7 +147,7 @@
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;killall node
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;strong&gt;禁用 openclaw-gateway&lt;/strong&gt;（一个 npm 全局包，占用 ~286MB）：&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;禁用 openclaw-gateway&lt;/strong&gt;（一个 npm 全局包，部署官方RDK Claw是自动部署的服务，占用 ~286MB）：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
