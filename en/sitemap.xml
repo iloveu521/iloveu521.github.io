@@ -1,4 +1,3 @@
-
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
@@ -70,6 +69,11 @@
                 />
     <xhtml:link
                 rel="alternate"
+                hreflang="zh-tw"
+                href="https://iloveu521.github.io/zh-tw/"
+                />
+    <xhtml:link
+                rel="alternate"
                 hreflang="ja"
                 href="https://iloveu521.github.io/ja/"
                 />
@@ -77,11 +81,6 @@
                 rel="alternate"
                 hreflang="zh-cn"
                 href="https://iloveu521.github.io/zh-cn/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-tw"
-                href="https://iloveu521.github.io/zh-tw/"
                 />
   </url><url>
     <loc>https://iloveu521.github.io/categories/ubuntu/</loc>
