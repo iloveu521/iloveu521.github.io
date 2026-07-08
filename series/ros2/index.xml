@@ -7,7 +7,86 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>Silly</copyright>
-        <lastBuildDate>Sun, 10 May 2026 00:49:21 +0800</lastBuildDate><atom:link href="https://iloveu521.github.io/series/ros2/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 06 Jul 2026 01:13:42 +0800</lastBuildDate><atom:link href="https://iloveu521.github.io/series/ros2/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>ROS2 Topic 发布-订阅：为什么增加订阅者不会增加发布者的负担？</title>
+        <link>https://iloveu521.github.io/p/ros2-topic-%E5%8F%91%E5%B8%83-%E8%AE%A2%E9%98%85%E4%B8%BA%E4%BB%80%E4%B9%88%E5%A2%9E%E5%8A%A0%E8%AE%A2%E9%98%85%E8%80%85%E4%B8%8D%E4%BC%9A%E5%A2%9E%E5%8A%A0%E5%8F%91%E5%B8%83%E8%80%85%E7%9A%84%E8%B4%9F%E6%8B%85/</link>
+        <pubDate>Mon, 06 Jul 2026 22:00:00 +0800</pubDate>
+        
+        <guid>https://iloveu521.github.io/p/ros2-topic-%E5%8F%91%E5%B8%83-%E8%AE%A2%E9%98%85%E4%B8%BA%E4%BB%80%E4%B9%88%E5%A2%9E%E5%8A%A0%E8%AE%A2%E9%98%85%E8%80%85%E4%B8%8D%E4%BC%9A%E5%A2%9E%E5%8A%A0%E5%8F%91%E5%B8%83%E8%80%85%E7%9A%84%E8%B4%9F%E6%8B%85/</guid>
+        <description>&lt;p&gt;今天队友问了我一个问题：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;如果一个节点发布一个 topic，增多订阅这个 topic 的数量，会不会增大发布节点的负担？&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;我的回答是：&lt;strong&gt;不会&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;这是一个很容易产生的直觉误区——就好像开了一个微信群，群里人越多，你说一句话要推送到更多人手机上，你这边流量消耗也越大。但 ROS2 的 topic 通信&lt;strong&gt;不是这样的&lt;/strong&gt;。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;发布者只管扔&#34;&gt;发布者只管&amp;quot;扔&amp;quot;
+&lt;/h2&gt;&lt;p&gt;ROS2 的 topic 通信基于 &lt;strong&gt;DDS（Data Distribution Service）&lt;/strong&gt;，它的核心思想是&lt;strong&gt;数据共享空间&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;发布者（Publisher）做的事情很简单：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;把数据写好&lt;/li&gt;
+&lt;li&gt;往 DDS 中间件的数据池里一扔&lt;/li&gt;
+&lt;li&gt;完事，收工&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;至于这个数据之后被谁读了、被几个人读了、有没有人读——发布者&lt;strong&gt;完全不关心，也不受影响&lt;/strong&gt;。&lt;/p&gt;
+&lt;div align=center&gt;&lt;img src=&#34;topic_to_publish.png&#34; alt=&#34;发布者-DDS-订阅者 关系图&#34; border=&#34;0&#34; /&gt;&lt;/div&gt;
+&lt;h2 id=&#34;那数据怎么到订阅者手里的&#34;&gt;那数据怎么到订阅者手里的？
+&lt;/h2&gt;&lt;p&gt;这是关键：&lt;strong&gt;数据分发的工作是 DDS 中间件做的，不是发布者做的&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;DDS 底层维护了一个全局数据空间（Global Data Space），发布者往里 write，订阅者往里 read。中间件的发现协议（Discovery Protocol）会自动匹配发布者和订阅者，然后由 DDS 自己去把数据路由过去。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;发布者的 CPU、内存开销只跟自己发布数据的频率和数据量有关&lt;/li&gt;
+&lt;li&gt;加 1 个订阅者还是加 100 个订阅者，发布者的负载基本不变&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;真正压力增加的是 DDS 中间件和网络层&lt;/strong&gt;（如果有跨主机通信），因为这些层面需要把同一份数据分发给多个端点。但这也跟发布者节点本身没关系。&lt;/p&gt;
+&lt;h2 id=&#34;一个生活化的比喻&#34;&gt;一个生活化的比喻
+&lt;/h2&gt;&lt;p&gt;把 topic 想象成一个&lt;strong&gt;公告栏&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;发布者 = 往公告栏上贴通知的人&lt;/li&gt;
+&lt;li&gt;订阅者 = 路过公告栏看通知的人&lt;/li&gt;
+&lt;li&gt;DDS 中间件 = 公告栏本身 + 负责把通知抄送出去的跑腿系统&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;贴通知的人只需要贴一次，至于后来有 1 个人来看还是 100 个人来看，他不用管。跑腿系统可能会根据有多少人订阅来决定要不要复印通知、复印多少份，但这一切贴通知的人都不用操心。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;那什么情况发布者会有负担&#34;&gt;那什么情况发布者会有负担？
+&lt;/h2&gt;&lt;p&gt;发布者的负担主要来自：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;发布频率&lt;/strong&gt;：你是 10Hz 发一次还是 1000Hz 发一次，差别巨大&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;消息大小&lt;/strong&gt;：发一个 int 和发一帧点云图完全不是一回事&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;QoS 策略&lt;/strong&gt;：如果用了 RELIABLE（可靠传输），发布者需要等待确认，这会有额外开销；如果用的是 BEST_EFFORT（尽力而为），发出去就不管了&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;以上这些决定了发布者的负载，但&lt;strong&gt;订阅者的数量不是其中之一&lt;/strong&gt;。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;总结&#34;&gt;总结
+&lt;/h2&gt;&lt;table&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;角色&lt;/th&gt;
+					&lt;th&gt;干什么&lt;/th&gt;
+					&lt;th&gt;受什么影响&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;发布者&lt;/td&gt;
+					&lt;td&gt;往数据池里写数据&lt;/td&gt;
+					&lt;td&gt;发布频率、消息大小、QoS 策略&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;DDS 中间件&lt;/td&gt;
+					&lt;td&gt;发现、匹配、路由数据&lt;/td&gt;
+					&lt;td&gt;订阅者数量、网络拓扑&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;订阅者&lt;/td&gt;
+					&lt;td&gt;从数据池里读数据&lt;/td&gt;
+					&lt;td&gt;接收频率、消息大小、回调处理速度&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;所以，&lt;strong&gt;topic 是一个共享的数据池子，有没有人订阅、有多少人订阅，都跟发布者无关&lt;/strong&gt;。他只是一个负责往池子里扔东西的人。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>Ros2学习笔记</title>
         <link>https://iloveu521.github.io/p/ros2%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
         <pubDate>Thu, 23 Apr 2026 01:06:24 +0800</pubDate>

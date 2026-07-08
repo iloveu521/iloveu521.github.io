@@ -3,10 +3,10 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://iloveu521.github.io/bugs/</loc>
-    <lastmod>2026-07-05T23:31:27+08:00</lastmod>
+    <lastmod>2026-07-08T13:25:44+08:00</lastmod>
   </url><url>
     <loc>https://iloveu521.github.io/categories/</loc>
-    <lastmod>2026-07-05T23:31:27+08:00</lastmod>
+    <lastmod>2026-07-08T13:25:44+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-us"
@@ -29,28 +29,26 @@
                 />
   </url><url>
     <loc>https://iloveu521.github.io/categories/issue/</loc>
-    <lastmod>2026-07-05T23:31:27+08:00</lastmod>
+    <lastmod>2026-07-08T13:25:44+08:00</lastmod>
   </url><url>
     <loc>https://iloveu521.github.io/series/issue/</loc>
-    <lastmod>2026-07-05T23:31:27+08:00</lastmod>
-  </url><url>
-    <loc>https://iloveu521.github.io/bugs/ros2/rdkx5-oom-ekf/</loc>
-    <lastmod>2026-07-05T23:31:27+08:00</lastmod>
+    <lastmod>2026-07-08T13:25:44+08:00</lastmod>
   </url><url>
     <loc>https://iloveu521.github.io/categories/resolved/</loc>
-    <lastmod>2026-07-05T23:31:27+08:00</lastmod>
+    <lastmod>2026-07-08T13:25:44+08:00</lastmod>
+  </url><url>
+    <loc>https://iloveu521.github.io/categories/ros2/</loc>
+    <lastmod>2026-07-08T13:25:44+08:00</lastmod>
+  </url><url>
+    <loc>https://iloveu521.github.io/bugs/ros2/ros2-dds-competition-interference/</loc>
+    <lastmod>2026-07-08T13:25:44+08:00</lastmod>
   </url><url>
     <loc>https://iloveu521.github.io/series/</loc>
-    <lastmod>2026-07-05T23:31:27+08:00</lastmod>
+    <lastmod>2026-07-08T13:25:44+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-us"
                 href="https://iloveu521.github.io/series/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-tw"
-                href="https://iloveu521.github.io/zh-tw/series/"
                 />
     <xhtml:link
                 rel="alternate"
@@ -62,9 +60,14 @@
                 hreflang="zh-cn"
                 href="https://iloveu521.github.io/zh-cn/series/"
                 />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-tw"
+                href="https://iloveu521.github.io/zh-tw/series/"
+                />
   </url><url>
     <loc>https://iloveu521.github.io/</loc>
-    <lastmod>2026-07-05T23:31:27+08:00</lastmod>
+    <lastmod>2026-07-08T13:25:44+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-us"
@@ -85,6 +88,21 @@
                 hreflang="zh-tw"
                 href="https://iloveu521.github.io/zh-tw/"
                 />
+  </url><url>
+    <loc>https://iloveu521.github.io/categories/note/</loc>
+    <lastmod>2026-07-06T01:13:42+08:00</lastmod>
+  </url><url>
+    <loc>https://iloveu521.github.io/post/</loc>
+    <lastmod>2026-07-06T01:13:42+08:00</lastmod>
+  </url><url>
+    <loc>https://iloveu521.github.io/series/ros2/</loc>
+    <lastmod>2026-07-06T01:13:42+08:00</lastmod>
+  </url><url>
+    <loc>https://iloveu521.github.io/p/ros2-topic-%E5%8F%91%E5%B8%83-%E8%AE%A2%E9%98%85%E4%B8%BA%E4%BB%80%E4%B9%88%E5%A2%9E%E5%8A%A0%E8%AE%A2%E9%98%85%E8%80%85%E4%B8%8D%E4%BC%9A%E5%A2%9E%E5%8A%A0%E5%8F%91%E5%B8%83%E8%80%85%E7%9A%84%E8%B4%9F%E6%8B%85/</loc>
+    <lastmod>2026-07-06T01:13:42+08:00</lastmod>
+  </url><url>
+    <loc>https://iloveu521.github.io/bugs/ros2/rdkx5-oom-ekf/</loc>
+    <lastmod>2026-07-05T23:31:27+08:00</lastmod>
   </url><url>
     <loc>https://iloveu521.github.io/categories/bug/</loc>
     <lastmod>2026-06-07T15:00:12+08:00</lastmod>
@@ -109,9 +127,6 @@
   </url><url>
     <loc>https://iloveu521.github.io/categories/hal/</loc>
     <lastmod>2026-05-09T23:45:00+08:00</lastmod>
-  </url><url>
-    <loc>https://iloveu521.github.io/post/</loc>
-    <lastmod>2026-05-10T00:49:21+08:00</lastmod>
   </url><url>
     <loc>https://iloveu521.github.io/categories/stm32/</loc>
     <lastmod>2026-05-09T23:45:00+08:00</lastmod>
@@ -173,17 +188,8 @@
     <loc>https://iloveu521.github.io/p/git%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86/</loc>
     <lastmod>2026-05-10T00:49:21+08:00</lastmod>
   </url><url>
-    <loc>https://iloveu521.github.io/categories/note/</loc>
-    <lastmod>2026-05-10T00:49:21+08:00</lastmod>
-  </url><url>
     <loc>https://iloveu521.github.io/bugs/code-server/code-server_extension-not-fond/</loc>
     <lastmod>2026-05-08T16:17:47+08:00</lastmod>
-  </url><url>
-    <loc>https://iloveu521.github.io/categories/ros2/</loc>
-    <lastmod>2026-05-10T00:49:21+08:00</lastmod>
-  </url><url>
-    <loc>https://iloveu521.github.io/series/ros2/</loc>
-    <lastmod>2026-05-10T00:49:21+08:00</lastmod>
   </url><url>
     <loc>https://iloveu521.github.io/p/ros2%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
     <lastmod>2026-05-10T00:49:21+08:00</lastmod>
@@ -231,6 +237,11 @@
                 />
     <xhtml:link
                 rel="alternate"
+                hreflang="ja"
+                href="https://iloveu521.github.io/ja/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
                 hreflang="zh-cn"
                 href="https://iloveu521.github.io/zh-cn/tags/"
                 />
@@ -238,11 +249,6 @@
                 rel="alternate"
                 hreflang="zh-tw"
                 href="https://iloveu521.github.io/zh-tw/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="ja"
-                href="https://iloveu521.github.io/ja/tags/"
                 />
   </url>
 </urlset>
