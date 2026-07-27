@@ -2,15 +2,17 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://iloveu521.github.io/bugs/</loc>
-    <lastmod>2026-07-08T13:25:44+08:00</lastmod>
-  </url><url>
     <loc>https://iloveu521.github.io/categories/</loc>
-    <lastmod>2026-07-08T13:25:44+08:00</lastmod>
+    <lastmod>2026-07-27T20:49:46+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-us"
                 href="https://iloveu521.github.io/categories/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-tw"
+                href="https://iloveu521.github.io/zh-tw/categories/"
                 />
     <xhtml:link
                 rel="alternate"
@@ -22,29 +24,15 @@
                 hreflang="zh-cn"
                 href="https://iloveu521.github.io/zh-cn/categories/"
                 />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-tw"
-                href="https://iloveu521.github.io/zh-tw/categories/"
-                />
   </url><url>
-    <loc>https://iloveu521.github.io/categories/issue/</loc>
-    <lastmod>2026-07-08T13:25:44+08:00</lastmod>
+    <loc>https://iloveu521.github.io/categories/git/</loc>
+    <lastmod>2026-07-27T20:49:46+08:00</lastmod>
   </url><url>
-    <loc>https://iloveu521.github.io/series/issue/</loc>
-    <lastmod>2026-07-08T13:25:44+08:00</lastmod>
-  </url><url>
-    <loc>https://iloveu521.github.io/categories/resolved/</loc>
-    <lastmod>2026-07-08T13:25:44+08:00</lastmod>
-  </url><url>
-    <loc>https://iloveu521.github.io/categories/ros2/</loc>
-    <lastmod>2026-07-08T13:25:44+08:00</lastmod>
-  </url><url>
-    <loc>https://iloveu521.github.io/bugs/ros2/ros2-dds-competition-interference/</loc>
-    <lastmod>2026-07-08T13:25:44+08:00</lastmod>
+    <loc>https://iloveu521.github.io/post/</loc>
+    <lastmod>2026-07-27T20:49:46+08:00</lastmod>
   </url><url>
     <loc>https://iloveu521.github.io/series/</loc>
-    <lastmod>2026-07-08T13:25:44+08:00</lastmod>
+    <lastmod>2026-07-27T20:49:46+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-us"
@@ -67,7 +55,7 @@
                 />
   </url><url>
     <loc>https://iloveu521.github.io/</loc>
-    <lastmod>2026-07-08T13:25:44+08:00</lastmod>
+    <lastmod>2026-07-27T20:49:46+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-us"
@@ -89,10 +77,37 @@
                 href="https://iloveu521.github.io/zh-tw/"
                 />
   </url><url>
-    <loc>https://iloveu521.github.io/categories/note/</loc>
-    <lastmod>2026-07-06T01:13:42+08:00</lastmod>
+    <loc>https://iloveu521.github.io/categories/windows/</loc>
+    <lastmod>2026-07-27T20:49:46+08:00</lastmod>
   </url><url>
-    <loc>https://iloveu521.github.io/post/</loc>
+    <loc>https://iloveu521.github.io/p/windows-11-%E5%AE%89%E8%A3%85-ubuntu-xx.04-wsl2-%E5%B9%B6%E8%BF%81%E7%A7%BB%E5%88%B0%E7%9B%AE%E6%A0%87%E7%9B%98%E7%9B%98/</loc>
+    <lastmod>2026-07-27T20:49:46+08:00</lastmod>
+  </url><url>
+    <loc>https://iloveu521.github.io/categories/wsl/</loc>
+    <lastmod>2026-07-27T20:49:46+08:00</lastmod>
+  </url><url>
+    <loc>https://iloveu521.github.io/series/wsl/</loc>
+    <lastmod>2026-07-27T20:49:46+08:00</lastmod>
+  </url><url>
+    <loc>https://iloveu521.github.io/bugs/</loc>
+    <lastmod>2026-07-08T13:25:44+08:00</lastmod>
+  </url><url>
+    <loc>https://iloveu521.github.io/categories/issue/</loc>
+    <lastmod>2026-07-08T13:25:44+08:00</lastmod>
+  </url><url>
+    <loc>https://iloveu521.github.io/series/issue/</loc>
+    <lastmod>2026-07-08T13:25:44+08:00</lastmod>
+  </url><url>
+    <loc>https://iloveu521.github.io/categories/resolved/</loc>
+    <lastmod>2026-07-08T13:25:44+08:00</lastmod>
+  </url><url>
+    <loc>https://iloveu521.github.io/categories/ros2/</loc>
+    <lastmod>2026-07-08T13:25:44+08:00</lastmod>
+  </url><url>
+    <loc>https://iloveu521.github.io/bugs/ros2/ros2-dds-competition-interference/</loc>
+    <lastmod>2026-07-08T13:25:44+08:00</lastmod>
+  </url><url>
+    <loc>https://iloveu521.github.io/categories/note/</loc>
     <lastmod>2026-07-06T01:13:42+08:00</lastmod>
   </url><url>
     <loc>https://iloveu521.github.io/series/ros2/</loc>
@@ -179,9 +194,6 @@
     <loc>https://iloveu521.github.io/thoughts/thoughts_at_train_station/</loc>
     <lastmod>2026-05-08T12:41:42+08:00</lastmod>
   </url><url>
-    <loc>https://iloveu521.github.io/categories/git/</loc>
-    <lastmod>2026-05-10T00:49:21+08:00</lastmod>
-  </url><url>
     <loc>https://iloveu521.github.io/series/git/</loc>
     <lastmod>2026-05-10T00:49:21+08:00</lastmod>
   </url><url>
@@ -237,6 +249,11 @@
                 />
     <xhtml:link
                 rel="alternate"
+                hreflang="zh-tw"
+                href="https://iloveu521.github.io/zh-tw/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
                 hreflang="ja"
                 href="https://iloveu521.github.io/ja/tags/"
                 />
@@ -244,11 +261,6 @@
                 rel="alternate"
                 hreflang="zh-cn"
                 href="https://iloveu521.github.io/zh-cn/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-tw"
-                href="https://iloveu521.github.io/zh-tw/tags/"
                 />
   </url>
 </urlset>
