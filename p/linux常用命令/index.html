@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://iloveu521.github.io/p/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/'>
 
-<link rel="stylesheet" href="/scss/style.min.a417f02c916931d7cdb31ab7abe48ac8b095f84732b48b43aa856697d22bf940.css"><meta property='og:title' content="Linux常用命令">
+<link rel="stylesheet" href="/scss/style.min.63bf7fa1c1cc27208c452cd4c9fbdf483d25be8c31c24886942c63ca67b3eb32.css"><meta property='og:title' content="Linux常用命令">
 <meta property='og:description' content="1. 常用命令概览 1.1 文件与目录管理 ls / ls -l / ll: 列出目录内容 cd &lt;dir&gt;: 切换到指定目录 pwd: 显示当前工作目录 mkdir &lt;dir&gt;: 创建新目录 rm -rf &lt;file/dir&gt;: 强制级联删除文件或目录（高危） cp -r &lt;src&gt; &lt;dest&gt;: 复制文件或目录 mv &lt;src&gt; &lt;dest&gt;: 移动/重命名文件或目录 touch &lt;file&gt;: 创建空文件或修改时间戳 cat &lt;file&gt;: 查看文件内容 less &lt;file&gt; / more &lt;file&gt;: 分页查看文件内容 tail -f &lt;file&gt;: 实时查看文件末尾内容（常用看日志） head -n 10 &lt;file&gt;: 查看文件前10行 find &lt;path&gt; -name &quot;*name*&quot;: 按名称查找文件或目录 find &lt;path&gt; -type d -name &quot;*name*&quot;: 仅查找目录(文件夹) find &lt;path&gt; -type f -name &quot;*name*&quot;: 仅查找普通文件 grep &quot;&lt;text&gt;&quot; &lt;file&gt;: 在文件中搜索指定文本内容 1.2 系统与进程管理 top / htop: 实时显示系统进程状态和资源占用 ps -ef / ps aux: 查看所有活动进程 kill -9 &lt;pid&gt;: 强制终止指定进程 free -h: 查看内存和交换空间使用情况 df -h: 查看磁盘分区和使用情况 du -sh &lt;dir&gt;: 查看指定目录的大小 uname -a: 查看系统内核及硬件架构信息 history: 查看命令历史记录 1.3 网络操作 ping &lt;ip/domain&gt;: 测试网络连通性 ifconfig / ip addr: 查看网络接口和IP地址 netstat -tulnp / ss -tulnp: 查看端口占用情况 curl -O &lt;url&gt; / wget &lt;url&gt;: 下载文件 scp &lt;file&gt; user@host:&lt;path&gt;: 通过SSH远程安全传输文件 ssh user@host: 远程登录服务器 1.4 用户与权限管理 chmod 755 &lt;file&gt;: 修改文件或目录权限 chown user:group &lt;file&gt;: 修改文件或目录的所有者和所属组 su - &lt;user&gt;: 切换用户 sudo &lt;command&gt;: 以超级用户权限执行命令 useradd &lt;user&gt; / userdel &lt;user&gt;: 增加/删除用户 passwd &lt;user&gt;: 修改用户密码 2. Vim常用快捷键与命令 Vim 主要有三种模式：普通模式（Command Mode）、插入模式（Insert Mode） 和 底线命令模式（Last line Mode）。\n">
 <meta property='og:url' content='https://iloveu521.github.io/p/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/'>
 <meta property='og:site_name' content='Silly'>
@@ -672,6 +672,19 @@
     <h2 class="section-title">Related content</h2>
     <div class="related-content">
         <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/bugs/ubuntu/wsl-github-ssh-proxy-timeout/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">WSL2 里 GitHub SSH 再次超时：这次凶手是 OpenSSH 根本不认识 http_proxy</h2>
+        </div>
+    </a>
+</article>
+
             
                 
 <article class="">

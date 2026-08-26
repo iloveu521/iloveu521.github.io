@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://iloveu521.github.io/bugs/ubuntu/ubuntu-root-full-crisis/'>
 
-<link rel="stylesheet" href="/scss/style.min.a417f02c916931d7cdb31ab7abe48ac8b095f84732b48b43aa856697d22bf940.css"><meta property='og:title' content="Ubuntu 根目录爆满危机：一场由 PCIe 日志引发的血案">
+<link rel="stylesheet" href="/scss/style.min.63bf7fa1c1cc27208c452cd4c9fbdf483d25be8c31c24886942c63ca67b3eb32.css"><meta property='og:title' content="Ubuntu 根目录爆满危机：一场由 PCIe 日志引发的血案">
 <meta property='og:description' content=" Ubuntu 根目录爆满危机：一场由 PCIe 日志引发的血案 楔子：黑屏降临 那是一个普通的夜晚，我像往常一样重启了 Ubuntu。\n然后——黑屏。\n不是那种&quot;等一会儿就好&quot;的黑屏，是那种&quot;我罢工了，你看着办吧&quot;的黑屏。风扇还在转，屏幕却如同一块沉默的黑洞。作为一个从 18.04 一路升级到 24.04 的双系统老用户，我隐约感到事情不简单。\n事后回想起来，这其实是系统发出的最后一声呼救，可惜当时我没听懂。\n第一章：幕后黑手浮出水面 1.1 第一嫌疑人：根分区 双系统用户都知道，当初装机时给 / 分了 75G，给 /home 分了 135G，心想&quot;够用了够用了&quot;。结果 /home 还剩 35G，根分区却悄无声息地被塞爆了。\n为什么会爆？我抱着&quot;让我进去看一眼&quot;的心态，尝试进入 Recovery Mode。\n1 df -h 看到 /dev/nvme0n1pX 100% 的那一刻，我知道第一嫌疑人已经锁定了。\n1.2 地毯式搜查 进入 root shell 后，我开始了逐层排查：\n1 2 # 看看是谁在吃空间 du -xhd1 / | sort -h 重点排查对象：\n">
 <meta property='og:url' content='https://iloveu521.github.io/bugs/ubuntu/ubuntu-root-full-crisis/'>
 <meta property='og:site_name' content='Silly'>
@@ -1055,6 +1055,19 @@
     <h2 class="section-title">Related content</h2>
     <div class="related-content">
         <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/bugs/ubuntu/wsl-github-ssh-proxy-timeout/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">WSL2 里 GitHub SSH 再次超时：这次凶手是 OpenSSH 根本不认识 http_proxy</h2>
+        </div>
+    </a>
+</article>
+
             
                 
 <article class="">
