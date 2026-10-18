@@ -1,13 +1,246 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>Ubuntu on Silly</title>
+        <title>Ubuntu on Gelpup</title>
         <link>https://iloveu521.github.io/categories/ubuntu/</link>
-        <description>Recent content in Ubuntu on Silly</description>
+        <description>Recent content in Ubuntu on Gelpup</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <copyright>Silly</copyright>
-        <lastBuildDate>Thu, 27 Aug 2026 00:49:36 +0800</lastBuildDate><atom:link href="https://iloveu521.github.io/categories/ubuntu/index.xml" rel="self" type="application/rss+xml" /><item>
+        <copyright>Gelpup</copyright>
+        <lastBuildDate>Sun, 18 Oct 2026 21:27:16 +0800</lastBuildDate><atom:link href="https://iloveu521.github.io/categories/ubuntu/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>修复 WSL Codex 更新被 Windows npm 路径劫持</title>
+        <link>https://iloveu521.github.io/bugs/ubuntu/wsl-codex-windows-npm-path-hijack/</link>
+        <pubDate>Tue, 13 Oct 2026 22:35:00 +0800</pubDate>
+        
+        <guid>https://iloveu521.github.io/bugs/ubuntu/wsl-codex-windows-npm-path-hijack/</guid>
+        <description>&lt;h2 id=&#34;问题现象&#34;&gt;问题现象
+&lt;/h2&gt;&lt;p&gt;在 WSL 中运行 Codex CLI 时，模型和功能看起来比 Windows 侧少。进一步检查还发现一个更直接的问题：Codex 已经落后于当前 npm 包版本，但执行常规更新后，WSL 中实际运行的版本没有变化。&lt;/p&gt;
+&lt;p&gt;表面上，&lt;code&gt;node&lt;/code&gt;、&lt;code&gt;npm&lt;/code&gt; 和 &lt;code&gt;codex&lt;/code&gt; 都能正常执行：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;node --version
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;npm --version
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;codex --version
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;然而它们不一定来自同一套运行环境。WSL 可以通过互操作机制直接调用 Windows 可执行文件；如果 Windows Node.js 路径进入了 WSL 的 &lt;code&gt;PATH&lt;/code&gt;，就可能出现“Linux Codex 配 Windows npm”的混合状态。&lt;/p&gt;
+&lt;h2 id=&#34;环境信息&#34;&gt;环境信息
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;Windows 主机中的 WSL2&lt;/li&gt;
+&lt;li&gt;Ubuntu 22.04&lt;/li&gt;
+&lt;li&gt;Zsh 与 NVM&lt;/li&gt;
+&lt;li&gt;Node.js 22&lt;/li&gt;
+&lt;li&gt;Codex CLI 通过 npm 管理&lt;/li&gt;
+&lt;li&gt;WSL 和 Windows 均存在 Codex CLI&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;本次排查中，WSL 实际运行的是 Linux Codex &lt;code&gt;0.145.0&lt;/code&gt;，npm 包目录返回的目标版本为 &lt;code&gt;0.162.1&lt;/code&gt;。版本号只是当时的现场信息，后续排查应以当前包目录为准。&lt;/p&gt;
+&lt;h2 id=&#34;错误信息&#34;&gt;错误信息
+&lt;/h2&gt;&lt;p&gt;&lt;code&gt;codex doctor&lt;/code&gt; 给出的关键提示是：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;npm install -g @openai/codex would update a different install
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;update would target a different npm install
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;诊断信息同时显示：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;running package root: ~/.nvm/versions/node/&amp;lt;version&amp;gt;/lib/node_modules/@openai/codex
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;npm package root: Windows npm global directory
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;也就是说，当前 &lt;code&gt;codex&lt;/code&gt; 属于 WSL NVM，但当前命令环境里的 &lt;code&gt;npm&lt;/code&gt; 却指向 Windows。&lt;/p&gt;
+&lt;h2 id=&#34;排查过程&#34;&gt;排查过程
+&lt;/h2&gt;&lt;h3 id=&#34;1-不要只看版本先查命令来自哪里&#34;&gt;1. 不要只看版本，先查命令来自哪里
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;type&lt;/span&gt; -a codex
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;which -a node npm npx codex
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;readlink -f &lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;$(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;command&lt;/span&gt; -v codex&lt;span class=&#34;k&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;code&gt;codex&lt;/code&gt; 的解析链最终进入：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;~/.nvm/versions/node/&amp;lt;version&amp;gt;/lib/node_modules/@openai/codex
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;继续检查底层文件：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;file ~/.nvm/versions/node/&amp;lt;version&amp;gt;/lib/node_modules/@openai/codex/&lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;node_modules/@openai/codex-linux-x64/vendor/&lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;x86_64-unknown-linux-musl/bin/codex
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;结果是 Linux ELF，而不是 Windows PE 可执行文件。这证明 WSL 当前运行的是独立的 Linux Codex，不是通过 WSL 互操作调用 Windows &lt;code&gt;codex.exe&lt;/code&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;2-对比交互式与非交互式-shell&#34;&gt;2. 对比交互式与非交互式 Shell
+&lt;/h3&gt;&lt;p&gt;直接从 Windows 调用非交互式 WSL：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;wsl&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;py&#34;&gt;exe&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-d&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Ubuntu&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;--&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;which&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;-a&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;node&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;npm&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;npx&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;codex&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;此时 &lt;code&gt;node&lt;/code&gt; 和 &lt;code&gt;codex&lt;/code&gt; 可以落到 WSL，&lt;code&gt;npm&lt;/code&gt;、&lt;code&gt;npx&lt;/code&gt; 却可能落到挂载的 Windows 路径。&lt;/p&gt;
+&lt;p&gt;再通过交互式 Zsh 检查：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;zsh -lic &lt;span class=&#34;s1&#34;&gt;&amp;#39;whence -va node npm npx codex&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;交互式 Zsh 会加载 NVM，因此 WSL NVM 的 &lt;code&gt;npm&lt;/code&gt; 排在 Windows npm 之前。两次结果不同，说明问题不是包本身损坏，而是 Shell 初始化方式改变了 &lt;code&gt;PATH&lt;/code&gt; 顺序。&lt;/p&gt;
+&lt;h3 id=&#34;3-让-codex-自己检查安装链&#34;&gt;3. 让 Codex 自己检查安装链
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;codex doctor
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;相比只运行 &lt;code&gt;codex --version&lt;/code&gt;，&lt;code&gt;doctor&lt;/code&gt; 会同时核对：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;当前 Codex 包根目录；&lt;/li&gt;
+&lt;li&gt;npm 全局包根目录；&lt;/li&gt;
+&lt;li&gt;实际可执行文件；&lt;/li&gt;
+&lt;li&gt;登录与配置；&lt;/li&gt;
+&lt;li&gt;网络连通性；&lt;/li&gt;
+&lt;li&gt;更新命令将要修改的目标。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;本次正是它明确指出“更新会修改另一套安装”，避免了继续反复更新 Windows 包。&lt;/p&gt;
+&lt;h2 id=&#34;根本原因&#34;&gt;根本原因
+&lt;/h2&gt;&lt;p&gt;WSL 与 Windows 各自存在一套 Node.js/Codex，同时 Windows 的可执行文件目录被加入了 WSL 的 &lt;code&gt;PATH&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;在交互式 Zsh 中，NVM 初始化会把 WSL 的 Node.js 工具放到前面；但从 Windows 直接启动的非交互式 WSL 命令不会完整加载相同的 Shell 初始化文件，于是发生了这组错配：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;codex -&amp;gt; WSL NVM 中的 Linux Codex
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;npm   -&amp;gt; Windows Node.js 的 npm
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;因此，普通的全局安装命令虽然成功退出，修改的却是 Windows npm 全局目录，WSL 正在执行的 Codex 仍停留在旧版本。&lt;/p&gt;
+&lt;h2 id=&#34;解决方案&#34;&gt;解决方案
+&lt;/h2&gt;&lt;h3 id=&#34;1-更新前确认-npm-属于-wsl&#34;&gt;1. 更新前确认 npm 属于 WSL
+&lt;/h3&gt;&lt;p&gt;在正常的 WSL 交互式 Shell 中执行：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;command&lt;/span&gt; -v node
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;command&lt;/span&gt; -v npm
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;command&lt;/span&gt; -v codex
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;npm config get prefix
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;这些路径应当指向 WSL 文件系统中的同一套 NVM 安装，而不是 &lt;code&gt;/mnt/c&lt;/code&gt;、&lt;code&gt;/mnt/d&lt;/code&gt; 等 Windows 挂载路径。&lt;/p&gt;
+&lt;h3 id=&#34;2-使用明确的-wsl-npm-更新&#34;&gt;2. 使用明确的 WSL npm 更新
+&lt;/h3&gt;&lt;p&gt;如果当前非交互式环境的 &lt;code&gt;PATH&lt;/code&gt; 不可信，可以直接调用 NVM 安装目录中的 npm：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;~/.nvm/versions/node/&amp;lt;version&amp;gt;/bin/npm install -g @openai/codex@latest
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;也可以明确启动会加载 NVM 的交互式 Zsh：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;zsh -lic &lt;span class=&#34;s1&#34;&gt;&amp;#39;npm install -g @openai/codex@latest&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;这里没有删除 Windows Codex，也没有把 Linux &lt;code&gt;codex&lt;/code&gt; 强行替换成 Windows &lt;code&gt;codex.exe&lt;/code&gt;。对于需要直接操作 WSL 工作区、Linux 工具链和权限模型的场景，保留原生 Linux Codex 更稳定。&lt;/p&gt;
+&lt;h3 id=&#34;3-长期修正-path-顺序&#34;&gt;3. 长期修正 PATH 顺序
+&lt;/h3&gt;&lt;p&gt;应确保 Shell 初始化完成后，WSL NVM 的 &lt;code&gt;bin&lt;/code&gt; 位于 Windows Node.js 路径之前。自动化脚本如果不加载交互式 Shell，不要假设 &lt;code&gt;npm&lt;/code&gt; 与终端中看到的是同一个命令；应使用绝对路径或显式加载 NVM。&lt;/p&gt;
+&lt;h2 id=&#34;验证结果&#34;&gt;验证结果
+&lt;/h2&gt;&lt;p&gt;更新后依次检查：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;codex --version
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;type&lt;/span&gt; -a codex
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;type&lt;/span&gt; -a npm
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;file &lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;$(&lt;/span&gt;readlink -f &lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;$(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;command&lt;/span&gt; -v codex&lt;span class=&#34;k&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;zsh -lic &lt;span class=&#34;s1&#34;&gt;&amp;#39;codex doctor&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;本次验证结果：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;WSL Codex 从 &lt;code&gt;0.145.0&lt;/code&gt; 更新到 &lt;code&gt;0.162.1&lt;/code&gt;；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;codex&lt;/code&gt; 与 &lt;code&gt;npm&lt;/code&gt; 在交互式 Zsh 中都优先解析到 WSL NVM；&lt;/li&gt;
+&lt;li&gt;底层 Codex 仍为 Linux x86_64 ELF；&lt;/li&gt;
+&lt;li&gt;原有 &lt;code&gt;/usr/local/bin/codex&lt;/code&gt; 链接继续指向更新后的 WSL NVM 包；&lt;/li&gt;
+&lt;li&gt;ChatGPT 登录、WebSocket 和 HTTP 服务可达；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;codex doctor&lt;/code&gt; 最终为 &lt;code&gt;0 fail&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;更新诊断仍可能因为版本探测端点返回 HTTP 403 而显示非阻塞警告。只要 npm 包目录已确认目标版本、实际安装版本一致，且其余自检通过，就应将它与安装路径错误分开判断。&lt;/p&gt;
+&lt;h2 id=&#34;经验总结&#34;&gt;经验总结
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;WSL 能运行 Windows 命令，不代表当前命令一定属于 Windows；必须沿 &lt;code&gt;type&lt;/code&gt;、&lt;code&gt;which&lt;/code&gt;、&lt;code&gt;readlink&lt;/code&gt; 和 &lt;code&gt;file&lt;/code&gt; 追到最终二进制。&lt;/li&gt;
+&lt;li&gt;“npm 安装成功”只证明某个全局目录被修改，不证明正在运行的 Codex 被更新。&lt;/li&gt;
+&lt;li&gt;交互式和非交互式 Shell 的 &lt;code&gt;PATH&lt;/code&gt; 可能不同，NVM、pyenv、conda 等版本管理器都存在同类风险。&lt;/li&gt;
+&lt;li&gt;同一工具在 Windows 与 WSL 各装一份时，应同时核对包根目录、包管理器前缀和可执行文件格式。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;codex doctor&lt;/code&gt; 比单独检查版本更适合诊断安装链、认证、网络和更新目标。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;相关内容&#34;&gt;相关内容
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/nvm-sh/nvm&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;NVM 项目文档&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.npmjs.com/package/@openai/codex&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Codex npm 包&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Codex CLI 内置诊断：&lt;code&gt;codex doctor&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>WSL2 里 GitHub SSH 再次超时：这次凶手是 OpenSSH 根本不认识 http_proxy</title>
         <link>https://iloveu521.github.io/bugs/ubuntu/wsl-github-ssh-proxy-timeout/</link>
         <pubDate>Thu, 27 Aug 2026 00:00:00 +0800</pubDate>

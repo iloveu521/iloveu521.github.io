@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>HAL on Silly</title>
+        <title>HAL on Gelpup</title>
         <link>https://iloveu521.github.io/categories/hal/</link>
-        <description>Recent content in HAL on Silly</description>
+        <description>Recent content in HAL on Gelpup</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <copyright>Silly</copyright>
+        <copyright>Gelpup</copyright>
         <lastBuildDate>Sat, 09 May 2026 23:45:00 +0800</lastBuildDate><atom:link href="https://iloveu521.github.io/categories/hal/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>STM32 HAL printf 重定向原理与实现</title>
         <link>https://iloveu521.github.io/p/stm32-hal-printf-%E9%87%8D%E5%AE%9A%E5%90%91%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/</link>

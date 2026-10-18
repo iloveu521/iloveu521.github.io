@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>Unresolved on Silly</title>
+        <title>Unresolved on Gelpup</title>
         <link>https://iloveu521.github.io/categories/unresolved/</link>
-        <description>Recent content in Unresolved on Silly</description>
+        <description>Recent content in Unresolved on Gelpup</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <copyright>Silly</copyright>
-        <lastBuildDate>Fri, 08 May 2026 16:17:47 +0800</lastBuildDate><atom:link href="https://iloveu521.github.io/categories/unresolved/index.xml" rel="self" type="application/rss+xml" /><item>
+        <copyright>Gelpup</copyright>
+        <lastBuildDate>Sun, 18 Oct 2026 21:25:52 +0800</lastBuildDate><atom:link href="https://iloveu521.github.io/categories/unresolved/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>n10-lidar start:Error</title>
         <link>https://iloveu521.github.io/bugs/ros2/n10-lidar-start_error/</link>
         <pubDate>Mon, 27 Apr 2026 20:04:50 +0800</pubDate>

@@ -6,10 +6,10 @@
 
 <link rel='canonical' href='https://iloveu521.github.io/zh-tw/series/'>
 
-<link rel="stylesheet" href="/scss/style.min.63bf7fa1c1cc27208c452cd4c9fbdf483d25be8c31c24886942c63ca67b3eb32.css"><meta property='og:title' content="Series">
+<link rel="stylesheet" href="/scss/style.min.0b8c96997680e138fee05e9531837a0fb268a4d926bfb06f612fe4bf0fd15962.css"><meta property='og:title' content="Series">
 <meta property='og:description' content="Welcome!">
 <meta property='og:url' content='https://iloveu521.github.io/zh-tw/series/'>
-<meta property='og:site_name' content='Silly'>
+<meta property='og:site_name' content='Gelpup'>
 <meta property='og:type' content='website'><meta property='og:updated_time' content=' 2026-10-12T22:18:06&#43;08:00 '/>
 <meta name="twitter:title" content="Series">
 <meta name="twitter:description" content="Welcome!"><link rel="alternate" type="application/rss&#43;xml" href="https://iloveu521.github.io/zh-tw/series/index.xml">
@@ -69,7 +69,7 @@
         
         
         <div class="site-meta">
-            <h1 class="site-name"><a href="/zh-tw">Silly</a></h1>
+            <h1 class="site-name"><a href="/zh-tw">Gelpup</a></h1>
             <h2 class="site-description">Welcome!</h2>
         </div>
     </header><ol class="menu-social">
@@ -199,11 +199,11 @@
                                 
                                     <option value="https://iloveu521.github.io/" >English</option>
                                 
+                                    <option value="https://iloveu521.github.io/ja/" >日本語</option>
+                                
                                     <option value="https://iloveu521.github.io/zh-cn/" >简体中文</option>
                                 
                                     <option value="https://iloveu521.github.io/zh-tw/" selected>正體中文</option>
-                                
-                                    <option value="https://iloveu521.github.io/ja/" >日本語</option>
                                 
                             </select>
                         </li>
@@ -328,33 +328,43 @@
     </aside>
 
 
-            <main class="main full-width">
-    <header>
-        <h3 class="section-title">
-            
-                段落
-            
-        </h3>
+            <main class="main full-width"><header class="series-header">
+        <h3 class="section-title">SECTION</h3>
 
-        <div class="section-card">
+        <div class="section-card series-heading-card">
             <div class="section-details">
-                <h3 class="section-count">第 0 頁</h3>
+                <h3 class="section-count">0 SERIES</h3>
                 <h1 class="section-term">Series</h1>
-                
             </div>
+
+            <button class="series-view-toggle"
+                    type="button"
+                    data-series-view-toggle
+                    aria-label="切换到列表视图"
+                    aria-pressed="false"
+                    title="切换展示方式">
+                <svg class="series-view-icon series-view-icon--list" aria-hidden="true" viewBox="0 0 24 24">
+                    <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" />
+                </svg>
+                <svg class="series-view-icon series-view-icon--grid" aria-hidden="true" viewBox="0 0 24 24">
+                    <rect x="3" y="3" width="7" height="7" rx="1" />
+                    <rect x="14" y="3" width="7" height="7" rx="1" />
+                    <rect x="3" y="14" width="7" height="7" rx="1" />
+                    <rect x="14" y="14" width="7" height="7" rx="1" />
+                </svg>
+            </button>
         </div>
     </header>
-        
-    
-    
-        <section class="article-list--compact">
-            
-        </section>
+
+    <section class="series-browser" data-series-browser data-view="grid" aria-label="文章系列">
+        <div class="series-grid"></div>
+    </section><script src="/js/series-view.min.9d57f257a5ceeef9053ff1a23d8d24215ec8b5b3f37acb790ee2484c7b25deba.js" defer></script>
+
     <footer class="site-footer">
     <section class="copyright">
         &copy; 
         
-        2026 Silly
+        2026 Gelpup
     </section>
     
     <section class="powerby">

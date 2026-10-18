@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>Git on Silly</title>
+        <title>Git on Gelpup</title>
         <link>https://iloveu521.github.io/categories/git/</link>
-        <description>Recent content in Git on Silly</description>
+        <description>Recent content in Git on Gelpup</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <copyright>Silly</copyright>
+        <copyright>Gelpup</copyright>
         <lastBuildDate>Mon, 27 Jul 2026 20:49:46 +0800</lastBuildDate><atom:link href="https://iloveu521.github.io/categories/git/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Windows 11 安装 Ubuntu xx.04 WSL2 并迁移到目标盘盘</title>
         <link>https://iloveu521.github.io/p/windows-11-%E5%AE%89%E8%A3%85-ubuntu-xx.04-wsl2-%E5%B9%B6%E8%BF%81%E7%A7%BB%E5%88%B0%E7%9B%AE%E6%A0%87%E7%9B%98%E7%9B%98/</link>
