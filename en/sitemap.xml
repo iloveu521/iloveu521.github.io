@@ -3,19 +3,14 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://iloveu521.github.io/bugs/</loc>
-    <lastmod>2026-10-18T21:27:16+08:00</lastmod>
+    <lastmod>2026-10-18T23:15:20+08:00</lastmod>
   </url><url>
     <loc>https://iloveu521.github.io/categories/</loc>
-    <lastmod>2026-10-18T21:27:16+08:00</lastmod>
+    <lastmod>2026-10-18T23:15:20+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-us"
                 href="https://iloveu521.github.io/categories/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="ja"
-                href="https://iloveu521.github.io/ja/categories/"
                 />
     <xhtml:link
                 rel="alternate"
@@ -27,15 +22,17 @@
                 hreflang="zh-tw"
                 href="https://iloveu521.github.io/zh-tw/categories/"
                 />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="https://iloveu521.github.io/ja/categories/"
+                />
   </url><url>
-    <loc>https://iloveu521.github.io/series/codex/</loc>
-    <lastmod>2026-10-18T21:27:16+08:00</lastmod>
-  </url><url>
-    <loc>https://iloveu521.github.io/bugs/codex/browser-plugin-cache-version-mismatch/</loc>
-    <lastmod>2026-10-18T21:27:16+08:00</lastmod>
+    <loc>https://iloveu521.github.io/tags/dkms/</loc>
+    <lastmod>2026-10-18T23:15:20+08:00</lastmod>
   </url><url>
     <loc>https://iloveu521.github.io/</loc>
-    <lastmod>2026-10-18T21:27:16+08:00</lastmod>
+    <lastmod>2026-10-18T23:15:20+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-us"
@@ -58,9 +55,53 @@
                 />
   </url><url>
     <loc>https://iloveu521.github.io/categories/issue/</loc>
-    <lastmod>2026-10-18T21:27:16+08:00</lastmod>
+    <lastmod>2026-10-18T23:15:20+08:00</lastmod>
+  </url><url>
+    <loc>https://iloveu521.github.io/tags/kernel/</loc>
+    <lastmod>2026-10-18T23:15:20+08:00</lastmod>
+  </url><url>
+    <loc>https://iloveu521.github.io/tags/nvidia/</loc>
+    <lastmod>2026-10-18T23:15:20+08:00</lastmod>
   </url><url>
     <loc>https://iloveu521.github.io/categories/resolved/</loc>
+    <lastmod>2026-10-18T23:15:20+08:00</lastmod>
+  </url><url>
+    <loc>https://iloveu521.github.io/tags/</loc>
+    <lastmod>2026-10-18T23:15:20+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-us"
+                href="https://iloveu521.github.io/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-tw"
+                href="https://iloveu521.github.io/zh-tw/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="https://iloveu521.github.io/ja/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://iloveu521.github.io/zh-cn/tags/"
+                />
+  </url><url>
+    <loc>https://iloveu521.github.io/categories/ubuntu/</loc>
+    <lastmod>2026-10-18T23:15:20+08:00</lastmod>
+  </url><url>
+    <loc>https://iloveu521.github.io/tags/ubuntu/</loc>
+    <lastmod>2026-10-18T23:15:20+08:00</lastmod>
+  </url><url>
+    <loc>https://iloveu521.github.io/bugs/ubuntu/nvidia-driver-dropped-after-kernel-update/</loc>
+    <lastmod>2026-10-18T23:15:20+08:00</lastmod>
+  </url><url>
+    <loc>https://iloveu521.github.io/series/codex/</loc>
+    <lastmod>2026-10-18T21:27:16+08:00</lastmod>
+  </url><url>
+    <loc>https://iloveu521.github.io/bugs/codex/browser-plugin-cache-version-mismatch/</loc>
     <lastmod>2026-10-18T21:27:16+08:00</lastmod>
   </url><url>
     <loc>https://iloveu521.github.io/series/</loc>
@@ -90,9 +131,6 @@
     <lastmod>2026-10-18T21:27:16+08:00</lastmod>
   </url><url>
     <loc>https://iloveu521.github.io/categories/linux/</loc>
-    <lastmod>2026-10-18T21:27:16+08:00</lastmod>
-  </url><url>
-    <loc>https://iloveu521.github.io/categories/ubuntu/</loc>
     <lastmod>2026-10-18T21:27:16+08:00</lastmod>
   </url><url>
     <loc>https://iloveu521.github.io/series/wsl/</loc>
@@ -307,28 +345,6 @@
                 rel="alternate"
                 hreflang="ja"
                 href="https://iloveu521.github.io/ja/search/"
-                />
-  </url><url>
-    <loc>https://iloveu521.github.io/tags/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-us"
-                href="https://iloveu521.github.io/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="ja"
-                href="https://iloveu521.github.io/ja/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://iloveu521.github.io/zh-cn/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-tw"
-                href="https://iloveu521.github.io/zh-tw/tags/"
                 />
   </url>
 </urlset>

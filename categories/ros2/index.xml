@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>ROS2 on Gelpup</title>
+        <title>Ros2 on Gelpup</title>
         <link>https://iloveu521.github.io/categories/ros2/</link>
-        <description>Recent content in ROS2 on Gelpup</description>
+        <description>Recent content in Ros2 on Gelpup</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>Gelpup</copyright>

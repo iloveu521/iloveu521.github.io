@@ -7,10 +7,10 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>Gelpup</copyright>
-        <lastBuildDate>Sun, 18 Oct 2026 21:27:16 +0800</lastBuildDate><atom:link href="https://iloveu521.github.io/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 18 Oct 2026 23:15:20 +0800</lastBuildDate><atom:link href="https://iloveu521.github.io/categories/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Issue</title>
         <link>https://iloveu521.github.io/categories/issue/</link>
-        <pubDate>Wed, 14 Oct 2026 00:00:00 +0800</pubDate>
+        <pubDate>Sun, 18 Oct 2026 22:00:00 +0800</pubDate>
         
         <guid>https://iloveu521.github.io/categories/issue/</guid>
         <description></description>
@@ -18,9 +18,17 @@
         <item>
         <title>Resolved</title>
         <link>https://iloveu521.github.io/categories/resolved/</link>
-        <pubDate>Wed, 14 Oct 2026 00:00:00 +0800</pubDate>
+        <pubDate>Sun, 18 Oct 2026 22:00:00 +0800</pubDate>
         
         <guid>https://iloveu521.github.io/categories/resolved/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Ubuntu</title>
+        <link>https://iloveu521.github.io/categories/ubuntu/</link>
+        <pubDate>Sun, 18 Oct 2026 22:00:00 +0800</pubDate>
+        
+        <guid>https://iloveu521.github.io/categories/ubuntu/</guid>
         <description></description>
         </item>
         <item>
@@ -40,14 +48,6 @@
         <description></description>
         </item>
         <item>
-        <title>Ubuntu</title>
-        <link>https://iloveu521.github.io/categories/ubuntu/</link>
-        <pubDate>Tue, 13 Oct 2026 22:35:00 +0800</pubDate>
-        
-        <guid>https://iloveu521.github.io/categories/ubuntu/</guid>
-        <description></description>
-        </item>
-        <item>
         <title>Neovim</title>
         <link>https://iloveu521.github.io/categories/neovim/</link>
         <pubDate>Sun, 11 Oct 2026 18:04:47 +0800</pubDate>
@@ -64,7 +64,7 @@
         <description></description>
         </item>
         <item>
-        <title>ROS2</title>
+        <title>Ros2</title>
         <link>https://iloveu521.github.io/categories/ros2/</link>
         <pubDate>Wed, 23 Sep 2026 22:28:55 +0800</pubDate>
         
