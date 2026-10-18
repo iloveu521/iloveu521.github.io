@@ -2,30 +2,8 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://iloveu521.github.io/zh-cn/categories/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-us"
-                href="https://iloveu521.github.io/categories/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="ja"
-                href="https://iloveu521.github.io/ja/categories/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://iloveu521.github.io/zh-cn/categories/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-tw"
-                href="https://iloveu521.github.io/zh-tw/categories/"
-                />
-  </url><url>
     <loc>https://iloveu521.github.io/zh-cn/page/</loc>
-    <lastmod>2026-05-10T00:49:21+08:00</lastmod>
+    <lastmod>2026-10-12T22:18:06+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-us"
@@ -36,35 +14,28 @@
                 hreflang="zh-cn"
                 href="https://iloveu521.github.io/zh-cn/page/"
                 />
-  </url><url>
-    <loc>https://iloveu521.github.io/zh-cn/series/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-us"
-                href="https://iloveu521.github.io/series/"
-                />
     <xhtml:link
                 rel="alternate"
                 hreflang="ja"
-                href="https://iloveu521.github.io/ja/series/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://iloveu521.github.io/zh-cn/series/"
+                href="https://iloveu521.github.io/ja/page/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-tw"
-                href="https://iloveu521.github.io/zh-tw/series/"
+                href="https://iloveu521.github.io/zh-tw/page/"
                 />
   </url><url>
     <loc>https://iloveu521.github.io/zh-cn/</loc>
-    <lastmod>2026-05-10T00:49:21+08:00</lastmod>
+    <lastmod>2026-10-12T22:18:06+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-us"
                 href="https://iloveu521.github.io/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-tw"
+                href="https://iloveu521.github.io/zh-tw/"
                 />
     <xhtml:link
                 rel="alternate"
@@ -76,10 +47,72 @@
                 hreflang="zh-cn"
                 href="https://iloveu521.github.io/zh-cn/"
                 />
+  </url><url>
+    <loc>https://iloveu521.github.io/zh-cn/archives/</loc>
+    <lastmod>2026-10-12T22:18:06+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-us"
+                href="https://iloveu521.github.io/archives/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="https://iloveu521.github.io/ja/archives/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://iloveu521.github.io/zh-cn/archives/"
+                />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-tw"
-                href="https://iloveu521.github.io/zh-tw/"
+                href="https://iloveu521.github.io/zh-tw/archives/"
+                />
+  </url><url>
+    <loc>https://iloveu521.github.io/zh-cn/categories/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-us"
+                href="https://iloveu521.github.io/categories/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-tw"
+                href="https://iloveu521.github.io/zh-tw/categories/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="https://iloveu521.github.io/ja/categories/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://iloveu521.github.io/zh-cn/categories/"
+                />
+  </url><url>
+    <loc>https://iloveu521.github.io/zh-cn/series/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-us"
+                href="https://iloveu521.github.io/series/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://iloveu521.github.io/zh-cn/series/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-tw"
+                href="https://iloveu521.github.io/zh-tw/series/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="https://iloveu521.github.io/ja/series/"
                 />
   </url><url>
     <loc>https://iloveu521.github.io/zh-cn/tags/</loc>
@@ -115,6 +148,29 @@
                 rel="alternate"
                 hreflang="zh-cn"
                 href="https://iloveu521.github.io/zh-cn/%E5%85%B3%E4%BA%8E/"
+                />
+  </url><url>
+    <loc>https://iloveu521.github.io/zh-cn/search/</loc>
+    <lastmod>2026-10-12T22:18:06+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-us"
+                href="https://iloveu521.github.io/search/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-tw"
+                href="https://iloveu521.github.io/zh-tw/search/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://iloveu521.github.io/zh-cn/search/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ja"
+                href="https://iloveu521.github.io/ja/search/"
                 />
   </url>
 </urlset>
