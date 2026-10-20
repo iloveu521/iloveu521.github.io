@@ -7,7 +7,31 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>Gelpup</copyright>
-        <lastBuildDate>Sun, 18 Oct 2026 23:15:20 +0800</lastBuildDate><atom:link href="https://iloveu521.github.io/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 20 Oct 2026 17:00:55 +0800</lastBuildDate><atom:link href="https://iloveu521.github.io/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Linear Regression</title>
+        <link>https://iloveu521.github.io/tags/linear-regression/</link>
+        <pubDate>Tue, 20 Oct 2026 00:00:00 +0800</pubDate>
+        
+        <guid>https://iloveu521.github.io/tags/linear-regression/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>NumPy</title>
+        <link>https://iloveu521.github.io/tags/numpy/</link>
+        <pubDate>Tue, 20 Oct 2026 00:00:00 +0800</pubDate>
+        
+        <guid>https://iloveu521.github.io/tags/numpy/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Python</title>
+        <link>https://iloveu521.github.io/tags/python/</link>
+        <pubDate>Tue, 20 Oct 2026 00:00:00 +0800</pubDate>
+        
+        <guid>https://iloveu521.github.io/tags/python/</guid>
+        <description></description>
+        </item>
+        <item>
         <title>DKMS</title>
         <link>https://iloveu521.github.io/tags/dkms/</link>
         <pubDate>Sun, 18 Oct 2026 22:00:00 +0800</pubDate>
