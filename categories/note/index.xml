@@ -7,12 +7,12 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>Gelpup</copyright>
-        <lastBuildDate>Tue, 20 Oct 2026 17:00:55 +0800</lastBuildDate><atom:link href="https://iloveu521.github.io/categories/note/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 20 Oct 2026 17:02:09 +0800</lastBuildDate><atom:link href="https://iloveu521.github.io/categories/note/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>从零实现线性回归：代价函数与梯度下降</title>
-        <link>https://iloveu521.github.io/p/%E4%BB%8E%E9%9B%B6%E5%AE%9E%E7%8E%B0%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E4%BB%A3%E4%BB%B7%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D/</link>
+        <link>https://iloveu521.github.io/p/linear-regression-from-scratch/</link>
         <pubDate>Tue, 20 Oct 2026 00:00:00 +0800</pubDate>
         
-        <guid>https://iloveu521.github.io/p/%E4%BB%8E%E9%9B%B6%E5%AE%9E%E7%8E%B0%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E4%BB%A3%E4%BB%B7%E5%87%BD%E6%95%B0%E4%B8%8E%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D/</guid>
+        <guid>https://iloveu521.github.io/p/linear-regression-from-scratch/</guid>
         <description>&lt;p&gt;线性回归是机器学习中一个直观的入门模型。这篇笔记使用一组房屋数据，从绘制散点图开始，逐步实现预测函数、代价函数和梯度下降。&lt;/p&gt;
 &lt;h2 id=&#34;读取并观察数据&#34;&gt;读取并观察数据
 &lt;/h2&gt;&lt;p&gt;数据文件每行包含房屋面积、卧室数量和价格。这个例子只使用面积作为输入特征、价格作为预测目标；卧室数量暂时不参与模型。&lt;/p&gt;
